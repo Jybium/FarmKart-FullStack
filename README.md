@@ -1,4 +1,4 @@
-Welcome to FarmKart!
+## WELCOME TO FARMAKART!
 
 FarmKart is a project carried out by a group of three developers, one project manager and five designers. It is as a result of several brainstorming session between the team to provide unique solution to problems that is facing sales of agricultural produce in rural and urban areas thereby eliminating the need for middlemen.
 
@@ -48,7 +48,7 @@ TEAM MEMBERS
 2. Lilian Damisa
 3. Emeka
 
-## Project Status
+## PROJECT STATUS
 
 Ongoing
 

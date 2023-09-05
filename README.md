@@ -4,12 +4,12 @@ FarmKart is a project carried out by a group of three developers, one project ma
 
 FarmKart is an e-market site where farmers(Sellers) meet with their prospective customer which can be final consumers for easy and swift exchange of commodity. WIth this technology, consumers get to buy fresh farm produce and the seller get fast returns on their investment - At the end of the day, everybody is happy.
 
-TOOLS
+## TOOLS
 
 The design process uses figma to produce the visually appealing yet user friendly user interfaces.
 The development process used pure HTML, CSS and javascript during the initial development process but after a while, it was shipped to the most recent NextJS React Framework.
 
-DEVELOPMENT PROCESS
+## DEVELOPMENT PROCESS
 
 The frontend uses NextJS, a production framework built on top of react. The following libraries are used:
 
@@ -28,7 +28,7 @@ The backend utilizes the NextJS capibility to embed server-side code in its code
 2. Next-auth - for authentication.
 3. Stripe - for payment management.
 
-TEAM MEMBERS
+## TEAM MEMBERS
 
 ## DESIGNERS
 
@@ -50,7 +50,7 @@ TEAM MEMBERS
 
 ## PROJECT STATUS
 
-Ongoing
+ONGOING
 
 <!-- This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

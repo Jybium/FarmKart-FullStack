@@ -32,21 +32,21 @@ TEAM MEMBERS
 
 ## DESIGNERS
 
-Mariam - Team Lead
-Babatola - Assistant Team Lead
-Lade
-Frank
-Joseph
+1. Mariam - Team Lead
+2. Babatola - Assistant Team Lead
+3. Lade
+4. Frank
+5. Joseph
 
 ## PRODUCT MANAGER
 
-Manji Best
+1. Manji Best
 
 ## DEVELOPERS
 
-Asaolu James - Team Lead <asaoljtomi@gmail.com>, <www.twitter.com/asaolujames5>
-Lilian Damisa
-Emeka
+1. Asaolu James - Team Lead <asaoljtomi@gmail.com>, <www.twitter.com/asaolujames5>
+2. Lilian Damisa
+3. Emeka
 
 ## Project Status
 

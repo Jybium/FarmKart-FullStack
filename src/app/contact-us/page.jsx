@@ -78,7 +78,11 @@ const page = () => {
               </label>
             </div>
             <div className="w-full">
-              <PrimaryButton title="Send Message" type="submit" />
+              <PrimaryButton
+                title="Send Message"
+                type="submit"
+                className="w-full"
+              />
             </div>
           </form>
         </div>

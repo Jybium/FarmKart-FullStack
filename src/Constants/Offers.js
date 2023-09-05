@@ -40,6 +40,26 @@ import Lilian from "@/Asset/FARMKART IMAGES/images/About-us/Lilian Damisa.jpg";
 import Manji from "@/Asset/FARMKART IMAGES/images/About-us/Manji Best.png";
 import Mariam from "@/Asset/FARMKART IMAGES/images/About-us/Mariam Asiwaju-Bello.jpg";
 
+// IMAGES FOR CATEGORIES
+import cassava from "@/Asset/FARMKART IMAGES/images/product/cassava.jpg";
+import chicken from "@/Asset/FARMKART IMAGES/images/product/chicken.jpg";
+import cow from "@/Asset/FARMKART IMAGES/images/product/cow.jpg";
+import eggs from "@/Asset/FARMKART IMAGES/images/product/eggs.jpg";
+import fish from "@/Asset/FARMKART IMAGES/images/product/fish.jpg";
+import fruits from "@/Asset/FARMKART IMAGES/images/product/fruits.jpg";
+import garri from "@/Asset/FARMKART IMAGES/images/product/garri.png";
+import goats from "@/Asset/FARMKART IMAGES/images/product/goats.jpg";
+import maize from "@/Asset/FARMKART IMAGES/images/product/maize.jpg";
+import onions from "@/Asset/FARMKART IMAGES/images/product/onions.jpg";
+import pawpaw from "@/Asset/FARMKART IMAGES/images/product/pawpaw.jpg";
+import pepper from "@/Asset/FARMKART IMAGES/images/product/pepper.jpg";
+import pigs from "@/Asset/FARMKART IMAGES/images/product/pigs.jpg";
+import ram from "@/Asset/FARMKART IMAGES/images/product/ram.jpg";
+import rice from "@/Asset/FARMKART IMAGES/images/product/rice.jpg";
+import sheep from "@/Asset/FARMKART IMAGES/images/product/sheep.jpg";
+import yam from "@/Asset/FARMKART IMAGES/images/product/yam.jpg";
+import watermelon from "@/Asset/FARMKART IMAGES/images/product/watermelon.jpg";
+
 export const Offers = [
   {
     id: 1,
@@ -223,5 +243,219 @@ export const Team = [
     image: Emeka,
     name: "Emeka Onwugbenu",
     role: "Frontend Developer",
+  },
+];
+
+export const TOU = [
+  "By using the  FarmKart platform, these terms will automatically apply to you. Please endeavour to read them carefully before using the platform. Not in any case are you allowed to copy, or modify any part of the website, or our trademarks in any way. Ontop of that, you are not allowed to attempt to extract the source code and API of the platform. Also, you should not try to translate the platform into other languages, or make derivative versions. The website itself, and all the trade marks, copyright, database rights and other intellectual property rights related to it, still belong to Farmer’s Ventures and Farm Kart.",
+
+  "Farm Kart is committed to ensuring that the website is as useful and efficient as possible. For that reason, we reserve the right to make changes to the platform or to charge for its services, at any time. We will never charge you for the website or its services without making it very clear to you exactly what you are paying for.",
+
+  "Farm Kart stores and processes personal data that you have provided to us, in order to provide our Service. It is therefore your sole responsibility to keep your phone and access to the platform secure. We recommend that you do not try to bypass our security and also constantly change your IP Address as this may result in making your data less secured and potential hack by fraudsters.",
+
+  "You should be aware that there are certain things that Farm Kart will not take responsibility for. The website will require the use of the internet at all time and you can only enjoy the benefits of the platform when you have registered successfully. A good network providers is therefore imperatiive to have full access to the website. The connection can be Wi-Fi, or provided by your mobile network provider, but Farm Kart cannot take responsibility for the website not working at full functionality if you do not have access to Wi-Fi, and you don’t have any of your data allowance left.",
+
+  "If you are using the website outside of an area with Wi-Fi, you should remember that your terms of the agreement with your mobile network provider will still apply. As a result, you may be charged by your mobile provider for the cost of data for the duration of the connection while accessing the platform, or other third party charges. In using Farmkart platform, you are accepting responsibility for any such charges, including roaming data charges if you use the app outside of your home territory (i.e. region or country) without turning off data roaming. If you are not the bill payer for the device on which you are using the platform, please be aware that we assume that you have received permission from the bill payer for using the platform.",
+
+  "Along the same lines, Farm Kart has the right to prosecute you if you attempt to engage in fraudulent and nefarious acts while engaging with farmers or consumers. We take the Nigerian Legal code on stealing and fraudulent acts with extreme alacrity. So desist from attempting to engage in such acts.",
+
+  "With respect to Farm Kart’s responsibility for your use of the platform, when you are using the website, it is important to bear in mind that although we endeavour to ensure that it is updated and correct at all times, we do rely on third parties to provide information to us so that we can make it available to you. Farm Kart accepts no liability for any loss, direct or indirect, you experience as a result of relying wholly on this functionality of the website.",
+];
+
+export const FAQ = [
+  {
+    id: "1",
+    question: "How do I sell on FarmKart?",
+    answer:
+      "You sell by signing in to FarmKart, click on the “sell” button on the homepage. Input all necessary details of your product. Ensure all information are correct then click on “Submit Product” button. Once done, our team will review your advert and you’ll get an email notification once it goes live.",
+  },
+  {
+    id: "2",
+    question: "What does Ads limit means?",
+    answer:
+      "You sell by signing in to FarmKart, click on the “sell” button on the homepage. Input all necessary details of your product. Ensure all information are correct then click on “Submit Product” button. Once done, our team will review your advert and you’ll get an email notification once it goes live.",
+  },
+  {
+    id: "3",
+    question: "How much do I pay before selling?",
+    answer:
+      "You sell by signing in to FarmKart, click on the “sell” button on the homepage. Input all necessary details of your product. Ensure all information are correct then click on “Submit Product” button. Once done, our team will review your advert and you’ll get an email notification once it goes live.",
+  },
+  {
+    id: "4",
+    question: "How fast is the delivery?",
+    answer:
+      "You sell by signing in to FarmKart, click on the “sell” button on the homepage. Input all necessary details of your product. Ensure all information are correct then click on “Submit Product” button. Once done, our team will review your advert and you’ll get an email notification once it goes live.",
+  },
+  {
+    id: "5",
+    question: "How do I contact support team?",
+    answer:
+      "You sell by signing in to FarmKart, click on the “sell” button on the homepage. Input all necessary details of your product. Ensure all information are correct then click on “Submit Product” button. Once done, our team will review your advert and you’ll get an email notification once it goes live.",
+  },
+  {
+    id: "6",
+    question: "What is a market place?",
+    answer:
+      "You sell by signing in to FarmKart, click on the “sell” button on the homepage. Input all necessary details of your product. Ensure all information are correct then click on “Submit Product” button. Once done, our team will review your advert and you’ll get an email notification once it goes live.",
+  },
+  {
+    id: "7",
+    question: "Do you have any office store?",
+    answer:
+      "You sell by signing in to FarmKart, click on the “sell” button on the homepage. Input all necessary details of your product. Ensure all information are correct then click on “Submit Product” button. Once done, our team will review your advert and you’ll get an email notification once it goes live.",
+  },
+  {
+    id: "8",
+    question: "How do I pay?",
+    answer:
+      "You sell by signing in to FarmKart, click on the “sell” button on the homepage. Input all necessary details of your product. Ensure all information are correct then click on “Submit Product” button. Once done, our team will review your advert and you’ll get an email notification once it goes live.",
+  },
+  {
+    id: "9",
+    question: "What are the advert rules?",
+    answer:
+      "You sell by signing in to FarmKart, click on the “sell” button on the homepage. Input all necessary details of your product. Ensure all information are correct then click on “Submit Product” button. Once done, our team will review your advert and you’ll get an email notification once it goes live.",
+  },
+  {
+    id: "10",
+    question: "How do I report fraudulent activities?",
+    answer:
+      "You sell by signing in to FarmKart, click on the “sell” button on the homepage. Input all necessary details of your product. Ensure all information are correct then click on “Submit Product” button. Once done, our team will review your advert and you’ll get an email notification once it goes live.",
+  },
+  {
+    id: "11",
+    question: "How many days does delivery take?",
+    answer:
+      "You sell by signing in to FarmKart, click on the “sell” button on the homepage. Input all necessary details of your product. Ensure all information are correct then click on “Submit Product” button. Once done, our team will review your advert and you’ll get an email notification once it goes live.",
+  },
+  {
+    id: "12",
+    question: "Who should I contact for card decline issues?",
+    answer:
+      "You sell by signing in to FarmKart, click on the “sell” button on the homepage. Input all necessary details of your product. Ensure all information are correct then click on “Submit Product” button. Once done, our team will review your advert and you’ll get an email notification once it goes live.",
+  },
+  {
+    id: "13",
+    question: "How can I  rate a seller?",
+    answer:
+      "You sell by signing in to FarmKart, click on the “sell” button on the homepage. Input all necessary details of your product. Ensure all information are correct then click on “Submit Product” button. Once done, our team will review your advert and you’ll get an email notification once it goes live.",
+  },
+  {
+    id: "14",
+    question: "Can i promote my advert?",
+    answer:
+      "You sell by signing in to FarmKart, click on the “sell” button on the homepage. Input all necessary details of your product. Ensure all information are correct then click on “Submit Product” button. Once done, our team will review your advert and you’ll get an email notification once it goes live.",
+  },
+  {
+    id: "15",
+    question: "Are reviews editable after posting?",
+    answer:
+      "You sell by signing in to FarmKart, click on the “sell” button on the homepage. Input all necessary details of your product. Ensure all information are correct then click on “Submit Product” button. Once done, our team will review your advert and you’ll get an email notification once it goes live.",
+  },
+  {
+    id: "16",
+    question: "What makes an advert effective?",
+    answer:
+      "You sell by signing in to FarmKart, click on the “sell” button on the homepage. Input all necessary details of your product. Ensure all information are correct then click on “Submit Product” button. Once done, our team will review your advert and you’ll get an email notification once it goes live.",
+  },
+  {
+    id: "17",
+    question: "How much is delivery fee?",
+    answer:
+      "You sell by signing in to FarmKart, click on the “sell” button on the homepage. Input all necessary details of your product. Ensure all information are correct then click on “Submit Product” button. Once done, our team will review your advert and you’ll get an email notification once it goes live.",
+  },
+];
+
+export const Categories = [
+  {
+    id: "1",
+    image: cassava,
+    name: "Cassava",
+  },
+  {
+    id: "2",
+    image: chicken,
+    name: "Chicken",
+  },
+  {
+    id: "3",
+    image: cow,
+    name: "Cow",
+  },
+  {
+    id: "4",
+    image: eggs,
+    name: "Eggs",
+  },
+  {
+    id: "5",
+    image: fish,
+    name: "Fish",
+  },
+  {
+    id: "6",
+    image: fruits,
+    name: "Fruits",
+  },
+  {
+    id: "7",
+    image: garri,
+    name: "Garri",
+  },
+  {
+    id: "8",
+    image: maize,
+    name: "Maize",
+  },
+  {
+    id: "9",
+    image: onions,
+    name: "Onions",
+  },
+  {
+    id: "10",
+    image: goats,
+    name: "Goats",
+  },
+  {
+    id: "11",
+    image: pigs,
+    name: "Pigs",
+  },
+  {
+    id: "12",
+    image: pepper,
+    name: "Pepper",
+  },
+  {
+    id: "13",
+    image: pawpaw,
+    name: "Pawpaw",
+  },
+  {
+    id: "14",
+    image: ram,
+    name: "Ram",
+  },
+  {
+    id: "15",
+    image: rice,
+    name: "Rice",
+  },
+  {
+    id: "16",
+    image: sheep,
+    name: "Sheep",
+  },
+  {
+    id: "17",
+    image: watermelon,
+    name: "Watermelon",
+  },
+  {
+    id: "18",
+    image: yam,
+    name: "Yam",
   },
 ];

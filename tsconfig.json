@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/components/Buttons.jsx",
-    "src/app/contact-us/page.jsx"
+    "src/app/contact-us/page.jsx",
+    "src/app/products/components/Products.jsx"
   ],
   "exclude": ["node_modules"]
 }

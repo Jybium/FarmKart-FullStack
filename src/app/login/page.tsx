@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const page = () => {
   return (
-    <main className="w-ful">
+    <main>
       <header className="text-center">
         <Image
           src={Logo}

@@ -1,4 +1,58 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Welcome to FarmKart!
+
+FarmKart is a project carried out by a group of three developers, one project manager and five designers. It is as a result of several brainstorming session between the team to provide unique solution to problems that is facing sales of agricultural produce in rural and urban areas thereby eliminating the need for middlemen.
+
+FarmKart is an e-market site where farmers(Sellers) meet with their prospective customer which can be final consumers for easy and swift exchange of commodity. WIth this technology, consumers get to buy fresh farm produce and the seller get fast returns on their investment - At the end of the day, everybody is happy.
+
+TOOLS
+
+The design process uses figma to produce the visually appealing yet user friendly user interfaces.
+The development process used pure HTML, CSS and javascript during the initial development process but after a while, it was shipped to the most recent NextJS React Framework.
+
+DEVELOPMENT PROCESS
+
+The frontend uses NextJS, a production framework built on top of react. The following libraries are used:
+
+1. React-hook-Form - for form management.
+2. React-Toastify - for push notification.
+3. Axios - for API calls.
+4. Framer-Motion - for Animation.
+5. React-Icons - for icons management.
+6. Flowbite - for react components like modals and carousel.
+7. tailwindcss - for styling.
+8. react-convetti
+
+The backend utilizes the NextJS capibility to embed server-side code in its codebase. The following libraries are used:
+
+1. Prisma - for object relational mapping which used postgressql as a database provider.
+2. Next-auth - for authentication.
+3. Stripe - for payment management.
+
+TEAM MEMBERS
+
+## DESIGNERS
+
+Mariam - Team Lead
+Babatola - Assistant Team Lead
+Lade
+Frank
+Joseph
+
+## PRODUCT MANAGER
+
+Manji Best
+
+## DEVELOPERS
+
+Asaolu James - Team Lead <asaoljtomi@gmail.com>, <www.twitter.com/asaolujames5>
+Lilian Damisa
+Emeka
+
+## Project Status
+
+Ongoing
+
+<!-- This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
@@ -31,4 +85,4 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details. -->

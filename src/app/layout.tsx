@@ -1,8 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import type { Author } from "next/dist/lib/metadata/types/metadata-types";
-import { Inter } from "next/font/google";
-import Header from "./components/Header";
+// import Head from "next/head";
+import { Head } from "next/document";
 import Footer from "./components/Footer";
 
 // const inter = Inter({ subsets: ["latin"] });
@@ -27,6 +27,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      {/* <Head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        />
+      </Head> */}
       <body>
         {/* <Header /> */}
         {children}

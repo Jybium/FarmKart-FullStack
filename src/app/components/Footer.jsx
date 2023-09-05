@@ -3,6 +3,11 @@ import Image from "next/image";
 import Logo from "@/app/logo (2).png";
 import Link from "next/link";
 import { PrimaryButton } from "./Buttons";
+import { TfiFacebook } from "react-icons/tfi";
+import { TfiLinkedin } from "react-icons/tfi";
+import { TfiTwitterAlt } from "react-icons/tfi";
+import { TbMailFilled } from "react-icons/tb";
+import { MdCall } from "react-icons/md";
 
 const Footer = () => {
   return (
@@ -52,7 +57,7 @@ const Footer = () => {
           <label htmlFor="Suscribe" className="font-bold text-base">
             NEWSLETTER
           </label>
-          <div className="flex">
+          <div className="flex mt-3">
             <input
               type="email"
               className="h-10 w-full pl-2 pr-1 border-0 py-2 outline-0 rounded text-sm placeholder:text-sm"
@@ -62,14 +67,45 @@ const Footer = () => {
           </div>
         </div>
       </section>
-      <section className="pt-5 pb-2">
+      <section className="flex justify-between pt-5 pb-2">
         <p className="text-sm">
           <span className="text-[#5E5B57]">
             &copy; 2022. All Rights Reserved.{" "}
             <span className="text-[#005400]">FarmKart</span>
           </span>
         </p>
-        <div></div>
+        <div className="flex gap-2">
+          <Link
+            href=""
+            className="border-[1px] border-black rounded-full p-[6px] text-center"
+          >
+            <TfiFacebook />
+          </Link>
+          <Link
+            href=""
+            className="border-[1px] border-black rounded-full p-[6px] text-center"
+          >
+            <TfiLinkedin />
+          </Link>
+          <Link
+            href=""
+            className="border-[1px] border-black rounded-full p-[6px] text-center"
+          >
+            <TfiTwitterAlt />
+          </Link>
+          <Link
+            href=""
+            className="border-[1px] border-black rounded-full p-[6px] text-center"
+          >
+            <TbMailFilled />
+          </Link>
+          <Link
+            href=""
+            className="border-[1px] border-black rounded-full p-[6px] text-center"
+          >
+            <MdCall />
+          </Link>
+        </div>
       </section>
     </footer>
   );

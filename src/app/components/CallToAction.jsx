@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { PrimaryButton, SecondaryButton } from "../components/Buttons";
 import CTA from "../../Asset/FARMKART IMAGES/images/landing-page/Hero-image.png";
+import Link from "next/link";
 
 const CallToAction = () => {
   return (
@@ -21,8 +22,12 @@ const CallToAction = () => {
           and customers can expect swift delivery when they purchase any item.
         </p>
         <div className="flex gap-2 mt-6">
-          <PrimaryButton title="Get Started" type="button" />
-          <SecondaryButton title="Learn more" type="button" />
+          <Link href="/signup">
+            <PrimaryButton title="Get Started" type="button" />
+          </Link>
+          <Link href="/about-us">
+            <SecondaryButton title="Learn more" type="button" />
+          </Link>
         </div>
       </div>
       <div className="h-auto">

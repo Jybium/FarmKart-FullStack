@@ -42,8 +42,12 @@ const Header = (props: any) => {
         </li>
       </ul>
       <div className="flex gap-2">
-        <SecondaryButton type="button" title="Sign In" />
-        <PrimaryButton type="button" title="Register" />
+        <Link href="/login">
+          <SecondaryButton type="button" title="Sign In" />
+        </Link>
+        <Link href="/signup">
+          <PrimaryButton type="button" title="Register" />
+        </Link>
       </div>
     </nav>
   );

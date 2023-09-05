@@ -44,13 +44,17 @@ The backend utilizes the NextJS capibility to embed server-side code in its code
 
 ## DEVELOPERS
 
-1. Asaolu James - Team Lead <asaoljtomi@gmail.com>, <www.twitter.com/asaolujames5>
+1. Asaolu James - Team Lead [<asaoljtomi@gmail.com>, <www.twitter.com/asaolujames5>]
 2. Lilian Damisa
 3. Emeka
 
 ## PROJECT STATUS
 
 ONGOING
+
+## TEST ENVIRONMENT
+
+VERCEL.
 
 <!-- This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

@@ -7,13 +7,15 @@ const page = () => {
   return (
     <main>
       <Header />
-      <main>
-        <Images />
-        <Details />
+      <main className="mx-28">
+        <section className="flex gap-8 my-10">
+          <Images />
+          <Details />
+        </section>
+        <section>
+          <h3 className="font-black text-lg">People also check</h3>
+        </section>
       </main>
-      <section>
-        <h3>People also check</h3>
-      </section>
     </main>
   );
 };

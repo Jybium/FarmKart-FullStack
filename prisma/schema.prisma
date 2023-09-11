@@ -23,7 +23,9 @@ model User {
   product       Product[]
   cart          Cart[]
   order         Order[]
-  Review        Review?
+  review        Review?
+  createdAt     DateTime
+  updatedAt     DateTime
 }
 
 model Product {
@@ -38,6 +40,8 @@ model Product {
   price       Int
   bulkPrice   Int
   description String
+  createdAt   DateTime
+  updatedAt   DateTime
   negotiable  Boolean    @default(false)
   category    Categories
   image       Image[]
@@ -46,10 +50,12 @@ model Product {
 }
 
 model Image {
-  Id        String  @id @default(uuid())
+  Id        String   @id @default(uuid())
   Image     String
   productid Int
-  product   Product @relation(fields: [productid], references: [Id])
+  createdAt DateTime
+  updatedAt DateTime
+  product   Product  @relation(fields: [productid], references: [Id])
 }
 
 model Order {
@@ -57,6 +63,8 @@ model Order {
   userId      String
   user        User     @relation(fields: [userId], references: [Id])
   status      Status
+  createdAt   DateTime
+  updatedAt   DateTime
   orderDate   DateTime
   totalAmount Int
 }
@@ -71,13 +79,15 @@ model Cart {
 }
 
 model Review {
-  Id        String  @id @default(uuid())
+  Id        String   @id @default(uuid())
   comment   String
   rating    Int
   productId Int
-  userId    String  @unique
-  user      User    @relation(fields: [userId], references: [Id])
-  product   Product @relation(fields: [productId], references: [Id])
+  userId    String   @unique
+  createdAt DateTime
+  updatedAt DateTime
+  user      User     @relation(fields: [userId], references: [Id])
+  product   Product  @relation(fields: [productId], references: [Id])
 }
 
 enum Categories {

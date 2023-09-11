@@ -10,7 +10,91 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
-  id
+model User {
+  Id            String    @id @default(uuid())
+  firstName     String
+  lastName      String
+  emailAddresss String
+  phoneNumber   Int
+  location      String
+  role          Role      @default(USER)
+  password      String
+  image         String
+  product       Product[]
+  cart          Cart[]
+  order         Order[]
+  Review        Review?
 }
 
+model Product {
+  Id          Int        @id @default(autoincrement())
+  userId      String
+  user        User       @relation(fields: [userId], references: [Id])
+  productName String
+  Quantity    Int
+  weight      Int
+  slug        String
+  color       String
+  price       Int
+  bulkPrice   Int
+  description String
+  negotiable  Boolean    @default(false)
+  category    Categories
+  image       Image[]
+  cart        Cart[]
+  Review      Review[]
+}
+
+model Image {
+  Id        String  @id @default(uuid())
+  Image     String
+  productid Int
+  product   Product @relation(fields: [productid], references: [Id])
+}
+
+model Order {
+  Id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [Id])
+  status      Status
+  orderDate   DateTime
+  totalAmount Int
+}
+
+model Cart {
+  Id        String  @id @default(uuid())
+  userId    String
+  productId Int
+  Quantity  Int
+  user      User    @relation(fields: [userId], references: [Id])
+  product   Product @relation(fields: [productId], references: [Id])
+}
+
+model Review {
+  Id        String  @id @default(uuid())
+  comment   String
+  rating    Int
+  productId Int
+  userId    String  @unique
+  user      User    @relation(fields: [userId], references: [Id])
+  product   Product @relation(fields: [productId], references: [Id])
+}
+
+enum Categories {
+  LIVESTOCK
+  CROPS
+  FARM_SUPPLEMENT
+  OTHER_CATEGORIES
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Status {
+  COMPLETED
+  PENDING
+  IN_PROGRESS
+  CANCELLED
+}

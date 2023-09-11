@@ -3,7 +3,9 @@ import React from "react";
 const Select = ({ name, title }) => {
   return (
     <div className="w-full">
-      <label htmlFor={name}></label>
+      <label htmlFor={name} className="text-sm font-black">
+        {name}
+      </label>
       <select
         name={name}
         id={name}

@@ -29,7 +29,7 @@ const Product = ({ product }) => {
   const productImage = product.images;
 
   return (
-    <div className="bg-[#E6EEE6] w-auto rounded shadow hover:shadow-lg hover:scale-x-100 hover:delay-100">
+    <div className="bg-[#E6EEE6] w-auto rounded shadow hover:shadow-lg hover:scale-110 hover:delay-100">
       <div className="w-auto text-center">
         <Image
           src={productImage[0]}

@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 // import Link from "next/link";
+import { product } from "@/Constants/Offers";
 import "../product.css";
 import { Categories } from "@/Constants/Offers";
 import { PrimaryButton } from "@/app/components/Buttons";
@@ -24,27 +25,38 @@ const Category = ({ category }) => {
   );
 };
 
-const Product = () => {
+const Product = ({ product }) => {
+  const productImage = product.images;
+
   return (
-    <div className="bg-[#E6EEE6]">
-      <div>
-        <Image />
+    <div className="bg-[#E6EEE6] w-auto rounded shadow hover:shadow-lg hover:scale-x-100 hover:delay-100">
+      <div className="w-auto text-center">
+        <Image
+          src={productImage[0]}
+          alt="product-image"
+          className="block w-full"
+        />
       </div>
-      <div>
-        <p className="font-bold text-sm"></p>
-        <p className="font-black "></p>
-        <p className="text-sm text-slate-300">
-          <span className="font-bold">Sold By: </span> <span>Samuel</span>
+      <div className="p-3 grid gap-1">
+        <p className="font-bold text-sm">{product.productName}</p>
+        <p className="font-black text-[15px]">{product.price}</p>
+        <p className="text-sm text-slate-400">
+          <span className="font-bold">Sold By: </span>{" "}
+          <span>{product.name}</span>
         </p>
+        <PrimaryButton
+          title="Add to cart"
+          type="button"
+          className="mt-2 w-full text-center"
+        />
       </div>
-      <PrimaryButton title="Add to cart" type="button" />
     </div>
   );
 };
 
 const Products = () => {
   return (
-    <main className="w-3/4">
+    <main className="w-3/4 mb-10">
       <section className="flex justify-between gap-5 overflow-auto w-full Hide">
         {Categories.map((category) => (
           <Category category={category} key={category.id} />
@@ -52,6 +64,11 @@ const Products = () => {
       </section>
       <section className="">
         <p className="text-[#003800] font-bold my-5">Most Popular</p>
+        <section className="flex">
+          {product.map((product) => (
+            <Product product={product} />
+          ))}
+        </section>
       </section>
     </main>
   );

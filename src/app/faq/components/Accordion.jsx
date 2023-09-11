@@ -6,7 +6,7 @@ const Accordion = ({ onclick, open, setopen }) => {
   return (
     <section className="w-5/6 mx-auto grid gap-3">
       {FAQ.map((items) => (
-        <div>
+        <div key={items.id}>
           <p
             className="bg-[#f6f6f6] px-6 py-3 rounded text-[15px] gap-8 flex items-center shadow cursor-pointer"
             onClick={() => {

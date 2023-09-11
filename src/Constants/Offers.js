@@ -60,6 +60,13 @@ import sheep from "@/Asset/FARMKART IMAGES/images/product/sheep.jpg";
 import yam from "@/Asset/FARMKART IMAGES/images/product/yam.jpg";
 import watermelon from "@/Asset/FARMKART IMAGES/images/product/watermelon.jpg";
 
+// IMAGES FOR THE PRODUCT AND PRODUCT DETAILS PAGE
+import Seller from "@/Asset/FARMKART IMAGES/images/product-details/seller.png";
+import FirstProduct from "@/Asset/FARMKART IMAGES/images/product-details/Product Image (1).png";
+import SecondProduct from "@/Asset/FARMKART IMAGES/images/product-details/Product Image (2).png";
+import ThirdProduct from "@/Asset/FARMKART IMAGES/images/product-details/Product Image (3).png";
+import FourthProduct from "@/Asset/FARMKART IMAGES/images/product-details/Product Image (4).png";
+
 export const Offers = [
   {
     id: 1,
@@ -457,5 +464,31 @@ export const Categories = [
     id: "18",
     image: yam,
     name: "Yam",
+  },
+];
+
+export const Navlinks = [
+  { id: "1", name: "Home", to: "/" },
+  { id: "2", name: "About Us", to: "/about-us" },
+  { id: "3", name: "Our Services", to: "" },
+  { id: "4", name: "FAQ", to: "/faq" },
+  { id: "5", name: "Contact Us", to: "/contact-us" },
+];
+
+export const product = [
+  {
+    id: 1,
+    name: "Ade Samuel",
+    productName: "Matured West African Breed Goat",
+    location: "Isikan, Akure, Ondo State",
+    rating: "4.5",
+    reviews: "200",
+    order: "3",
+    views: "2",
+    price: "#30, 000",
+    category: "Livestock",
+    available: "60",
+    color: ["Black", "Brown"],
+    images: [FirstProduct, SecondProduct, ThirdProduct, FourthProduct],
   },
 ];

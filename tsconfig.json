@@ -29,7 +29,9 @@
     ".next/types/**/*.ts",
     "src/app/components/Buttons.jsx",
     "src/app/contact-us/page.jsx",
-    "src/app/products/components/Products.jsx"
+    "src/app/products/components/Products.jsx",
+    "src/app/profile/page.jsx",
+    "src/app/components/Header.jsx"
   ],
   "exclude": ["node_modules"]
 }

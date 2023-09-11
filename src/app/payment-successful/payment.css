@@ -1,0 +1,23 @@
+hr {
+  height: 1.5px;
+  background-color: black;
+  position: relative;
+  border: none;
+}
+hr::after {
+  content: "  ";
+  position: absolute;
+  height: 20px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  left: 25%;
+  width: 40%;
+  border-radius: 20px;
+  top: 1%;
+  background-color: #003800;
+  /* background-color: red; */
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}

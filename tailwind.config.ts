@@ -16,6 +16,8 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "about-us":
           "url('../../src/Asset/FARMKART IMAGES/images/About-us/for about.jpg')",
+        "sell-page":
+          "url('../../src/Asset/FARMKART IMAGES/images/Sell-page/plus-sign.png')",
       },
     },
   },

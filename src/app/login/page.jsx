@@ -4,6 +4,7 @@ import Logo from "@/Asset/FARMKART IMAGES/images/landing-page/logo.png";
 import Login from "@/Asset/FARMKART IMAGES/images/sign-in/amico.png";
 import { PrimaryButton } from "../components/Buttons";
 import Link from "next/link";
+import { PasswordLogin, Text } from "../components/Input";
 
 const page = () => {
   return (
@@ -23,34 +24,14 @@ const page = () => {
         </div>
       </header>
       <div className="flex items-center content-center justify-between w-5/6 mx-auto my-10">
-        <form action="" className="w-1/2">
+        <form action="" className="sm:w-1/2 w-full">
           <div className="grid gap-3 w-full">
-            <label
-              htmlFor="emailorphonenumber"
-              className="grid text-sm font-bold w-full"
-            >
-              Email or Phone Number
-              <input
-                type="text"
-                name="emailorphonenumber"
-                id="emailorphonenumber"
-                className="mt-1 rounded bg-[#E6EEE6] placeholder:text-sm placeholder:font-regular font-regular text-slate-600 w-full mb-3"
-                placeholder="jamesabel@outlook.com"
-              />
-            </label>
-            <label htmlFor="password" className="grid text-sm font-bold">
-              Password
-              <input
-                type="password"
-                name="password"
-                id="password"
-                className="mt-1 rounded bg-[#E6EEE6] placeholder:text-sm placeholder:font-regular font-regular text-slate-600 mb-3 w-full"
-                placeholder="*************"
-              />
-              <p className="text-[#005400] font-bold text-sm text-right">
-                Forgot Password?
-              </p>
-            </label>
+            <Text
+              title="Email or Phone Number"
+              type="email"
+              placeholder="jamesabel@outlook.com"
+            />
+            <PasswordLogin title="Password" placeholder="*************" />
           </div>
           <div className="my-3">
             <PrimaryButton title="Sign In" type="submit" className="w-full" />
@@ -67,7 +48,7 @@ const page = () => {
           alt="signin image"
           objectFit="contain"
           objectPosition="center"
-          className="w-[450px]"
+          className="w-[450px] sm:block hidden"
         />
       </div>
     </main>

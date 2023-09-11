@@ -27,6 +27,7 @@ const Header = (props) => {
           />
         </Link>
       </div>
+
       <Navlink />
       <div className="flex gap-2">
         <Link href="/login">

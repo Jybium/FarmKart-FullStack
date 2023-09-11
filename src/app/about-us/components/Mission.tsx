@@ -4,7 +4,7 @@ import { Team } from "@/Constants/Offers";
 
 const Person = ({ person }: any) => {
   return (
-    <div className="text-center w-1/6 gap-3 m-auto">
+    <div className="text-center sm:w-1/6 w-2/6 gap-3 m-auto">
       <Image
         src={person.image}
         objectFit="contain"

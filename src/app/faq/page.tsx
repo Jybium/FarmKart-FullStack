@@ -23,14 +23,14 @@ const page = () => {
         have questions? we're here to help.
       </p>
       <div className="relative text-center mb-10">
-        <div className="absolute bottom-3 left-[35%] z-30">
+        <div className="absolute bottom-3 left-[27%]  sm:left-[35%] z-30">
           <GrSearch />
         </div>
         <input
           type="text"
           name=""
           id=""
-          className="relative w-1/3 m-auto placeholder:text-sm rounded px-14 bg-[#E6EEE6] ring-gray-900"
+          className="relative sm:w-1/3 w-3/6 m-auto placeholder:text-sm rounded sm:px-14 px-10 bg-[#E6EEE6] ring-gray-900"
           placeholder="Search FAQ"
         />
       </div>

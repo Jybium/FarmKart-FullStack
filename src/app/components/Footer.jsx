@@ -12,7 +12,7 @@ import { MdCall } from "react-icons/md";
 const Footer = () => {
   return (
     <footer className="bg-[#E6EEE6] px-10 py-5">
-      <section className=" flex justify-between items-start pb-14 w-12/12 border-[#5E5B57] border-b-[1px]">
+      <section className="grid sm:flex justify-between items-start pb-14 w-12/12 border-[#5E5B57] border-b-[1px]">
         <Link href="/">
           <Image
             className="w-[80px]"
@@ -21,7 +21,7 @@ const Footer = () => {
             objectFit="cover"
           />
         </Link>
-        <div className="flex justify-between gap-12 text-[#27241E] text-base">
+        <div className="sm:flex grid justify-between sm:gap-12 gap-5 text-[#27241E] text-base my-5 sm:my-0 ml-5 sm:ml-0">
           <div>
             <h1 className="font-bold uppercase">About Us</h1>
             <ul className="mt-2 text-sm gap-1 grid">
@@ -53,11 +53,11 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <div className="w-4/12">
+        <div className="sm:w-4/12 w-full ml-5 sm:ml-0">
           <label htmlFor="Suscribe" className="font-bold text-base">
             NEWSLETTER
           </label>
-          <div className="flex mt-3">
+          <div className="flex sm:mt-3 mt-1">
             <input
               type="email"
               className="h-10 w-full pl-2 pr-1 border-0 py-2 outline-0 rounded text-sm placeholder:text-sm"
@@ -67,14 +67,14 @@ const Footer = () => {
           </div>
         </div>
       </section>
-      <section className="flex justify-between pt-5 pb-2">
+      <section className="grid gap-3 sm:gap-0 sm:flex justify-between pt-5 pb-2">
         <p className="text-sm">
           <span className="text-[#5E5B57]">
             &copy; 2022. All Rights Reserved.{" "}
             <span className="text-[#005400]">FarmKart</span>
           </span>
         </p>
-        <div className="flex gap-2">
+        <div className="flex gap-2 ">
           <Link
             href=""
             className="border-[1px] border-black rounded-full p-[6px] text-center"

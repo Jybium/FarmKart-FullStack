@@ -12,7 +12,7 @@ const Sponsor = () => {
         {Partner.map((partner) => (
           <Image
             src={partner.image}
-            className="w-full flex m-auto"
+            className="w-full m-auto"
             objectFit="contain"
             objectPosition="center"
             key={partner.id}

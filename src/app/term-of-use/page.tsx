@@ -5,12 +5,14 @@ import { TOU } from "@/Constants/Offers";
 const page = () => {
   return (
     <main>
-      <Header />
-      <main className="my-10 w-5/6 mx-auto">
+      <Header className="bg-white" />
+      <main className="py-10 w-5/6 mx-auto relative top-[80px] h-[calc(100%-80px)] overflow-scroll pb-20 Hide">
         <h1 className="font-black my-3 text-center">TERMS OF USE</h1>
         <section className="grid gap-4 mt-4">
-          {TOU.map((text) => (
-            <p className="text-sm">{text}</p>
+          {TOU.map((text, i) => (
+            <p className="text-sm" key={i}>
+              {text}
+            </p>
           ))}
         </section>
         <section className="my-3">

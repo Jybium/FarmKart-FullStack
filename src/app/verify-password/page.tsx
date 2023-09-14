@@ -26,7 +26,7 @@ const page = () => {
             </span>
           </p>
         </div>
-        <form action="" className="">
+        <form className="">
           <div className="grid grid-flow-col w-8/12 m-auto my-14">
             <input
               type="tel"

@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
 import React from "react";
 import Logo from "@/Asset/FARMKART IMAGES/images/landing-page/logo.png";
 import Forgot from "@/Asset/FARMKART IMAGES/images/forgot-password/cuate.png";
@@ -7,6 +10,16 @@ import { PrimaryButton } from "../components/Buttons";
 import { Text } from "../components/Input";
 
 const page = () => {
+  const {
+    watch,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <main>
       <header>
@@ -27,11 +40,14 @@ const page = () => {
               code.
             </p>
           </div>
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <Text
               title="Email or Phone Number"
               placeholder="jamesabel@outlook.com"
               type="email"
+              register={register}
+              error={errors}
+              name="emailAddress"
             />
             <PrimaryButton
               title="Send Code"

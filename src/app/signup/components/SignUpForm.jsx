@@ -1,105 +1,87 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 import { Text } from "@/app/components/Input";
-import { Password } from "@/app/components/Input";
-import Select from "@/app/components/Select";
+import { Password, Select } from "@/app/components/Input";
+
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { PrimaryButton } from "@/app/components/Buttons";
 
-const SignUpForm = () => {
-  // STATE FOR THE MODAL
-  const [modal, setModal] = useState(false);
-  const showModal = () => {
-    setModal((prev) => !modal);
+const SignUpForm = ({ showModal }) => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onsubmit = (data) => {
+    toast("submitted successfully!");
+    console.log(data);
   };
   return (
     <section className="w-full relative">
-      {modal ? (
-        <div className=" absolute w-screen top-0 left-0 h-screen z-10 bg-green-50">
-          <div className="h-1/2 grid items-center content-center w-1/2 mx-auto rounded bg-green-100">
-            <div>
-              <div>
-                <p>Why Choose a Location?</p>
-                <div>
-                  <p>
-                    This will tell ue where you are selling and shopping from.
-                  </p>
-                  <p>It also means that we can:</p>
-                </div>
-                <div>
-                  <p>
-                    1. provide more suitable services based on your location.
-                  </p>
-                  <p>
-                    2. Effectively provide data security according to the laws
-                    of Nigeria.
-                  </p>
-                </div>
-                <p>
-                  Make sure you choose the right state as you proceed with your
-                  registration.
-                </p>
-              </div>
-              <div onClick={showModal}>
-                <PrimaryButton
-                  title="OK"
-                  className="rounded-md w-full"
-                  type="button"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : (
-        ""
-      )}
-      <form>
+      <form onSubmit={handleSubmit(onsubmit)}>
         <div className="w-full gap-5 grid">
           <div className="grid sm:flex gap-3 w-full">
-            <Text title="First Name" placeholder="James" />
-            <Text title="Last Name" placeholder="Abel" />
+            <Text
+              title="First Name"
+              placeholder="James"
+              register={register}
+              required
+              name="firstName"
+              error={errors}
+            />
+            <Text
+              title="Last Name"
+              placeholder="Abel"
+              register={register}
+              name="lastName"
+              required
+              error={errors}
+            />
           </div>
           <div className="grid sm:flex gap-3 w-full">
             <Text
               title="Email Address"
               type="email"
               placeholder="jamesabel@outlook.com"
+              register={register}
+              name="emailAddress"
+              required
+              error={errors}
             />
             <Text
               title="Phone Number (+234)"
               type="tel"
               placeholder="0805 234 0098"
+              register={register}
+              name="phoneNumber"
+              required
+              error={errors}
             />
           </div>
           <div className="grid sm:flex gap-3 w-full">
-            <label htmlFor="location" className="grid text-sm font-bold w-full">
-              Location
-              {/* <input
-                    type="text"
-                    name="emailorphonenumber"
-                    id="emailorphonenumber"
-                    className="mt-1 rounded bg-[#E6EEE6] placeholder:text-sm placeholder:font-regular font-regular text-slate-600 w-full "
-                    placeholder="jamesabel@outlook.com"
-                  /> */}
-              <select
-                name="location"
-                id="location"
-                className="mt-1 rounded bg-[#E6EEE6] placeholder:text-sm placeholder:font-regular font-regular text-slate-600 w-full text-sm"
-              >
-                <option value="default" className="text-sm">
-                  Select Location
-                </option>
-              </select>
-              <p
-                className="text-blue-500 mt-1 font-bold text-sm"
-                onClick={showModal}
-              >
-                Why Choose Location?
-              </p>
-            </label>
-            <Password title="Password" placeholder="***********" />
+            <Select
+              title="Location"
+              onclick={showModal}
+              register={register}
+              error={errors}
+              required
+              name="location"
+            >
+              Why Choose Location?
+            </Select>
+            <Password
+              title="Password"
+              placeholder="***********"
+              register={register}
+              required
+              name="password"
+              error={errors}
+            />
           </div>
         </div>
         <p className="text-sm my-5">
@@ -112,8 +94,8 @@ const SignUpForm = () => {
             Term of Use
           </Link>
         </p>
+        <PrimaryButton type="submit" title="Register" className="w-full" />
       </form>
-      <PrimaryButton type="submit" title="Register" className="w-full" />
       <p className="text-sm text-center mt-2">
         {" "}
         Already Have An Account On FarmKart?

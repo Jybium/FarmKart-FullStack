@@ -1,11 +1,26 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/Asset/FARMKART IMAGES/images/landing-page/logo.png";
 import { PrimaryButton } from "../components/Buttons";
 import { Password } from "../components/Input";
+import { useForm } from "react-hook-form";
 
 const page = () => {
+  const {
+    handleSubmit,
+    register,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+    reset();
+  };
+
   return (
     <main>
       <header>
@@ -22,10 +37,22 @@ const page = () => {
           <h1 className="capitalize font-black text-lg">new password</h1>
           <p>Enter a new password to complete the process</p>
         </div>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid gap-4 my-3">
-            <Password title="New Password" placeholder="***********" />
-            <Password title="Confirm Password" placeholder="***********" />
+            <Password
+              title="New Password"
+              placeholder="***********"
+              name="password"
+              error={errors}
+              register={register}
+            />
+            <Password
+              title="Confirm Password"
+              placeholder="***********"
+              name="comfirmPassword"
+              error={errors}
+              register={register}
+            />
           </div>
           <PrimaryButton
             title="Reset Password"

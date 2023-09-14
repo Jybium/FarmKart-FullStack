@@ -8,7 +8,7 @@ import Header from "../components/Header";
 const page = () => {
   return (
     <main>
-      <Header />
+      <Header className="bg-white" />
       <Banner />
       <Mission />
     </main>

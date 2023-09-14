@@ -60,11 +60,14 @@ const Reviews = () => {
           secondCarousel={<Images />}
           thirdCarousel={<Images />}
         />
-        <SlideAsAnything
-          firstCarousel={<Images />}
-          secondCarousel={<Images />}
-          thirdCarousel={<Images />}
-        />
+
+        <div className="hidden sm:block">
+          <SlideAsAnything
+            firstCarousel={<Images />}
+            secondCarousel={<Images />}
+            thirdCarousel={<Images />}
+          />
+        </div>
       </section>
     </main>
   );

@@ -4,7 +4,7 @@ import { Team } from "@/Constants/Offers";
 
 const Person = ({ person }: any) => {
   return (
-    <div className="text-center sm:w-1/6 w-2/6 gap-3 m-auto">
+    <div className="text-center gap-3 m-auto">
       <Image
         src={person.image}
         objectFit="contain"
@@ -62,7 +62,7 @@ const Mission = () => {
           to real-world problems.
         </p>
         <div className="text-center">
-          <div className="flex flex-wrap gap-5 place-content-center place-items-center ">
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-5 place-content-center place-items-center ">
             {Team.map((person) => (
               <Person person={person} />
             ))}

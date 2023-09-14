@@ -7,8 +7,8 @@ import Error from "../Asset/FARMKART IMAGES/images/Error-404/error.png";
 const Custom404 = () => {
   return (
     <main className="text-center">
-      <Header />
-      <main className="w-1/2 mx-auto my-14">
+      <Header className="bg-white" />
+      <main className="w-1/2 mx-auto py-14 relative overflow-scroll top-[80px] h-[calc(100%_80px)] pb-20 Hide">
         <Image src={Error} objectFit="contain" objectPosition="center" />
       </main>
       <PrimaryButton

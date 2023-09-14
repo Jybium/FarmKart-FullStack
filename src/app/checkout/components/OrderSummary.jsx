@@ -3,7 +3,7 @@ import React from "react";
 
 const OrderSummary = () => {
   return (
-    <main className="w-[45%]">
+    <main className="sm:w-[45%] w-full">
       <p className="font-black text-sm my-5">ORDER SUMMARY</p>
       <section>
         <section className="rounded border-[1px] border-black text-sm font-bold">

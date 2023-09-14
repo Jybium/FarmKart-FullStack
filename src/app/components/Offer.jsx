@@ -5,7 +5,7 @@ import Mockup from "@/Asset/FARMKART IMAGES/images/landing-page/Frame 1151.png";
 
 const OurOffer = ({ offer }) => {
   return (
-    <div className="flex flex-col content-center text-center w-1/4 items-center text-xs m-2 mx-auto">
+    <div className="flex flex-col flex-1 content-center text-center  items-center text-xs m-2 mx-auto">
       <Image
         src={offer.image}
         objectFit="cover"
@@ -22,12 +22,12 @@ const OurOffer = ({ offer }) => {
 
 const Offer = () => {
   return (
-    <main className="text-center relative py-10">
+    <main className="text-center relative py-10 px-5 sm:px-0 w-full">
       <Image
         src={Mockup}
         objectFit="cover"
         objectPosition="center"
-        className="w-[40px] absolute left-0 top-0"
+        className="w-[40px] hidden sm:block absolute left-0 top-0"
       />
       <h1 className="text-[#005400] font-bold my-3">What We Offer</h1>
       <p className="text-[#504D49] font-bold text-sm">
@@ -35,7 +35,7 @@ const Offer = () => {
         an easy go
       </p>
       <div className="relative">
-        <div className="flex flex-wrap gap-5 my-5  w-5/6 justify-center content-center items-center text-center m-auto relative">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 my-5  w-5/6 justify-center place-content-center place-items-center text-center m-auto relative">
           {Offers.map((offer) => (
             <OurOffer offer={offer} key={offer.id} />
           ))}
@@ -45,7 +45,7 @@ const Offer = () => {
           src={Mockup}
           objectFit="cover"
           objectPosition="center"
-          className="w-[40px] absolute top-0 right-0"
+          className="w-[40px] hidden sm:block absolute top-0 right-0"
         />
       </div>
     </main>

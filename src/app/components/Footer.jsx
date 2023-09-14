@@ -15,7 +15,7 @@ const Footer = () => {
       <section className="grid sm:flex justify-between items-start pb-14 w-12/12 border-[#5E5B57] border-b-[1px]">
         <Link href="/">
           <Image
-            className="w-[80px]"
+            className="w-[80px] ml-5 sm:ml-0"
             src={Logo}
             alt="Farmkart logo"
             objectFit="cover"

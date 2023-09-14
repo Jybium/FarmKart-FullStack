@@ -17,7 +17,7 @@ const page = () => {
           className="text-center m-auto"
         />
       </header>
-      <main className="my-6 w-1/2 mx-auto">
+      <main className="my-6 sm:w-1/2 w-5/6 mx-auto">
         <Image
           src={passwordsuccess}
           objectFit="contain"

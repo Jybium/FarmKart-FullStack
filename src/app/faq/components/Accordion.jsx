@@ -8,7 +8,7 @@ const Accordion = ({ onclick, open, setopen }) => {
       {FAQ.map((items) => (
         <div key={items.id}>
           <p
-            className="bg-[#f6f6f6] px-6 py-3 rounded text-[15px] gap-8 flex items-center shadow cursor-pointer"
+            className="bg-[#f6f6f6] px-6 sm:py-3 py-2 rounded text-[15px] gap-8 flex items-center shadow cursor-pointer"
             onClick={() => {
               onclick(items.id);
               if (open === items.id) {

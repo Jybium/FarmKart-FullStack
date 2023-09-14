@@ -4,7 +4,7 @@ import { GrWaypoint } from "react-icons/gr";
 
 const Checkout = () => {
   return (
-    <main className="w-[50%]">
+    <main className="sm:w-[50%] w-full">
       <p className="font-black text-sm my-5">CHECKOUT</p>
       <section>
         {/* FOR THE FIRST ITEM IN THE ADDRESS COLUMN */}

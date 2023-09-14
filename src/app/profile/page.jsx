@@ -9,10 +9,10 @@ import Link from "next/link";
 const page = () => {
   return (
     <main>
-      <Header />
-      <main className="w-5/6 mx-auto my-10">
+      <Header className="bg-white" />
+      <main className="w-5/6 mx-auto py-10 relative h-[calc(100%-80px)] overflow-scroll Hide">
         <h1 className="font-black text-lg my-4">My Profile</h1>
-        <section className="flex justify-between my-5">
+        <section className="flex items-center justify-between my-5">
           <div className="flex items-center gap-4">
             <Image
               src={Profile}
@@ -24,26 +24,28 @@ const page = () => {
           </div>
           <Link
             href="products"
-            className="text-[#003800] font-black tracking-wide"
+            className="text-[#003800] font-black sm:tracking-wide text-sm sm:text-base"
           >
             Back To HomePage
           </Link>
         </section>
-        <section>
-          <form action="" className="w-full grid gap-7 my-5">
-            <div className="flex justify-between gap-5">
-              <Input title="First Name" placeholder="James" />
-              <Input title="Last Name" placeholder="Abel" />
-            </div>
-            <div className="flex justify-between gap-5">
-              <Input title="Phone Number (+234)" placeholder="0806 234 9900" />
-              <Input title="Location" placeholder="Lagos" />
-            </div>
-          </form>
-          <div className="text-center mt-28">
-            <PrimaryButton title="Edit Profile" className="w-1/3 mx-auto" />
+
+        <form className="w-full grid sm:gap-7 gap-4 my-5">
+          <div className="flex sm:flex-row flex-col justify-between gap-5 w-full">
+            <Input title="First Name" placeholder="James" />
+            <Input title="Last Name" placeholder="Abel" />
           </div>
-        </section>
+          <div className="flex sm:flex-row flex-col w-full justify-between gap-5 ">
+            <Input title="Phone Number (+234)" placeholder="0806 234 9900" />
+            <Input title="Location" placeholder="Lagos" />
+          </div>
+        </form>
+        <div className="text-center sm:mt-28 mt-8">
+          <PrimaryButton
+            title="Edit Profile"
+            className="sm:w-1/3 w-1/2 mx-auto"
+          />
+        </div>
       </main>
     </main>
   );

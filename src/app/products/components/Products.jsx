@@ -56,7 +56,7 @@ const Product = ({ product }) => {
 
 const Products = () => {
   return (
-    <main className="w-3/4 mb-10">
+    <main className="w-3/4 lg:w-3/5 xl:w-3/4 md:w-3/5 mb-10">
       <section className="flex justify-between gap-5 overflow-auto w-full Hide">
         {Categories.map((category) => (
           <Category category={category} key={category.id} />

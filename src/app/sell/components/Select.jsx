@@ -2,8 +2,8 @@ import React from "react";
 
 const Select = ({ name, title }) => {
   return (
-    <div className="w-full">
-      <label htmlFor={name} className="text-sm font-black">
+    <div className="block w-full">
+      <label htmlFor={name} className="text-sm font-black w-full">
         {name}
       </label>
       <select

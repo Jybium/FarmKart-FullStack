@@ -14,18 +14,18 @@ model User {
   Id            String    @id @default(uuid())
   firstName     String
   lastName      String
-  emailAddresss String
+  emailAddresss String    @unique
   phoneNumber   Int
   location      String
   role          Role      @default(USER)
   password      String
-  image         String
+  image         String?
   product       Product[]
   cart          Cart[]
   order         Order[]
   review        Review?
-  createdAt     DateTime
-  updatedAt     DateTime
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }
 
 model Product {
@@ -40,8 +40,8 @@ model Product {
   price       Int
   bulkPrice   Int
   description String
-  createdAt   DateTime
-  updatedAt   DateTime
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
   negotiable  Boolean    @default(false)
   category    Categories
   image       Image[]
@@ -53,8 +53,8 @@ model Image {
   Id        String   @id @default(uuid())
   Image     String
   productid Int
-  createdAt DateTime
-  updatedAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   product   Product  @relation(fields: [productid], references: [Id])
 }
 
@@ -63,9 +63,8 @@ model Order {
   userId      String
   user        User     @relation(fields: [userId], references: [Id])
   status      Status
-  createdAt   DateTime
-  updatedAt   DateTime
-  orderDate   DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   totalAmount Int
 }
 
@@ -84,8 +83,8 @@ model Review {
   rating    Int
   productId Int
   userId    String   @unique
-  createdAt DateTime
-  updatedAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   user      User     @relation(fields: [userId], references: [Id])
   product   Product  @relation(fields: [productId], references: [Id])
 }

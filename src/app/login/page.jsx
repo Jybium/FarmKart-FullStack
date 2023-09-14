@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
 import Logo from "@/Asset/FARMKART IMAGES/images/landing-page/logo.png";
@@ -5,8 +7,22 @@ import Login from "@/Asset/FARMKART IMAGES/images/sign-in/amico.png";
 import { PrimaryButton } from "../components/Buttons";
 import Link from "next/link";
 import { PasswordLogin, Text } from "../components/Input";
+import { useForm } from "react-hook-form";
+import { motion } from "framer-motion";
 
 const page = () => {
+  const {
+    handleSubmit,
+    reset,
+    register,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(register);
+  };
+
   return (
     <main>
       <header className="text-center">
@@ -24,14 +40,24 @@ const page = () => {
         </div>
       </header>
       <div className="flex items-center content-center justify-between w-5/6 mx-auto my-10">
-        <form action="" className="sm:w-1/2 w-full">
+        <form onSubmit={handleSubmit(onSubmit)} className="sm:w-1/2 w-full">
           <div className="grid gap-3 w-full">
             <Text
               title="Email or Phone Number"
               type="email"
               placeholder="jamesabel@outlook.com"
+              register={register}
+              name="emailAddress"
+              error={errors}
+              required
             />
-            <PasswordLogin title="Password" placeholder="*************" />
+            <PasswordLogin
+              title="Password"
+              placeholder="*************"
+              register={register}
+              name="password"
+              error={errors}
+            />
           </div>
           <div className="my-3">
             <PrimaryButton title="Sign In" type="submit" className="w-full" />

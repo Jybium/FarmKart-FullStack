@@ -31,7 +31,7 @@ const Header = (props) => {
       <div
         className={`${
           show ? "grid" : "hidden"
-        } w-full sm:w-3/4 md:w-11/12 lg:w-10/12 fixed sm:relative top-0 left-0 h-screen sm:h-0 backdrop-blur-sm  bg-transparent sm:bg-none sm:backdrop-blur-none  sm:mt-0 shadow-md sm:flex py-3 px-5 sm:px-0 sm:py-0 flex items-center justify-between`}
+        } w-full sm:w-3/4 md:w-11/12 lg:w-10/12 fixed sm:relative top-0 left-0 h-screen sm:h-0 backdrop-blur-sm  bg-transparent sm:bg-none sm:backdrop-blur-none  sm:mt-0 shadow-md sm:flex py-3 px-5 sm:px-0 sm:py-0 flex items-center  text-left justify-between`}
         onClick={showNav}
       >
         <div className="sm:flex justify-between items-center ml-10 sm:w-full my-5 grid gap-20 sm:gap-0">

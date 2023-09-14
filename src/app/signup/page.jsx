@@ -21,7 +21,7 @@ const page = () => {
           className="fixed w-full top-0 left-0 h-full z-10 bg-slate-transparent backdrop-blur-sm bg-blend-overlay"
           onClick={showModal}
         >
-          <div className="h-max flex items-center justify-center content-center sm:w-1/3 w-2/3 m-auto rounded bg-green-100 absolute translate-y-1/4 sm:translate-x-1/4 sm:translate-y-3/4 translate-x-1/4 top-0 left-0 z-20 blur-none shadow-md sm:left-1/4">
+          <div className="h-max flex items-center justify-center content-center sm:w-1/3 w-3/4 m-auto rounded bg-green-100 absolute translate-y-1/4 sm:translate-x-1/4 sm:translate-y-3/4 translate-x-1/4 top-0 left-0 z-20 blur-none shadow-md sm:left-1/4">
             <div className="px-4 py-2 text-sm grid gap-4">
               <div>
                 <p className="text-center font-black text-base mb-3">

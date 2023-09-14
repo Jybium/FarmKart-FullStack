@@ -7,16 +7,17 @@ import { motion } from "framer-motion";
 
 const Variant = {
   hidden: {
-    scale: "1.1",
-    opacity: 0,
+    scale: "1",
+    // opacity: 0,
   },
   visible: {
-    opacity: 1,
+    // opacity: 1,
+    scale: "1.2",
     transition: {
       type: "spring",
-      delay: "0.2",
-      duration: "2",
-      yoyo: 10,
+      delay: "0.1",
+      duration: "4",
+      yoyo: Infinity,
     },
   },
 };

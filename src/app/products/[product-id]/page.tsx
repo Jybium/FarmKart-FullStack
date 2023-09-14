@@ -6,9 +6,9 @@ import Details from "@/app/products/[product-id]/components/Details";
 const page = () => {
   return (
     <main>
-      <Header className="bg-white"/>
-      <main className="mx-28">
-        <section className="flex gap-8 py-10">
+      <Header className="bg-white" />
+      <main className="sm:mx-28 w-[90%] m-auto sm:m-0 relative top-[80px] overflow-scroll h-[calc(100%-80px)] pb-20 Hide">
+        <section className="sm:flex grid sm:gap-8 gap-3 py-10">
           <Images />
           <Details />
         </section>

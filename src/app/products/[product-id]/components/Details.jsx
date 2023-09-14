@@ -12,7 +12,7 @@ const style = { color: "Green" };
 
 const Details = () => {
   return (
-    <section className="w-5/12">
+    <section className="sm:w-5/12 w-full">
       <section className="border-[1px] border-black rounded px-3 py-2 my-2 ">
         {/* FOR THE DETAILS SUCH AS IMAGE, NAME AND LOCATION */}
 

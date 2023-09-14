@@ -36,20 +36,20 @@ const Custom404 = () => {
           <PrimaryButton
             title="Back To Homepage"
             type="button"
-            className="sm:w-1/2 w-4/6 mx-auto my-5 text-sm tracking-wider"
+            className="sm:w-full w-4/6 mx-auto my-5 text-sm tracking-wider"
           />
         </main>
       </main>
 
       {/* IF THE CART IS NOT EMPTY */}
 
-      <main className="w-[90%] m-auto mt-8 mb-20 relative top-[80px] overflow-scroll h-[calc(100%-80px)] pb-20">
+      <main className="w-[90%] mx-auto mt-8 mb-20 relative top-[80px] overflow-scroll h-[calc(100%-80px)] pb-20 Hide">
         <h1 className="capitalize font-black">shopping cart: 1 item</h1>
         <section className="sm:flex w-full gap-6 justify-between mt-5 mb-10">
           <div className="bg-[#E6EEE6] rounded shadow w-full sm:w-9/12">
             <div className="flex items-center justify-between py-2 px-4 uppercase font-black text-sm border-b border-black">
               <p className="sm:w-[46%] w-[47%]">item details</p>
-              <p className="sm:w-[20%] w-[21%] text-right sm:text-right grid justify-center">
+              <p className="sm:w-[20%] w-[21%] text-right sm:text-right">
                 item price
               </p>
               <p className="w-[30%] text-right">Quantity</p>

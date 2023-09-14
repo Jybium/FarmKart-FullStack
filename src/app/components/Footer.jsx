@@ -21,7 +21,7 @@ const Footer = () => {
             objectFit="cover"
           />
         </Link>
-        <div className="sm:flex grid justify-between sm:gap-12 gap-5 text-[#27241E] text-base my-5 sm:my-0 ml-5 sm:ml-0">
+        <div className="sm:flex grid justify-between sm:gap-12 gap-5 text-[#27241E] text-base my-7 sm:my-0 ml-5 sm:ml-0">
           <div>
             <h1 className="font-bold uppercase">About Us</h1>
             <ul className="mt-2 text-sm gap-1 grid">
@@ -53,7 +53,7 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <div className="sm:w-4/12 w-full ml-5 sm:ml-0">
+        <div className="sm:w-4/12 w-full sm:ml-0">
           <label htmlFor="Suscribe" className="font-bold text-base">
             NEWSLETTER
           </label>

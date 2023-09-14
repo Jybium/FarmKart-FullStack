@@ -24,7 +24,7 @@ const page = () => {
           have questions? we're here to help.
         </p>
         <div className="relative text-center mb-10">
-          <div className="absolute bottom-3 left-[27%]  sm:left-[35%] z-30">
+          <div className="absolute bottom-3 left-[27%]  sm:left-[35%] ">
             <GrSearch />
           </div>
           <input

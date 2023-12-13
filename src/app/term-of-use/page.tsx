@@ -1,5 +1,7 @@
-import React from "react";
-import Header from "../components/Header";
+import React, { lazy } from "react";
+
+const Header = lazy(()=> import("../components/Header"))
+
 import { TOU } from "@/Constants/Offers";
 
 const page = () => {

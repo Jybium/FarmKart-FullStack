@@ -16,6 +16,7 @@ const Sponsor = () => {
             objectFit="contain"
             objectPosition="center"
             key={partner.id}
+            alt="image containing logo of our partners"
           />
         ))}
       </div>

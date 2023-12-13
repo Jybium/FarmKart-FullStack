@@ -1,10 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import type { Author } from "next/dist/lib/metadata/types/metadata-types";
-// import Head from "next/head";
-import { Head } from "next/document";
 import Footer from "./components/Footer";
-import { ToastContainer } from "react-toastify";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -39,7 +36,7 @@ export default function RootLayout({
         {children}
         <Footer />
       </body>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </html>
   );
 }

@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { Offers } from "../../Constants/Offers";
 import Mockup from "@/Asset/FARMKART IMAGES/images/landing-page/Frame 1151.png";
+import { createPortal } from "react-dom";
 
 const OurOffer = ({ offer }) => {
   return (
@@ -11,10 +12,11 @@ const OurOffer = ({ offer }) => {
         objectFit="cover"
         objectPosition="center"
         className={offer.className || "w-[80px]"}
+        alt="Image of what we offer"
       />
       <div className=" grid gap-1 mt-3">
         <h1 className="text-[#005400] font-bold">{offer.title}</h1>
-        <p className="text-[#504D49">{offer.words}</p>
+        <p className="text-[#504D49]">{offer.words}</p>
       </div>
     </div>
   );
@@ -28,6 +30,7 @@ const Offer = () => {
         objectFit="cover"
         objectPosition="center"
         className="w-[40px] hidden sm:block absolute left-0 top-0"
+        alt="Offers"
       />
       <h1 className="text-[#005400] font-bold my-3">What We Offer</h1>
       <p className="text-[#504D49] font-bold text-sm">
@@ -46,6 +49,7 @@ const Offer = () => {
           objectFit="cover"
           objectPosition="center"
           className="w-[40px] hidden sm:block absolute top-0 right-0"
+          alt="image of what we offer"
         />
       </div>
     </main>

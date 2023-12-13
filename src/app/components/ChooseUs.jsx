@@ -34,7 +34,7 @@ const ChooseUs = () => {
       </h1>
       <div className=" mx-auto w-[90%] my-10 ">
         {Choose.map((item) => (
-          <OurOffer offer={item} />
+          <OurOffer offer={item} key={item.id} />
         ))}
       </div>
 

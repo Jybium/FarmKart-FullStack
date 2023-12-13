@@ -37,6 +37,7 @@ const CallToAction = () => {
           objectFit="contain"
           objectPosition="center"
           loading="lazy"
+          alt="A woman holding shovel in the garden"
         />
       </div>
     </section>

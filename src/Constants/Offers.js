@@ -63,7 +63,7 @@ import watermelon from "@/Asset/FARMKART IMAGES/images/product/watermelon.jpg";
 // IMAGES FOR THE PRODUCT AND PRODUCT DETAILS PAGE
 import Seller from "@/Asset/FARMKART IMAGES/images/product-details/seller.png";
 import FirstProduct from "@/Asset/FARMKART IMAGES/images/product-details/Product Image (1).png";
-import SecondProduct from "@/Asset/FARMKART IMAGES/images/product-details/Product Image (2).png";
+import SecondProduct from "@/Asset/FARMKART IMAGES/images/product-details/Product image (2).png";
 import ThirdProduct from "@/Asset/FARMKART IMAGES/images/product-details/Product Image (3).png";
 import FourthProduct from "@/Asset/FARMKART IMAGES/images/product-details/Product Image (4).png";
 

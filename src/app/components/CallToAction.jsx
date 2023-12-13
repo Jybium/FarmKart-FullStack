@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { PrimaryButton, SecondaryButton } from "../components/Buttons";
-import CTA from "../../Asset/FARMKART IMAGES/images/landing-page/Hero-image.png";
+import CTA from "../../Asset/FARMKART IMAGES/images/landing-page/Hero-Image.png";
 import Link from "next/link";
 
 const CallToAction = () => {

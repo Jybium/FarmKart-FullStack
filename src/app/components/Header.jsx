@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import Logo from "@/app/logo (2).png";
+import Logo from "../../app/logo (2).png";
+
 import Link from "next/link";
 import { GrMenu, GrClose } from "react-icons/gr";
 import { PrimaryButton, SecondaryButton } from "@/app/components/Buttons";

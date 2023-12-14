@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import Logo from "@/app/logo (2).png";
+import Logo from "../../app/logo (2).png";
+
 import Link from "next/link";
 import { PrimaryButton } from "./Buttons";
 import { TfiFacebook } from "react-icons/tfi";

@@ -15,7 +15,6 @@ export async function POST(req, res) {
     } = await req.json();
 
     const PhoneNumber = phoneNumber.toString()
-    console.log(PhoneNumber)
 
     if (!password || !firstName || !lastName || !emailAddress)
       return NextResponse.json(
@@ -29,7 +28,7 @@ export async function POST(req, res) {
       },
     });
 
-    console.log(existingUser)
+    
 
     if (existingUser)
       return NextResponse.json(
@@ -53,7 +52,7 @@ export async function POST(req, res) {
 
     const { password: hashedPassword, ...result } = user;
 
-    console.log(password, result)
+    
     return NextResponse.json(
       { message: "User Created Successfully" , data: { result }},
       { status: 201 }

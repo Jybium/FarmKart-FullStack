@@ -21,7 +21,6 @@ const SignUpForm = ({ showModal }) => {
 
   const onsubmit = (data) => {
     notifySuccess("Button clicked")
-    console.log(data);
      try {
        axios
          .post("/api/auth/register", {...data})

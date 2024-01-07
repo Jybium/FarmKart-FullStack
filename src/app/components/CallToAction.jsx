@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const CallToAction = () => {
   return (
-    <section className="grid gap-4 sm:gap-0 pt-10 relative sm:flex items-center px-14 justify-between bg-[#E6EEE6]">
+    <section className="grid gap-4 sm:gap-0 pt-10 relative sm:flex items-center sm:px-14  px-10 justify-between bg-[#E6EEE6]">
       <div className="sm:w-1/2 pr-5 grid sm:gap-10 gap-5">
         <h1
           className="text-[#005400] font-bold text-4xl text-center sm:text-left tracking-wider"

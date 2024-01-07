@@ -14,8 +14,10 @@ model User {
   Id            String    @id @default(uuid())
   firstName     String
   lastName      String
-  emailAddresss String    @unique
-  phoneNumber   Int
+  emailAddress String    @unique
+  emailVerify   Boolean @default(false)
+  verificationToken String?
+  phoneNumber   String
   location      String
   role          Role      @default(USER)
   password      String

@@ -8,7 +8,11 @@ import { PrimaryButton } from "../components/Buttons";
 import Link from "next/link";
 import { PasswordLogin, Text } from "../components/Input";
 import { useForm } from "react-hook-form";
+import axios from "axios"
 import { motion } from "framer-motion";
+import {signIn} from "next-auth/react"
+import { redirect } from "next/dist/server/api-utils";
+
 
 const page = () => {
   const {
@@ -18,9 +22,18 @@ const page = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log(register);
+  const onSubmit = ( data) => {
+    // e.preventDefault();
+    // signIn("credentials", {data}).then(res=>{
+    //   console.log(res)
+    // }).catch(e=>console.error(e))
+    try {
+      
+      axios.post("/api/auth/login", data).then(res => res.data ).then(result => console.log(result))
+    } catch (error) {
+      console.log(error)
+    }
+
   };
 
   return (

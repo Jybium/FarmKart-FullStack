@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { toast } from "react-toastify";
+import notifySuccess from "@/app/utils/notifySuccess"
+import axios from "axios"
+import notifyError from "@/app/utils/notifyError"
 import { Text } from "@/app/components/Input";
 import { Password, Select } from "@/app/components/Input";
 
@@ -18,8 +20,16 @@ const SignUpForm = ({ showModal }) => {
   } = useForm();
 
   const onsubmit = (data) => {
-    toast("submitted successfully!");
+    notifySuccess("Button clicked")
     console.log(data);
+     try {
+       axios
+         .post("/api/auth/register", {...data})
+         .then((res) => res.data)
+         .then((result) => console.log(result));
+     } catch (error) {
+       console.log(error);
+     }
   };
   return (
     <section className="w-full relative">
@@ -55,7 +65,7 @@ const SignUpForm = ({ showModal }) => {
             />
             <Text
               title="Phone Number (+234)"
-              type="tel"
+              type="number"
               placeholder="0805 234 0098"
               register={register}
               name="phoneNumber"

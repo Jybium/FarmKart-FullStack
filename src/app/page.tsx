@@ -7,8 +7,8 @@ const Sponsor = lazy(()=>import("@/app/components/Sponsor"))
 const Reviews = lazy(()=>import("@/app/components/Reviews"))
 const Header = lazy(()=>import("@/app/components/Header"))
 const CallToAction = lazy(()=>import("@/app/components/CallToAction"))
-import { ToastContainer } from "react-toastify";
-import "react-toastify/ReactToastify.min.css";
+// import { ToastContainer } from "react-toastify";
+// import "react-toastify/ReactToastify.min.css";
 
 export default function Home() {
   return (
@@ -21,7 +21,7 @@ export default function Home() {
         <Reviews />
         <Sponsor />
       </main>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </Suspense>
   );
 }

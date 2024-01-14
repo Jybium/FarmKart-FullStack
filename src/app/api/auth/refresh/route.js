@@ -1,5 +1,4 @@
-// pages/api/refresh-token.js
-import { NextApiRequest, NextApiResponse } from "next";
+
 import prisma from "../../../lib/prisma";
 import jwt from "jsonwebtoken";
 

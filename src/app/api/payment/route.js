@@ -3,7 +3,7 @@ import { loadStripe } from "@stripe/stripe-js";
 
 const stripe = loadStripe(process.env.STRIPE_SECRET_KEY);
 
-export default async function handler(req, res) {
+export async function POST(req, res) {
   if (req.method === "POST") {
     try {
       // Use the Stripe API to process payments on the server

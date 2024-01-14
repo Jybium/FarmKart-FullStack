@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/app/lib/prisma";
 import nodemailer from "nodemailer";
 
-export async function handler(
+export async function POST(
   req,
   res
 ) {

@@ -1,6 +1,6 @@
 // pages/api/password-recovery/request.js
 import { NextApiRequest, NextApiResponse } from "next";
-import prisma from "../../lib/prisma";
+import prisma from "@/app/lib/prisma";
 import nodemailer from "nodemailer";
 
 export default async function handler(

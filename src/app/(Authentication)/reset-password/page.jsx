@@ -4,8 +4,8 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/Asset/FARMKART IMAGES/images/landing-page/logo.png";
-import { PrimaryButton } from "../components/Buttons";
-import { Password } from "../components/Input";
+import { PrimaryButton } from "../../components/Buttons";
+import { Password } from "../../components/Input";
 import { useForm } from "react-hook-form";
 
 const page = () => {

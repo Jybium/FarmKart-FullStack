@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../lib/prisma";
 import jwt from "jsonwebtoken";
 
-export default async function handler(
+export async function handler(
   req,
   res
 ) {

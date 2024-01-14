@@ -33,9 +33,9 @@
     "src/app/profile/page.jsx",
     "src/app/components/Header.jsx",
     "src/app/signup/page.jsx",
-    "src/app/login/page.jsx",
-    "src/app/forgot-password/page.jsx",
+    "src/app/(Authentication)/login/page.jsx",
+    "src/app/(Authentication)/forgot-password/page.jsx",
     "src/app/reset-password/page.jsx"
-  ],
+, "src/app/api/auth/password-recovery/route.js"  ],
   "exclude": ["node_modules"]
 }

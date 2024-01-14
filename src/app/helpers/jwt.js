@@ -24,3 +24,17 @@ export const verifyToken = (token) => {
     }
 
 }
+
+export const decodeToken = (token) => {
+
+    try {
+     
+        const decoded = jwt.decode(token, {complete: true})
+        return decoded, decoded.payload
+    } catch (error) {
+        console.log(error)
+        return null
+    }
+
+}
+

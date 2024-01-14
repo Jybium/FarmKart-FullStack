@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link"
 import Header from "../components/Header";
 import { PrimaryButton } from "../components/Buttons";
 import Select from "./components/Select";
@@ -16,13 +17,13 @@ const page = () => {
             <Select title="Select Location" name="Location" />
           </div>
           <AddingImage />
-          <div className="text-center mt-20">
+          <Link href="/sell-2" className="text-center mt-20">
             <PrimaryButton
               title="Next"
               type="button"
               className=" sm:w-1/3 w-1/2 mx-auto"
             />
-          </div>
+          </Link>
         </form>
       </main>
     </main>

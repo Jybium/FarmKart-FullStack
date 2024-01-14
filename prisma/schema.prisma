@@ -11,23 +11,30 @@ datasource db {
 }
 
 model User {
-  Id            String    @id @default(uuid())
-  firstName     String
-  lastName      String
-  emailAddress String    @unique
-  emailVerify   Boolean @default(false)
-  verificationToken String?
-  phoneNumber   String
-  location      String
-  role          Role      @default(USER)
-  password      String
-  image         String?
-  product       Product[]
-  cart          Cart[]
-  order         Order[]
-  review        Review?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  Id                               String    @id @default(uuid())
+  firstName                        String
+  lastName                         String
+  emailAddress                     String    @unique
+  emailVerify                      Boolean   @default(false)
+  verificationToken                String?
+  phoneNumber                      String
+  refreshToken                     String?
+  passwordResetToken               String?
+  passwordResetTokenExpiration     DateTime?
+  emailVerificationToken           String?
+  emailVerificationTokenExpiration DateTime?
+  lastLoginAttempts                DateTime  @default(now())
+  loginAttempts                    Int?
+  location                         String
+  role                             Role      @default(USER)
+  password                         String
+  image                            String?
+  product                          Product[]
+  cart                             Cart[]
+  order                            Order[]
+  review                           Review?
+  createdAt                        DateTime  @default(now())
+  updatedAt                        DateTime  @updatedAt
 }
 
 model Product {
@@ -61,13 +68,14 @@ model Image {
 }
 
 model Order {
-  Id          String   @id @default(uuid())
-  userId      String
-  user        User     @relation(fields: [userId], references: [Id])
-  status      Status
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  totalAmount Int
+  Id            String   @id @default(uuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [Id])
+  status        Status
+  transactionId String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  totalAmount   Int
 }
 
 model Cart {
@@ -101,6 +109,7 @@ enum Categories {
 enum Role {
   USER
   ADMIN
+  BUYER
 }
 
 enum Status {

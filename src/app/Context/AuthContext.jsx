@@ -9,7 +9,10 @@ const AuthProvider = ({children}) =>{
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState()
 
-    
+    const FetchUser = async () =>{
+        
+    }
+
 
 
     return <AuthContext.Provider value={{user, setUser, loading, setLoading}}>

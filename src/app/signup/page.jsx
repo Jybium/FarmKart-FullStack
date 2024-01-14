@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import SignUpForm from "@/app/signup/components/SignUpForm";
 import Logo from "@/Asset/FARMKART IMAGES/images/landing-page/logo.png";
 import { PrimaryButton } from "../components/Buttons";
 import Signup from "@/Asset/FARMKART IMAGES/images/sign-up/Sign-up.png";
+import { Spinner } from "flowbite-react";
 
 const page = () => {
   const [modal, setModal] = useState(false);
@@ -60,6 +61,8 @@ const page = () => {
       ) : (
         ""
       )}
+      <Suspense fallback={<Spinner/>}>
+
       <header className="text-center">
         <Image
           src={Logo}
@@ -86,7 +89,9 @@ const page = () => {
           className="w-1/3 hidden sm:block"
         />
       </main>
+      </Suspense>
     </main>
+
   );
 };
 

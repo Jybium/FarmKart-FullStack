@@ -6,8 +6,8 @@ import { useForm } from "react-hook-form";
 import React from "react";
 import Logo from "@/Asset/FARMKART IMAGES/images/landing-page/logo.png";
 import Forgot from "@/Asset/FARMKART IMAGES/images/forgot-password/cuate.png";
-import { PrimaryButton } from "../components/Buttons";
-import { Text } from "../components/Input";
+import { PrimaryButton } from "../../components/Buttons";
+import { Text } from "../../components/Input";
 
 const page = () => {
   const {

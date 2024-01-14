@@ -2,7 +2,7 @@ import cookie from "cookie"
 import { setCookie } from "cookies-next"
 import {NextResponse} from "next/server"
 
-export default async function (req, res){
+export async function POST(req, res){
 
     if(req.method === 'POST'){
 

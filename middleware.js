@@ -4,7 +4,7 @@ import { getCookie } from "cookies-next";
 import cookie, { serialize } from "cookie";
 
 export const config = {
-  matcher: ["/products", "/products/:id", "/sell", "/sell-2", "/profile"],
+  matcher: [ "/products/:id", "/sel", "/sell-2", "/profile"],
 };
 
 export function middleware(request, res) {
@@ -28,7 +28,7 @@ export function middleware(request, res) {
   // Setting cookies on the response using the `ResponseCookies` API
   const response = NextResponse.next();
 
-  console.log(cookie.value); // => { name: 'vercel', value: 'fast', Path: '/' }
+  // console.log(cookie.value); // => { name: 'vercel', value: 'fast', Path: '/' }
   // The outgoing response will have a `Set-Cookie:vercel=fast;path=/` header.
 
   const serialized = serialize("token", String(cookie.value), {
@@ -42,7 +42,7 @@ export function middleware(request, res) {
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("set-cookie", serialized);
 
-  console.log(requestHeaders);
+  // console.log(requestHeaders);
 
   return response;
 }

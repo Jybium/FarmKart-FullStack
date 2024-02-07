@@ -49,11 +49,13 @@ const page = () => {
               error={errors}
               name="emailAddress"
             />
+            <Link href="/reset-password">
             <PrimaryButton
               title="Send Code"
               type="submit"
               className="w-full mt-3 mb-1"
-            />
+              />
+              </Link>
           </form>
           <Link
             href="/login"

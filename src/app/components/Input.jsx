@@ -47,7 +47,7 @@ export const Password = ({
           {show ? <GrHide size="20" /> : <GrView size="20" />}
         </span>
       </div>
-      <p className="text-gray-400 font-bold text-sm mt-1">
+      <p className="text-gray-400 font-bold text-sm mt-1 text-right">
         Minimum of 8 characters.
       </p>
       {error[name] && error[name].type === "required" && (

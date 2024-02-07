@@ -35,3 +35,13 @@ body {
     rgb(var(--background-start-rgb)); */
   font-family: "Haoura";
 }
+
+input:active{
+  outline: 1px solid black;
+  border: 1px solid black;
+}
+
+input:focus, input:focus-visible{
+  outline: 1px solid black;
+  border: 1px solid black
+}

@@ -1,15 +1,19 @@
 
 import {NextResponse} from "next/server"
-import { signInAccessToken } from "../../../helpers/jwt";
-import cookie, { serialize } from "cookie"
-import * as bcrypt from "bcrypt"
-import prisma from '@/app/lib/prisma'
+import { signInAccessToken, signInRefreshToken } from "../../../helpers/jwt";
 
-import rateLimitMiddleware from "@/app/helpers/rateLimitMiddleware"
+import  { serialize } from "cookie"
+import {setCookie} from "cookies-next"
+import * as bcrypt from "bcrypt"
+import prisma from '../../../lib/prisma'
+
+// import rateLimitMiddleware from "../../../helpers/rateLimitMiddleware"
 
 export async function POST(req, res) {
 
-    await rateLimitMiddleware(req, res)
+    // await rateLimitMiddleware(req, res, async () =>{
+      
+    // })
 
   try {
     const { password, emailAddress } = await req.json();
@@ -22,26 +26,28 @@ export async function POST(req, res) {
 
     const user = await prisma.user.findUnique({
       where: { emailAddress: emailAddress.toLowerCase() },
+      
     });
     if (!user)
       return NextResponse.json({ message: "User not found" }, { status: 401 });
 
+
+
     // Check if the account is locked
-    if (
-      user.loginAttempts >= 5 &&
-      Date.now() - user.lastLoginAttempt < 15 * 60 * 1000
-    ) {
-      return NextResponse.json(
-        {
-          message:
-            "Account locked due to too many failed attempts. Try again later.",
-        },
-        { status: 401 }
-      );
-    }
+    // if (
+    //   user.loginAttempts >= 5 &&
+    //   Date.now() - user.lastLoginAttempts < 15 * 60 * 1000
+    // ) {
+    //   return NextResponse.json(
+    //     {
+    //       message:
+    //         "Account locked due to too many failed attempts. Try again later.",
+    //     },
+    //     { status: 401 }
+    //   );
+    // }
 
-
-    
+    // Check if the password is correct
 
     const isPasswordCorrect = bcrypt.compareSync(password, user.password);
 
@@ -51,17 +57,20 @@ export async function POST(req, res) {
         { status: 400 }
       );
 
+        // if password is not correct, update the log in attempt     
+
       if (!isPasswordCorrect) {
+
         // Update login attempts
-        await prisma.user.update({
-          where: {
-            id: user.id,
-          },
-          data: {
-            loginAttempts: user.loginAttempts + 1,
-            lastLoginAttempt: new Date(),
-          },
-        });
+        // await prisma.user.update({
+        //   where: {
+        //     id: user.Id,
+        //   },
+        //   data: {
+        //     loginAttempts: user.loginAttempts + 1,
+        //     lastLoginAttempt: new Date(),
+        //   },
+        // });
 
         return NextResponse.json(
           { message: "Invalid email address or password" },
@@ -70,8 +79,20 @@ export async function POST(req, res) {
       }
 
 
+      // if password is correct
+
+
     if (isPasswordCorrect && user) {
-      const token = await signInAccessToken(user);
+
+      // Generate an access token
+
+      const token = await signInAccessToken({
+        id: user.Id,
+        email: user.emailAddress,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      });
+      
       const serialized = serialize("token", token, {
         httpOnly: true,
         maxAge: 60 * 60 * 24,
@@ -80,22 +101,29 @@ export async function POST(req, res) {
         path: "/",
       });
 
-      // Reset login attempts on successful login
-      await prisma.user.update({
-        where: {
-          id: user.Id,
-        },
-        data: {
-          loginAttempts: 0,
-          lastLoginAttempt: null,
-        },
-      });
+      const refreshToken = await signInRefreshToken({id:user.Id})
+      // console.log(typeof refreshToken)
+        // Reset login attempts on successful login
+        if(refreshToken){
+        
+        await prisma.user.update({
+          where: {
+            Id: user.Id,
+          },
+          data: {
+            // loginAttempts: 0,
+            // lastLoginAttempt: null,
+            refreshToken: refreshToken.toString()
+          },
+        });} else return
 
       const requestHeaders = new Headers(req.headers);
       requestHeaders.set("set-cookie", serialized);
+     
+      setCookie("token", token, serialized)
 
       return NextResponse.json(
-        { message: "User Signed in successfully", data: { user, token } },
+        { message: "User Signed in successfully", data: { user: [user,lastName, user.lastName, user.phoneNumber, user.emailAddress, user.image], refreshToken, token } },
         { status: 200, headers: { "set-cookie": serialized } }
       );
 

@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import type { Author } from "next/dist/lib/metadata/types/metadata-types";
 import Footer from "./components/Footer";
-import AuthProvider from "@/app/Context/AuthContext";
+// import AuthProvider from "@/app/Context/AuthContext";
 import ToastProvider from "./components/ToastContainer";
 
 // const inter = Inter({ subsets: ["latin"] });
@@ -36,7 +36,9 @@ export default function RootLayout({
       <body className="Hide">
         {/* <Header /> */}
         <ToastProvider>
-          <AuthProvider>{children}</AuthProvider>
+          {/* <AuthProvider> */}
+            {children}
+            {/* </AuthProvider> */}
           <Footer />
         </ToastProvider>
       </body>

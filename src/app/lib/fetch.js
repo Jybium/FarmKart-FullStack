@@ -1,108 +1,146 @@
-import {useState} from "react"
+"use client"
+
+import {useState, useEffect} from "react"
 
 
-import { getCookie } from "cookies-next";
+import {getCookie} from "cookies-next"
 import notifyError from "../utils/notifyError"
 import notifySuccess from "../utils/notifySuccess"
 
 
-let isFetching = false;
+console.log(
+  getCookie("token", {
+    httpOnly: true,
+    maxAge: 60 * 60 * 24,
+    secure: process.env.NODE_ENV !== "development",
+    sameSite: "strict",
+    path: "/",
+  })
+);
 
-export async function fetchData(url, options) {
-    const [data, SetData] = useState()
-    const [error, SetError] = useState()
-    const [loading, setLoading] = useState(false)
+
+export function fetchData(url, options) {
+  let isFetching = false;
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   if (isFetching) {
-    // If a request is already in progress, you can handle it as needed.
     console.log("Request in progress, please wait.");
-    return;
+    return { data, loading, error };
   }
 
   try {
     isFetching = true;
-    setLoading(true)
-    const response = await fetch(url, options);
-    
-setLoading(true)
-    // Process the response as needed
+    setLoading(true);
+
+    const response =  fetch(url, options);
+
     if (response.ok) {
-      const data = await response.json();
-      SetData(data)
-      setLoading(false)
+      const responseData =  response.json();
+      setData(responseData);
     } else {
       console.error("Request failed:", response.status, response.statusText);
     }
   } catch (error) {
     console.error("Error:", error.message);
-    SetError(error)
-    setLoading(false)
+    setError(error);
   } finally {
     isFetching = false;
-    setLoading(false)
+    setLoading(false);
   }
 
-  return data, loading, error
+  return { data, loading, error };
 }
 
-export const fetchWithInterceptors = async (url, options) => {
 
-  const [data, SetData] = useState();
-  const [error, SetError] = useState();
+
+
+
+export const useFetchWithInterceptors = (url, options = {}) => {
+  const [data, setData] = useState();
+  const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
 
-  const token = getCookie('token')
-  // Add your request interceptors here if needed
-  const modifiedOptions = {
-    ...options,
-    headers: {
-      ...(options.headers || {}),
-      "Content-Type": "application/json",
-      "Authorization" : `Bearer ${token}`
-      // Add other headers as needed
-    },
-  };
+  useEffect(() => {
+    let isMounted = true;
 
-  try {
-    setLoading(true)
-    const response = await fetch(url, modifiedOptions);
+    const fetchData = async () => {
+      try {
+        setLoading(true);
 
-    // Add your response interceptors here if needed
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error("Response error:", errorData);
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
+        const token = getCookie("token");
+        const modifiedOptions = {
+          ...options,
+          headers: {
+            ...(options.headers || {}),
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        };
 
-    const result = await response.json();
-    SetData(result)
-    setLoading(false)
-  } catch (error) {
-    // Add your error interceptors here if needed
-    console.error("Request error:", error);
-    SetError(error)
-    setLoading(false)
-    // throw error;
-  } finally{
-    setLoading(false)
-  }
+        const response = await fetch(url, modifiedOptions);
 
-  return data, error, loading
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error("Response error:", errorData);
+
+          if (response.status === 401) {
+            // Handle token expiry or unauthorized access
+          }
+
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const contentType = response.headers.get("content-type");
+        const result =
+          contentType && contentType.includes("application/json")
+            ? await response.json()
+            : await response.text();
+
+        if (isMounted) {
+          setData(result);
+        }
+      } catch (error) {
+        console.error("Request error:", error);
+
+        if (isMounted) {
+          setError(error);
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [url, options]);
+
+  return { data, error, loading };
 };
+
+
+
+
 
 // Example usage:
-const onsubmit = async (data) => {
-  try {
-    const result = await fetchWithInterceptors("/api/auth/register", {
-      method: "POST",
-      body: JSON.stringify(data),
-    });
+// const onsubmit = async (data) => {
+//   try {
+//     const result = await fetchWithInterceptors("/api/auth/register", {
+//       method: "POST",
+//       body: JSON.stringify(data),
+//     });
 
-    console.log(result);
-    notifySuccess(result.message);
-  } catch (error) {
-    notifyError("An unexpected error occurred");
-  }
+//     console.log(result);
+//     notifySuccess(result.message);
+//   } catch (error) {
+//     notifyError("An unexpected error occurred");
+//   }
 
-};
+// };
 

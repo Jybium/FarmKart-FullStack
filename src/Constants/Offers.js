@@ -469,8 +469,8 @@ export const Categories = [
 
 export const Navlinks = [
   { id: "1", name: "Home", to: "/" },
-  { id: "2", name: "About Us", to: "/about-us" },
-  { id: "3", name: "Our Services", to: "" },
+  { id: "2", name: "Marketplace", to: "/products" },
+  { id: "3", name: "About Us", to: "/about-us" },
   { id: "4", name: "FAQ", to: "/faq" },
   { id: "5", name: "Contact Us", to: "/contact-us" },
 ];

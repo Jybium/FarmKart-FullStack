@@ -7,6 +7,8 @@ import { Categories } from "@/Constants/Offers";
 import { PrimaryButton } from "@/app/components/Buttons";
 import { GrAdd } from "react-icons/gr";
 
+
+
 const Category = ({ category }) => {
   return (
     <div className="grid w-full mx-auto text-center gap-1">
@@ -54,7 +56,16 @@ const Product = ({ product }) => {
   );
 };
 
-const Products = () => {
+const Products = ({data}) => {
+
+  if (data.length <= 0)
+    return (
+      <div className="text-center text-xl justify-center mt-3 mx-auto">
+        sorry 😥😣! <br /> There are no product available!
+      </div>
+    );
+
+  
   return (
     <main className="w-3/4 lg:w-3/5 xl:w-3/4 md:w-3/5 mb-10">
       <section className="flex justify-between gap-5 overflow-auto w-full Hide">
@@ -65,7 +76,8 @@ const Products = () => {
       <section className="">
         <p className="text-[#003800] font-bold my-5">Most Popular</p>
         <section className="flex">
-          {product.map((product) => (
+          
+          {data.map((product) => (
             <Product product={product} />
           ))}
         </section>

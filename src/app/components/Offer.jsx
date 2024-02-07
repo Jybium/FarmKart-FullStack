@@ -6,18 +6,21 @@ import { createPortal } from "react-dom";
 
 const OurOffer = ({ offer }) => {
   return (
-    <div className="flex flex-col flex-1 content-center text-center  items-center text-xs m-2 mx-auto">
+    <div className="flex flex-col sm:flex-  content-center text-center w-[46%] sm:w-[30%]  items-center text-xs m-2 sm:mx- mx-auto">
+
+
       <Image
         src={offer.image}
         objectFit="cover"
         objectPosition="center"
         className={offer.className || "w-[80px]"}
         alt="Image of what we offer"
-      />
+        />
       <div className=" grid gap-1 mt-3">
         <h1 className="text-[#005400] font-bold">{offer.title}</h1>
         <p className="text-[#504D49]">{offer.words}</p>
       </div>
+        
     </div>
   );
 };
@@ -38,7 +41,7 @@ const Offer = () => {
         an easy go
       </p>
       <div className="relative">
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 my-5  w-5/6 justify-center place-content-center place-items-center text-center m-auto relative">
+        <div className="flex flex-wrap gap-5 sm:gap-5 my-5 w-[100%]  sm:w-5/6 justify-center content-center items-center text-center mx-auto relative">
           {Offers.map((offer) => (
             <OurOffer offer={offer} key={offer.id} />
           ))}

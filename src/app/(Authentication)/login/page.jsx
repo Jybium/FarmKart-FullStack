@@ -8,17 +8,19 @@ import { PrimaryButton } from "../../components/Buttons";
 import Link from "next/link";
 import { PasswordLogin, Text } from "../../components/Input";
 import { useForm } from "react-hook-form";
-import axios from "axios"
+
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 
 import notifySuccess from "../../utils/notifySuccess";
 import notifyError from "../../utils/notifyError";
 import { Spinner } from "flowbite-react";
+import { useAuth } from "@/app/Context/AuthContext";
 
 
 const page = () => {
   const router = useRouter();
+  const {setUser} = useAuth()
   const searchParams = useSearchParams()
   
   const redirect = searchParams.get('redirect')
@@ -44,6 +46,9 @@ const page = () => {
        if (!response.ok) {
          const errorData = await response.json();
          console.log(errorData);
+         if(errorData.message === "User not found" ) {
+          router.push("/signup")
+         }
          notifyError(errorData.message);
 
         //  if (response.status === 401) {

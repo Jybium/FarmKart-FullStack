@@ -1,5 +1,7 @@
 // @ts-ignore
-const rateLimit = require('express-rate-limiter')
+
+import rateLimit from 'express-rate-limiter';
+// const rateLimit = require('express-rate-limiter')
 
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -7,4 +9,4 @@ const apiLimiter = rateLimit({
   message: "Too many requests from this IP, please try again later.",
 });
 
-module.exports = apiLimiter;
+export default apiLimiter

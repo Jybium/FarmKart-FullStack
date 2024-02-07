@@ -7,6 +7,7 @@ import Logo from "@/Asset/FARMKART IMAGES/images/landing-page/logo.png";
 import { PrimaryButton } from "../../components/Buttons";
 import { Password } from "../../components/Input";
 import { useForm } from "react-hook-form";
+import notifyError from "@/app/utils/notifyError";
 
 const page = () => {
   const {
@@ -16,10 +17,16 @@ const page = () => {
     reset,
     formState: { errors },
   } = useForm();
+
+
   const onSubmit = (data) => {
+    if(data.password !== data.confirmPassword){
+      notifyError("New password and confirm password must be the same!")
+    }
     console.log(data);
     reset();
   };
+
 
   return (
     <main>
@@ -49,7 +56,7 @@ const page = () => {
             <Password
               title="Confirm Password"
               placeholder="***********"
-              name="comfirmPassword"
+              name="confirmPassword"
               error={errors}
               register={register}
             />

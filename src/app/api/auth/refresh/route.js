@@ -1,4 +1,6 @@
-
+import {NextResponse} from "next/server"
+import { serialize } from "cookie";
+import { signInAccessToken, signInRefreshToken, verifyRefreshToken } from "../../../helpers/jwt";
 import prisma from "../../../lib/prisma";
 import jwt from "jsonwebtoken";
 
@@ -6,44 +8,52 @@ export async function POST(
   req,
   res
 ) {
-  const { refreshToken } = req.body;
+  const {refresh:Token}  = req.headers;
+  // const actualToken = Token.subString(7)
 
   try {
-    if (!refreshToken) {
-      return res
-        .status(400)
-        .json({ message: "Bad request: Refresh token is required" });
+    if (!Token) {
+      return NextResponse.json({ message: "Bad request: Refresh token is required" }, {status: 400});
     }
 
     // Verify the refresh token and retrieve the associated user
-    const decoded = jwt.verify(refreshToken, "your-refresh-token-secret-key");
+    const decoded = verifyRefreshToken(Token)
+    
     const user = await prisma.user.findUnique({
-      where: { id: decoded.userId },
+      where: { Id: decoded.id },
     });
 
-    if (!user || user.refreshToken !== refreshToken) {
-      return res
-        .status(401)
-        .json({ message: "Unauthorized: Invalid refresh token" });
+    if (!user || user.refreshToken !== Token) {
+      
+      return  NextResponse.json({ message: "Unauthorized: Invalid refresh token" }, {status: 401});
     }
 
     // Generate a new access token and refresh token
-    const newAccessToken = generateAccessToken({
-      userId: user.id,
-      username: user.username,
-    });
-    const newRefreshToken = generateRefreshToken({ userId: user.id });
+    const newAccessToken = signInAccessToken({id: user.Id, firstName: user.firstName, lastName: user.lastName, email: user.emailAddress, image: user.image})
+
+    const newRefreshToken = signInRefreshToken({ id: user.Id });
 
     // Update the user's refresh token in the database
     await prisma.user.update({
-      where: { id: user.id },
+      where: { Id: user.Id },
       data: { refreshToken: newRefreshToken },
     });
 
-    res.json({ accessToken: newAccessToken, refreshToken: newRefreshToken });
+    const serialized = serialize("token", newAccessToken, {
+      httpOnly: true,
+      maxAge: 60 * 60 * 24,
+      secure: process.env.NODE_ENV !== "development",
+      sameSite: "strict",
+      path: "/",
+    });
+
+       const requestHeaders = new Headers(req.headers);
+       requestHeaders.set("set-cookie", serialized);
+                  
+    NextResponse.json({ accessToken: newAccessToken, refreshToken: newRefreshToken });
   } catch (error) {
     console.error(error);
-    res.status(401).json({ message: "Unauthorized: Invalid refresh token" });
+    NextResponse.json({ message: "Unauthorized: Invalid refresh token" }, {status : 401});
   }
 }
 

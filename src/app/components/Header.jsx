@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Logo from "../../app/logo (2).png";
+import { useAuth } from "../Context/AuthContext";
 
 import Link from "next/link";
 import { GrMenu, GrClose } from "react-icons/gr";
@@ -11,6 +12,7 @@ import Navlink from "@/app/components/Navlink";
 
 const Header = (props) => {
   const [show, setShow] = useState(false);
+  const { user } = useAuth();
   const showNav = () => {
     setShow((prev) => !show);
   };
@@ -38,12 +40,29 @@ const Header = (props) => {
         <div className="sm:flex justify-between items-center ml-10 sm:w-full my-5 grid gap-20 sm:gap-0">
           <Navlink />
           <div className="flex gap-2 justify-center sm:justify-normal">
-            <Link href="/login">
-              <SecondaryButton type="button" title="Sign In" />
-            </Link>
-            <Link href="/signup">
-              <PrimaryButton type="button" title="Register" />
-            </Link>
+            {user ? (
+              <div>
+                <Image src={user.Image} alt="User's profile image" className=""/> <PrimaryButton title="SELL" />{" "}
+                <div>
+                  <span className="relative">
+                    <GrCart />
+                    <p className="absolute right-0 top-0 bg-red-600 px-[2px] py-[1px]">
+                      0
+                    </p>
+                  </span>{" "}
+                  <p>Cart</p>
+                </div>
+              </div>
+            ) : (
+              <>
+                <Link href="/login">
+                  <SecondaryButton type="button" title="Sign In" />
+                </Link>
+                <Link href="/signup">
+                  <PrimaryButton type="button" title="Register" />
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

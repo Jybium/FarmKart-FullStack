@@ -2,7 +2,8 @@ import { toast } from "react-toastify";
 
 const notifyError = (message) => {
   toast.error(message, {
-    position: "top-left",
+    position: "top-right",
+
     autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,

@@ -1,36 +1,32 @@
-// File: routes/accountVerification.js
-const express = require("express");
-const crypto = require("crypto");
+// for verifying email address and account
+
+import {NextResponse} from "next/server"
 const nodemailer = require("nodemailer");
-const { PrismaClient } = require("@prisma/client");
+import prisma from "../../../lib/prisma"
 
-const prisma = new PrismaClient();
 
-const router = express.Router();
 
-router.post("/request", async (req, res) => {
-  const { emailAddress } = req.body;
+export async function POST(req, res) {
+  const { emailAddress } = req.json();
 
   try {
     const user = await prisma.user.findUnique({
-      where: { emailAddress },
+      where: { emailAddress: emailAddress.toLowerCase()},
     });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return NextResponse.json({ message: "User not found" }, {status: 404});
     }
 
-    if (user.emailVerified) {
-      return res
-        .status(400)
-        .json({ message: "Email address is already verified" });
+    if (user.emailVerify) {
+      return NextResponse.json({ message: "Email address is already verified" }, {status: 400});
     }
 
     const token = crypto.randomBytes(32).toString("hex");
     const tokenExpiration = new Date(Date.now() + 24 * 60 * 60 * 1000); // Token expires in 24 hours
 
     await prisma.user.update({
-      where: { id: user.id },
+      where: { id: user.Id },
       data: {
         emailVerificationToken: token,
         emailVerificationTokenExpiration: tokenExpiration,
@@ -40,45 +36,45 @@ router.post("/request", async (req, res) => {
     const verificationLink = `http://your-app.com/verify-account/${token}`;
     sendVerificationEmail(emailAddress, verificationLink);
 
-    res.status(200).json({ message: "Verification email sent successfully" });
+    NextResponse.json({ message: "Verification email sent successfully" }, {status : 200});
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    NextResponse.json({ message: "Internal server error" }, {status : 500});
   }
-});
+}
 
-router.post("/verify", async (req, res) => {
-  const { token } = req.body;
+// export async function POST (req, res) {
+//   const { token } = req.json();
 
-  try {
-    const user = await prisma.user.findFirst({
-      where: {
-        emailVerificationToken: token,
-        emailVerificationTokenExpiration: {
-          gte: new Date(),
-        },
-      },
-    });
+//   try {
+//     const user = await prisma.user.findFirst({
+//       where: {
+//         emailVerificationToken: token,
+//         emailVerificationTokenExpiration: {
+//           gte: new Date(),
+//         },
+//       },
+//     });
 
-    if (!user) {
-      return res.status(401).json({ message: "Invalid or expired token" });
-    }
+//     if (!user) {
+//       return res.status(401).json({ message: "Invalid or expired token" });
+//     }
 
-    await prisma.user.update({
-      where: { id: user.id },
-      data: {
-        emailVerified: true,
-        emailVerificationToken: null,
-        emailVerificationTokenExpiration: null,
-      },
-    });
+//     await prisma.user.update({
+//       where: { id: user.Id },
+//       data: {
+//         emailVerified: true,
+//         emailVerificationToken: null,
+//         emailVerificationTokenExpiration: null,
+//       },
+//     });
 
-    res.status(200).json({ message: "Account verification successful" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
+//     res.status(200).json({ message: "Account verification successful" });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: "Internal server error" });
+//   }
+// }
 
 async function sendVerificationEmail(email, verificationLink) {
   // Use Nodemailer to send an email with the account verification link
@@ -107,4 +103,4 @@ async function sendVerificationEmail(email, verificationLink) {
   });
 }
 
-module.exports = router;
+

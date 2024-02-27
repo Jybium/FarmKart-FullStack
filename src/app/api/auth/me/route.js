@@ -1,4 +1,4 @@
-import { verifyToken } from "../../../helpers/jwt";
+import { verifyAccessJWT } from "../../../helpers/jwt";
 import { PrismaClient } from "@prisma/client";
 import { getCookie } from "cookies-next";
 import {cookies} from "next/headers"
@@ -21,7 +21,7 @@ export async function GET (request){
     const token = authorization.value
     let decodedToken
     try {
-        decodedToken = verifyToken(token, secretKey )
+        decodedToken = verifyAccessJWT(token)
     } catch (error) {
         console.log(error)
         return NextResponse.json({message:"Invalid token"}, {status: 401})

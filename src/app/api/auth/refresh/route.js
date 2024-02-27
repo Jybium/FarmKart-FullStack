@@ -1,6 +1,6 @@
 import {NextResponse} from "next/server"
 import { serialize } from "cookie";
-import { signInAccessToken, signInRefreshToken, verifyRefreshToken } from "../../../helpers/jwt";
+import { signAccessJWT, signRefreshJWT, verifyRefreshJWT } from "../../../helpers/jwt";
 import { getRefreshTokenCookie } from "../../../utils/cookies";
 import prisma from "../../../lib/prisma";
 
@@ -22,7 +22,7 @@ export async function POST(
     }
 
     // Verify the refresh token and retrieve the associated user
-    const decoded = verifyRefreshToken(refreshToken);
+    const decoded = verifyRefreshJWT(refreshToken);
 
     const user = await prisma.user.findUnique({
       where: { Id: decoded.id },
@@ -36,15 +36,16 @@ export async function POST(
     }
 
     // Generate a new access token and refresh token
-    const newAccessToken = signInAccessToken({
+    const data = {
       id: user.Id,
+      email: user.emailAddress,
       firstName: user.firstName,
       lastName: user.lastName,
-      email: user.emailAddress,
-      image: user.image,
-    });
+    };
 
-    const newRefreshToken = signInRefreshToken({ id: user.Id });
+    const newAccessToken = await signAccessJWT(data, process.env.ACCESS_JWT_EXPIRES_IN);
+
+    const newRefreshToken = signRefreshJWT({ id: user.Id, expires: process.env.REFRESH_JWT_EXPIRES_IN });
 
     // Update the user's refresh token in the database
     await prisma.user.update({

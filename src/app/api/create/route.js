@@ -1,5 +1,5 @@
 import prisma from "../../lib/prisma";
-import { verifyToken } from "../../helpers/jwt";
+import { verifyAccessJWT } from "../../helpers/jwt";
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
@@ -49,7 +49,7 @@ export async function POST(request) {
       );
     }
 
-    const verified = verifyToken(token.value);
+    const verified = verifyAccessJWT(token.value);
     if (!verified) {
       return NextResponse.json({ message: "Bad request" }, { status: 400 });
     }

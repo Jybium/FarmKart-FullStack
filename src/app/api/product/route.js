@@ -1,5 +1,5 @@
 import prisma from "../../lib/prisma";
-import { verifyToken } from "../../helpers/jwt";
+import { verifyAccessJWT } from "../../helpers/jwt";
 import { NextResponse, NextRequest } from "next/server";
 
 export async function GET(res, req) {

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { verifyRefreshToken, verifyToken } from "./app/helpers/jwt";
+import { verifyRefreshJWT, verifyAccessJWT } from "./app/helpers/jwt";
 import { cookies } from "next/headers";
 import { getCookie } from "cookies-next";
 import cookie, { serialize } from "cookie";
@@ -25,7 +25,7 @@ export function middleware(request, res) {
   let verified;
   try {
     
-   verified = verifyToken(cookie);
+   verified = verifyAccessJWT(cookie);
   } catch (error) {
     console.log(error)
   }
@@ -36,7 +36,7 @@ export function middleware(request, res) {
 
     try{
 
-      const refreshToken = verifyRefreshToken(refreshCookie)
+      const refreshToken = verifyRefreshJWT(refreshCookie)
       if(refreshToken){
        result =  fetch("http://localhost:3000/api/refresh", {
         method: "GET"

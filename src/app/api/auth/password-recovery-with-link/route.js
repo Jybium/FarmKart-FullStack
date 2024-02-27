@@ -18,7 +18,14 @@ export async function POST(
       return res.status(404).json({ message: "User not found" });
     }
 
-    const token = await SignInAccessToken({id: user.Id, email: user.emailAddress, firstName: user.firstName, lastName: user.lastName})
+  const data = {
+        id: user.Id,
+        email: user.emailAddress,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      };
+
+      const token = await signAccessJWT(data, process.env.ACCESS_JWT_EXPIRES_IN);
     const tokenExpiration = new Date(Date.now() + 15 * 60 * 1000); // Token expires in 15 minutes
 
     await prisma.user.update({

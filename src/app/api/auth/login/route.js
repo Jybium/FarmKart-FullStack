@@ -1,6 +1,6 @@
 
 import {NextResponse} from "next/server"
-import { signInAccessToken, signInRefreshToken } from "../../../helpers/jwt";
+import { signAccessJWT, signRefreshJWT } from "../../../helpers/jwt";
 import  { serialize } from "cookie"
 import {setCookie} from "cookies-next"
 import * as bcrypt from "bcrypt"
@@ -84,12 +84,14 @@ export async function POST(req, res) {
     if (isPasswordCorrect && user) {
       // Generate an access token
 
-      const token = await signInAccessToken({
+      const data = {
         id: user.Id,
         email: user.emailAddress,
         firstName: user.firstName,
         lastName: user.lastName,
-      });
+      };
+
+      const token = await signAccessJWT(data, process.env.ACCESS_JWT_EXPIRES_IN);
 
       const serialized = serialize("token", token, {
         httpOnly: true,
@@ -101,7 +103,7 @@ export async function POST(req, res) {
 
      
 
-      const refreshToken = await signInRefreshToken({ id: user.Id });
+      const refreshToken = await signRefreshJWT({ id: user.Id, expires: process.env.REFRESH_JWT_EXPIRES_IN});
       // console.log(refreshToken)
 
        const refreshTokenSerialized = serialize("refreshToken", refreshToken, {

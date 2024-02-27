@@ -15,8 +15,8 @@ const page = () => {
       <main className="w-5/6 mx-auto py-5 relative overflow-scroll top-[80px] h-[calc(100%-80px)] Hide pb-20">
         <Image
           src={Payment}
-          objectFit="contain"
-          objectPosition="center"
+           
+           
           className="sm:w-1/4 w-3/4 m-auto text-center"
         />
         <section className="text-center my-6">

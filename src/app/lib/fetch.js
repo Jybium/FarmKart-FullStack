@@ -8,17 +8,6 @@ import notifyError from "../utils/notifyError"
 import notifySuccess from "../utils/notifySuccess"
 
 
-console.log(
-  getCookie("token", {
-    httpOnly: true,
-    maxAge: 60 * 60 * 24,
-    secure: process.env.NODE_ENV !== "development",
-    sameSite: "strict",
-    path: "/",
-  })
-);
-
-
 export function fetchData(url, options) {
   let isFetching = false;
   const [data, setData] = useState(null);
@@ -83,10 +72,12 @@ export const useFetchWithInterceptors = (url, options = {}) => {
 
         if (!response.ok) {
           const errorData = await response.json();
+          setError(errorData)
           console.error("Response error:", errorData);
 
           if (response.status === 401) {
             // Handle token expiry or unauthorized access
+            
           }
 
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -106,6 +97,7 @@ export const useFetchWithInterceptors = (url, options = {}) => {
 
         if (isMounted) {
           setError(error);
+          
         }
       } finally {
         if (isMounted) {
@@ -119,7 +111,7 @@ export const useFetchWithInterceptors = (url, options = {}) => {
     return () => {
       isMounted = false;
     };
-  }, [url, options]);
+  }, []);
 
   return { data, error, loading };
 };

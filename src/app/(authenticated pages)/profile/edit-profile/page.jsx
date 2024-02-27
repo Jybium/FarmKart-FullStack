@@ -1,4 +1,3 @@
-
 import Header from "../../../components/Header";
 import Image from "next/image";
 import Profile from "@/Asset/FARMKART IMAGES/images/profile-image.jpg";
@@ -19,8 +18,8 @@ const page = () => {
           <div className="flex items-center gap-4">
             <Image
               src={Profile}
-              objectFit="contain"
-              objectPosition="center"
+               
+               
               className="rounded-full w-16 h-16"
             />
             <p className="font-black">James Abel</p>

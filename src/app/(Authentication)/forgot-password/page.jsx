@@ -25,8 +25,8 @@ const page = () => {
       <header>
         <Image
           src={Logo}
-          objectFit="contain"
-          objectPosition="center"
+           
+           
           alt="company logo"
           className="text-center m-auto my-2"
         />
@@ -66,8 +66,8 @@ const page = () => {
         </section>
         <Image
           src={Forgot}
-          objectFit="contain"
-          objectPosition="center"
+           
+           
           alt="company logo"
           className="w-1/3 hidden sm:block"
         />

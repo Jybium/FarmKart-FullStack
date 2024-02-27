@@ -6,39 +6,65 @@ import notifyError from "@/app/utils/notifyError";
 import { fetchData } from "@/app/lib/fetch";
 
 
-const fetch = async (id) =>{
+export const dynamic = 'force-dynamic'
 
-try {
+// const fetch = async (id) =>{
+
+// try {
   
-  const product = await fetchData(`/api/products/${id}`, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-  });
-  const response = await product.json();
-  console.log(response)
+//   const product = await fetchData(`/api/products/${id}`, {
+//     method: "POST",
+//     headers: {
+//       "content-type": "application/json",
+//     },
+//   });
+//   const response = await product.json();
+//   console.log(response)
 
-  return response
-} catch (error) {
-  console.log(error)
+//   return response
+// } catch (error) {
+//   console.log(error)
   
-  notifyError(error.message)
-}
+//   notifyError(error.message)
+// }
+// }
+
+export async function generateStaticParams() {
+  const products = await fetch("http:/localhost:3000/api/product").then((res) =>
+    res.json()
+  );
+
+  return products.data?.map((product) => ({
+    id: product.Id.toString(),
+  }));
 }
 
 
-const page = ({params}) => {
-  const param  = params.id
-  const data  = fetch(param)
+const page = async ({params}) => {
+
+  const param  = +params.id
+
+  const result = await fetch(
+    `http://localhost:3000/api/product-details/${param}`,
+    {
+      method: "GET",
+    }
+  ).then((res) => res.json());
+
+  console.log(result)
+
+
+    const responseImage = await result.message.data?.image
+    const responseDetails = await result.message.data
+    const responseUser = await result.message.data?.user
   
   return (
     <main>
       <Header className="bg-white" />
       <main className="sm:mx-28 w-[90%] m-auto sm:m-0 relative top-[80px] overflow-scroll h-[calc(100%-80px)] pb-20 Hide">
         <section className="sm:flex grid sm:gap-8 gap-3 py-10">
-          <Images />
-          <Details />
+          <Images image={responseImage}/>
+          <Details details={responseDetails} user={responseUser}/>
         </section>
         <section>
           <h3 className="font-black text-lg">People also check</h3>

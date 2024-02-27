@@ -8,6 +8,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { useSearchParams } from "next/navigation";
+import { fetchUserRoles, statesNigeria } from "../../lib/enums";
+
 
 const {LIVESTOCK, CROPS, FARM_SUPPLEMENT, OTHER_CATEGORIES} = Categories
 
@@ -27,7 +29,7 @@ const Aside = () => {
 
   return (
     <aside
-      className="border-[1px] border-black rounded border-collapse text-sm h-max md:w-2/5 xl:w-1/4 lg:w-2/5 sm:w-1/4 w-fit mb-10
+      className="border-[1px] border-black rounded border-collapse text-sm h-max md:w-1/5 xl:w-1/4 lg:w-[30%] sm:w-1/4 w-fit mb-10
      block sm:grid"
     >
       <div className="w-full">
@@ -42,6 +44,7 @@ const Aside = () => {
               Livestock
             </li>
            </Link>
+<Link href={{pathname: "/products", query:{"category" : `${CROPS.toLowerCase()}`}}}>
 
             <li className="cursor-pointer flex items-center gap-3">
               <span>
@@ -49,6 +52,7 @@ const Aside = () => {
               </span>{" "}
               Crops
             </li>
+</Link>
           
           
            <Link href={{pathname:"/products", query:{"category":`${FARM_SUPPLEMENT.replace("_", " ").toLowerCase()}`}}}>
@@ -81,7 +85,9 @@ const Aside = () => {
               id="location"
               className="rounded text-sm bg-[#E6EEE6]"
             >
-              <option value="All Nigeria">All Nigeria</option>
+              {statesNigeria.map((state, i) =>
+              <option key={i} value={state}>{state}</option>
+              )}
             </select>
           </div>
           <div className="grid">

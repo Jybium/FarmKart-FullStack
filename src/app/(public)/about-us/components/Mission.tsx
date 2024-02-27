@@ -7,8 +7,8 @@ const Person = ({ person }: any) => {
     <div className=" gap-3 m-auto flex flex-col sm:flex-  content-center text-center w-[46%] sm:w-[20%]  items-center">
       <Image
         src={person.image}
-        objectFit="contain"
-        objectPosition="center"
+         
+         
         className="rounded-full w-20 h-20 m-auto mb-2"
         alt="team image"
       />

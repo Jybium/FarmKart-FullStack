@@ -34,8 +34,8 @@ const CallToAction = () => {
         <Image
           src={CTA}
           className="sm:h-[550px] h-[300px] w-full"
-          objectFit="contain"
-          objectPosition="center"
+           
+           
           loading="lazy"
           alt="A woman holding shovel in the garden"
         />

@@ -17,8 +17,8 @@ const page = () => {
       <header>
         <Image
           src={Logo}
-          objectFit="contain"
-          objectPosition="center"
+           
+           
           alt="company logo"
           className="text-center m-auto"
         />

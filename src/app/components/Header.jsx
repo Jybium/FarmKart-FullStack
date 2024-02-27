@@ -2,17 +2,25 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import Logo from "../../app/logo (2).png";
+import Logo from "../logo (2).png";
 import { useAuth } from "../Context/AuthContext";
-
 import Link from "next/link";
-import { GrMenu, GrClose } from "react-icons/gr";
+import { GrMenu, GrClose} from "react-icons/gr";
+import {CiShoppingCart} from "react-icons/ci"
 import { PrimaryButton, SecondaryButton } from "@/app/components/Buttons";
 import Navlink from "@/app/components/Navlink";
+import { ImageUrl } from "@/Constants/Offers";
 
 const Header = (props) => {
+
   const [show, setShow] = useState(false);
   const { user } = useAuth();
+
+
+  const imageUrl = ImageUrl + user.image
+
+
+
   const showNav = () => {
     setShow((prev) => !show);
   };
@@ -23,12 +31,7 @@ const Header = (props) => {
     <nav className={classes}>
       <div className="w-1/4 md:w-1/12 lg:w-2/12 ">
         <Link href="/">
-          <Image
-            className="w-[80px]"
-            src={Logo}
-            alt="Farmkart logo"
-            objectFit="cover"
-          />
+          <Image className="w-[80px]" src={Logo} alt="Farmkart logo" />
         </Link>
       </div>
       <div
@@ -39,29 +42,42 @@ const Header = (props) => {
       >
         <div className="sm:flex justify-between items-center ml-10 sm:w-full my-5 grid gap-20 sm:gap-0">
           <Navlink />
-          <div className="flex gap-2 justify-center sm:justify-normal">
-            {user ? (
-              <div>
-                <Image src={user.Image} alt="User's profile image" className=""/> <PrimaryButton title="SELL" />{" "}
-                <div>
+          <div>
+            {Object.entries(user) !== 0 ? (
+              <div className="flex gap-5 items-center justify-between ">
+                <Link href="/profile">
+
+                <img
+                  src={imageUrl}
+                  alt="User's profile image"
+                  className=" block w-16 h-16 rounded-full border border-black"
+                  />
+                  </Link>
+                <Link href="/sell">
+                  <PrimaryButton title="SELL" />
+                </Link>
+                <Link href="/cart">
+
+                <div className="flex justify-between items-center ml-auto gap-2">
                   <span className="relative">
-                    <GrCart />
-                    <p className="absolute right-0 top-0 bg-red-600 px-[2px] py-[1px]">
+                    <CiShoppingCart size={35} />
+                    <p className="absolute right-0 -top-1 bg-red-700 px-[6px] py-[1px] rounded-full text-white text-sm">
                       0
                     </p>
                   </span>{" "}
-                  <p>Cart</p>
+                  <p className="">Cart</p>
                 </div>
+                </Link>
               </div>
             ) : (
-              <>
+              <div className="flex justify-between gap-2 sm:justify-normal">
                 <Link href="/login">
                   <SecondaryButton type="button" title="Sign In" />
                 </Link>
                 <Link href="/signup">
                   <PrimaryButton type="button" title="Register" />
                 </Link>
-              </>
+              </div>
             )}
           </div>
         </div>

@@ -492,3 +492,6 @@ export const product = [
     images: [FirstProduct, SecondProduct, ThirdProduct, FourthProduct],
   },
 ];
+export const ImageUrl = 
+  "https://neainqsqckknglhdwqdv.supabase.co/storage/v1/object/public/";
+

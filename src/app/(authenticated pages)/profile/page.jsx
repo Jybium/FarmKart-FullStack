@@ -16,8 +16,8 @@ const page = () => {
           <div className="flex items-center gap-4">
             <Image
               src={Profile}
-              objectFit="contain"
-              objectPosition="center"
+               
+               
               className="rounded-full w-16 h-16"
             />
             <p className="font-black">James Abel</p>

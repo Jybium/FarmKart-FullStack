@@ -6,7 +6,7 @@ const signInoptions = {
 }
 
 const refreshOptions = {
-    expiresIn:"3h",
+    expiresIn:"24h",
     
 }
 
@@ -37,7 +37,8 @@ export const verifyToken = (token) => {
         
     } catch (error) {
         console.log(error)
-        return null
+        throw new Error("Token Expired")
+        // return error
     }
 
 }
@@ -51,7 +52,7 @@ export const verifyRefreshToken = (token) => {
 
     } catch (error) {
         console.log(error)
-        return null
+        throw new Error("Token Expired")
     }
 
 }

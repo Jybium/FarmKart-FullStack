@@ -19,7 +19,7 @@ const Footer = () => {
             className="w-[80px] ml-5 sm:ml-0"
             src={Logo}
             alt="Farmkart logo"
-            objectFit="cover"
+             
           />
         </Link>
         <div className="sm:flex grid justify-between sm:gap-12 gap-5 text-[#27241E] text-base my-7 sm:my-0 ml-5 sm:ml-0">
@@ -71,7 +71,7 @@ const Footer = () => {
       <section className="grid gap-3 sm:gap-0 sm:flex justify-between pt-5 pb-2">
         <p className="text-sm">
           <span className="text-[#5E5B57]">
-            &copy; 2022. All Rights Reserved.{" "}
+            &copy; 2024. All Rights Reserved.{" "}
             <span className="text-[#005400]">FarmKart</span>
           </span>
         </p>

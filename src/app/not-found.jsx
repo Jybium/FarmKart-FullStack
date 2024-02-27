@@ -9,7 +9,7 @@ const Custom404 = () => {
     <main className="text-center">
       <Header className="bg-white" />
       <main className="w-2/3 mx-auto py-14 relative overflow-scroll top-[80px] h-[calc(100%_80px)] pb-20 Hide">
-        <Image src={Error} objectFit="contain" objectPosition="center" priority alt="Error icon"/>
+        <Image src={Error}     priority alt="Error icon"/>
       </main>
       <PrimaryButton
         title="Back To HomePage"

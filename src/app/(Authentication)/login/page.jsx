@@ -60,8 +60,9 @@ const page = () => {
 
        const result = await response.json();
        setLoading(false);
-       console.log(result);
+      //  console.log(result);
        notifySuccess(result.message);
+       setUser(result.data.user)
        router.replace(redirect || "/products");
      } catch (error) {
        setLoading(false);
@@ -78,8 +79,8 @@ const page = () => {
         <header className="text-center">
           <Image
             src={Logo}
-            objectFit="contain"
-            objectPosition="center"
+             
+             
             alt="company logo"
             className="text-center m-auto"
           />
@@ -127,8 +128,8 @@ const page = () => {
           <Image
             src={Login}
             alt="signin image"
-            objectFit="contain"
-            objectPosition="center"
+             
+             
             className="w-[450px] sm:block hidden"
           />
         </div>

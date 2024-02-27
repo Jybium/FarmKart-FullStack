@@ -1,7 +1,6 @@
 
 import {NextResponse} from "next/server"
 import { signInAccessToken, signInRefreshToken } from "../../../helpers/jwt";
-
 import  { serialize } from "cookie"
 import {setCookie} from "cookies-next"
 import * as bcrypt from "bcrypt"
@@ -83,7 +82,6 @@ export async function POST(req, res) {
 
 
     if (isPasswordCorrect && user) {
-
       // Generate an access token
 
       const token = await signInAccessToken({
@@ -92,20 +90,30 @@ export async function POST(req, res) {
         firstName: user.firstName,
         lastName: user.lastName,
       });
-      
+
       const serialized = serialize("token", token, {
         httpOnly: true,
-        maxAge: 60 * 60 * 24,
+        maxAge: 60 * 60,
         secure: process.env.NODE_ENV !== "development",
         sameSite: "strict",
         path: "/",
       });
 
-      const refreshToken = await signInRefreshToken({id:user.Id})
-      // console.log(typeof refreshToken)
-        // Reset login attempts on successful login
-        if(refreshToken){
-        
+     
+
+      const refreshToken = await signInRefreshToken({ id: user.Id });
+      // console.log(refreshToken)
+
+       const refreshTokenSerialized = serialize("refreshToken", refreshToken, {
+         httpOnly: true,
+         maxAge: 60 * 60 * 24,
+         secure: process.env.NODE_ENV !== "development",
+         sameSite: "strict",
+         path: "/",
+       });
+
+      // Reset login attempts on successful login
+      if (refreshToken) {
         await prisma.user.update({
           where: {
             Id: user.Id,
@@ -113,27 +121,57 @@ export async function POST(req, res) {
           data: {
             // loginAttempts: 0,
             // lastLoginAttempt: null,
-            refreshToken: refreshToken.toString()
+            refreshToken: refreshToken.toString(),
           },
-        });} else return
+        });
+      } else return;
 
-      const requestHeaders = new Headers(req.headers);
-      requestHeaders.set("set-cookie", serialized);
+
+      // THE FIRST METHOD I WAS USING TO SET THE COOKIE HEADER BEFORE EVERYTHING STOPPED WORKING
+
+      // const requestHeaders = new Headers(req.headers);
+      // requestHeaders.set("set-cookie", [serialized, refreshTokenSerialized]);
+
+      // res.setHeader('Set-Cookie', [serialized, refreshTokenSerialized])
+      // setCookie("token", token, serialized);
+
+      // requestHeaders.set("set-cookie", refreshTokenSerialized);
+      // setCookie("refreshToken", refreshToken, refreshTokenSerialized);
+
+      
      
-      setCookie("token", token, serialized)
+      
 
-      return NextResponse.json(
-        { message: "User Signed in successfully", data: { user: [user,lastName, user.lastName, user.phoneNumber, user.emailAddress, user.image], refreshToken, token } },
-        { status: 200, headers: { "set-cookie": serialized } }
+      const response = NextResponse.json(
+        {
+          message: "User Signed in successfully",
+          data: {
+            user: {
+              firstName: user.firstName,
+              lastName: user.lastName,
+              phoneNumber: user.phoneNumber,
+              emailAddress: user.emailAddress,
+              image: user.image,
+              refreshToken: refreshToken,
+              accessToken: token,
+            },
+          },
+        },
+        { status: 200, headers: { "set-cookie": [refreshTokenSerialized, serialized] } }
       );
 
+      // THE NEW METHOD I ADOPTED
+      response.headers.set("Set-Cookie", [refreshTokenSerialized, serialized])
 
+      return response
     } else {
 
       return NextResponse.json(
         { message: "Error trying to sign you in, wrong password" },
         { status: 400 }
       );
+
+    
     }
   } catch (error) {
 
@@ -143,7 +181,7 @@ export async function POST(req, res) {
     if(error.name === "PrismaClientInitializationError") return NextResponse.json({message:"Network Error. trying resetting your connection"}, {status: 404})
     
     return NextResponse.json(
-      { message: "Error was encountered while tryign to register you" },
+      { message: "Error was encountered while trying to register you" },
       { status: 500 }
     );
   

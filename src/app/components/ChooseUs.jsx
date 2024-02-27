@@ -10,8 +10,8 @@ const OurOffer = ({ offer }) => {
       <Image
         src={offer.image}
         alt={`${offer.title} image`}
-        objectFit="cover"
-        objectPosition="center"
+         
+         
         className="sm:w-[35%] w-full block object-cover"
       />
       <div className=" grid gap-1 mt-3 sm:w-1/2 px-4 py-2 sm:py-0 sm:px-0">
@@ -47,8 +47,8 @@ const ChooseUs = () => {
             <Image
               src={image.image}
               alt={`${image.image} image`}
-              objectFit="cover"
-              objectPosition="center"
+               
+               
               key={image.id}
               className="w-40 h-40 mx-auto"
             />

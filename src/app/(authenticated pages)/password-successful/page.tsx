@@ -11,8 +11,8 @@ const page = () => {
       <header>
         <Image
           src={Logo}
-          objectFit="contain"
-          objectPosition="center"
+           
+           
           alt="company logo"
           className="text-center m-auto"
         />
@@ -20,8 +20,8 @@ const page = () => {
       <main className="my-6 sm:w-1/2 w-5/6 mx-auto">
         <Image
           src={passwordsuccess}
-          objectFit="contain"
-          objectPosition="center"
+           
+           
           alt="company logo"
           className="text-center m-auto w-1/3"
         />

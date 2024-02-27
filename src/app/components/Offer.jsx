@@ -11,8 +11,8 @@ const OurOffer = ({ offer }) => {
 
       <Image
         src={offer.image}
-        objectFit="cover"
-        objectPosition="center"
+         
+         
         className={offer.className || "w-[80px]"}
         alt="Image of what we offer"
         />
@@ -30,8 +30,8 @@ const Offer = () => {
     <main className="text-center relative py-10 px-5 sm:px-0 w-full">
       <Image
         src={Mockup}
-        objectFit="cover"
-        objectPosition="center"
+         
+         
         className="w-[40px] hidden sm:block absolute left-0 top-0"
         alt="Offers"
       />
@@ -49,8 +49,8 @@ const Offer = () => {
 
         <Image
           src={Mockup}
-          objectFit="cover"
-          objectPosition="center"
+           
+           
           className="w-[40px] hidden sm:block absolute top-0 right-0"
           alt="image of what we offer"
         />

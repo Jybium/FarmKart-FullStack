@@ -66,8 +66,8 @@ const page = () => {
       <header className="text-center">
         <Image
           src={Logo}
-          objectFit="contain"
-          objectPosition="center"
+           
+           
           alt="company logo"
           className="text-center m-auto"
         />
@@ -83,8 +83,8 @@ const page = () => {
         <SignUpForm modal={modal} setModal={setModal} showModal={showModal} />
         <Image
           src={Signup}
-          objectFit="contain"
-          objectPosition="center"
+           
+           
           alt="signup image"
           className="w-1/3 hidden sm:block"
         />

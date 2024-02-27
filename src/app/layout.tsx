@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import type { Author } from "next/dist/lib/metadata/types/metadata-types";
 import Footer from "./components/Footer";
-// import AuthProvider from "@/app/Context/AuthContext";
+import AuthProvider from "@/app/Context/AuthContext";
 import ToastProvider from "./components/ToastContainer";
 
 // const inter = Inter({ subsets: ["latin"] });
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   keywords:
     "farm, agric ,farm produce, fresh, product, organic, agricultural, buyers, sellers, business, farm business, buy, sell, agricultural",
   authors: author as Author,
-  viewport: "width=device-width, initial-scale=1",
+  // viewport: "width=device-width, initial-scale=1",
   icons: "./favicon.ico",
 };
 
@@ -36,9 +36,9 @@ export default function RootLayout({
       <body className="Hide">
         {/* <Header /> */}
         <ToastProvider>
-          {/* <AuthProvider> */}
+          <AuthProvider>
             {children}
-            {/* </AuthProvider> */}
+            </AuthProvider>
           <Footer />
         </ToastProvider>
       </body>

@@ -13,8 +13,8 @@ const Sponsor = () => {
           <Image
             src={partner.image}
             className="w-full m-auto"
-            objectFit="contain"
-            objectPosition="center"
+             
+             
             key={partner.id}
             alt="image containing logo of our partners"
           />

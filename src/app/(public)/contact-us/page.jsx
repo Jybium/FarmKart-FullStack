@@ -92,8 +92,8 @@ const page = () => {
           <div>
             <Image
               src={contact}
-              objectFit="contain"
-              objectPosition="center"
+               
+               
               alt="contact us image"
               className="hidden sm:block"
             />

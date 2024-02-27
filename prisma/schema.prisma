@@ -18,7 +18,7 @@ model User {
   emailVerify                      Boolean   @default(false)
   verificationToken                String?
   phoneNumber                      String
-  refreshToken                     String? 
+  refreshToken                     String?
   passwordResetToken               String?
   passwordResetTokenExpiration     DateTime?
   emailVerificationToken           String?
@@ -38,7 +38,7 @@ model User {
 
 model Product {
   Id          Int        @id @default(autoincrement())
-  userId      String @unique
+  userId      String
   user        User       @relation(fields: [userId], references: [Id])
   productName String
   Quantity    Int
@@ -47,7 +47,7 @@ model Product {
   color       String
   price       Int
   bulkPrice   Int
-  views Int
+  views       Int
   description String
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
@@ -61,7 +61,7 @@ model Product {
 model Image {
   Id        String   @id @default(uuid())
   Image     String[]
-  productid Int @unique
+  productid Int      @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   product   Product  @relation(fields: [productid], references: [Id])
@@ -69,7 +69,7 @@ model Image {
 
 model Order {
   Id            String   @id @default(uuid())
-  userId        String @unique
+  userId        String   @unique
   user          User     @relation(fields: [userId], references: [Id])
   status        Status
   transactionId String
@@ -80,8 +80,8 @@ model Order {
 
 model Cart {
   Id        String  @id @default(uuid())
-  userId    String @unique
-  productId Int @unique
+  userId    String  @unique
+  productId Int     @unique
   Quantity  Int
   user      User    @relation(fields: [userId], references: [Id])
   product   Product @relation(fields: [productId], references: [Id])

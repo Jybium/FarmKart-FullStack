@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { GrView } from "react-icons/gr";
 import { GrHide } from "react-icons/gr";
+import { statesNigeria } from "../lib/enums";
 import React from "react";
 import Link from "next/link";
 
@@ -174,9 +175,7 @@ export const Select = ({ title, register, error, children, name, onclick }) => {
           {...register(name, { required: true })}
           className="mt-1 rounded bg-[#E6EEE6] placeholder:text-sm placeholder:font-regular font-regular text-slate-600 w-full "
         >
-          <option value="">Select location</option>
-          <option value="lagos">Lagos</option>
-          <option value="abuja">Abuja</option>
+          {statesNigeria.map((state) => <option value={state}>{state}</option>)}
         </select>
       </label>
       <p

@@ -13,16 +13,14 @@ const Custom404 = () => {
     <>
       <main className="text-center w-full">
         <Header className="bg-white" />
-        <main className="m-auto py-10 text-center relative sm:w-1/5 w-5/6 top-[80px] overflow-scroll h-[calc(100%-80px)] Hide">
+        <main className="m-auto py-10 text-center relative sm:w-2/5 w-5/6 top-[80px] overflow-scroll h-[calc(100%-80px)] Hide">
           <div className="relative">
             <Image
               src={Cart}
-              objectFit="contain"
-              objectPosition="center"
               alt="cart image"
-              className="text-center m-auto rounded-lg w-1/2 sm:w-full mb-2 relative"
+              className="text-center m-auto rounded-lg w-1/2 sm:w-1/2 mb-2 relative"
             />
-            <p className="absolute grid place-items-center place-content-center text-center m-auto sm:h-16 h-10 w-10 sm:w-16 bottom-3 right-20  sm:bottom-4 sm:-right-[20px] text-white bg-green-950 rounded-full text-2xl font-mono">
+            <p className="absolute grid place-items-center place-content-center text-center m-auto sm:h-16 h-10 w-10 sm:w-16 bottom-3 right-20  sm:bottom-4 sm:right-[20%] text-white bg-green-950 rounded-full text-2xl font-mono">
               0
             </p>
           </div>
@@ -45,7 +43,7 @@ const Custom404 = () => {
 
       <main className="w-[90%] mx-auto mt-8 mb-20 relative top-[80px] overflow-scroll h-[calc(100%-80px)] pb-20 Hide">
         <h1 className="capitalize font-black">shopping cart: 1 item</h1>
-        <section className="sm:flex w-full gap-6 justify-between mt-5 mb-10">
+        <section className="sm:flex w-full gap-6 justify-between items-start mt-5 mb-10">
           <div className="bg-[#E6EEE6] rounded shadow w-full sm:w-9/12">
             <div className="flex items-center justify-between py-2 px-4 uppercase font-black text-sm border-b border-black">
               <p className="sm:w-[46%] w-[47%]">item details</p>
@@ -59,8 +57,8 @@ const Custom404 = () => {
                 <div className="sm:flex gap-5 sm:w-[46%] w-[42%]">
                   <Image
                     src={Photo}
-                    objectFit="contain"
-                    objectPosition="center"
+                     
+                     
                     alt="product image"
                     className="w-[150px] h-max"
                   />
@@ -94,7 +92,7 @@ const Custom404 = () => {
 
           {/* CHECKOUT PAGE */}
 
-          <div className="bg-[#E6EEE6] py-2 text-sm rounded shadow sm:w-3/12 w-full my-5">
+          <div className="bg-[#E6EEE6] py-2 text-sm rounded shadow sm:w-3/12 w-full my-5 sm:my-0">
             <h1 className="uppercase text-sm pb-2 pl-4 font-black">
               order summary
             </h1>

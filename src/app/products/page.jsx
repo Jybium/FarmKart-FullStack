@@ -1,5 +1,5 @@
 
-
+import Link from "next/link"
 import Header from "../components/Header";
 import Search from "./components/Search";
 import Aside from "./components/Aside";
@@ -17,8 +17,24 @@ export const metadata = {
 
 const page = async () => {
 
-const product = await prisma.product.findMany()
-console.log(product)
+const product = await prisma.product.findMany({
+  include: {
+    image: { select: { Image: true } },
+    user: {
+      select: {
+        firstName: true,
+        lastName: true,
+        emailAddress: true,
+        phoneNumber: true,
+        createdAt: true,
+        updatedAt: true,
+        location: true,
+      },
+    },
+  },
+});
+
+// console.log(product)
 
   return (
 
@@ -28,7 +44,9 @@ console.log(product)
         <Search />
         <section className="sm:flex grid w-[90%] mx-auto gap-10">
           <Aside />
+          
           <Products data={product}/>
+         
         </section>
       </main>
     </main>

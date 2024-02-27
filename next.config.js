@@ -11,6 +11,19 @@ module.exports = {
 
     return config;
   },
+
+  images: {
+     domains: ['neainqsqckknglhdwqdv.supabase.co'],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "neainqsqckknglhdwqdv.supabase.co",
+        port: "",
+        pathname: "/storage/v1/object/public/",
+        domains: ["neainqsqckknglhdwqdv.supabase.co"],
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig

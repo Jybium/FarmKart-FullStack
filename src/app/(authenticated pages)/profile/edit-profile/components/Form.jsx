@@ -4,8 +4,8 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import Input from "../../../sell-2/components/Input";
 import { PrimaryButton, SecondaryButton } from "../../../../components/Buttons";
-import Link from "next/link";
 import Select from "../../../sell/components/Select";
+import { statesNigeria } from '@/app/lib/enums';
 
 const Form = () => {
     const {handleSubmit, register, watch, formState:{errors}} = useForm()
@@ -25,7 +25,7 @@ const Form = () => {
         <Input title="Phone Number (+234)" placeholder="0806 234 9900" />
       </div>
       <div className="sm:w-1/2 w-full">
-        <Select title="Location" name="Location" />
+        <Select name="Location" register={register} error={errors} categories={statesNigeria} />
       </div>
 
       <section className="my-5">
@@ -34,16 +34,19 @@ const Form = () => {
           <Input
             title="Password"
             placeholder="**************"
+            name="Password"
             type="password"
           />
           <Input
             title="New Password"
             placeholder="************"
+            name="new password"
             type="password"
           />
           <Input
             title="Confirm Password"
             placeholder="***********"
+            name="confirm password"
             type="password"
           />
         </div>

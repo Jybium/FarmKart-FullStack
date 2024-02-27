@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import notifySuccess from "@/app/utils/notifySuccess"
 import { useRouter } from "next/navigation";
-import axios from "axios"
 import notifyError from "@/app/utils/notifyError"
 import { Text } from "@/app/components/Input";
 import { Password, Select } from "@/app/components/Input";

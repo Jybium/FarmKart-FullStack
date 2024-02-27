@@ -21,6 +21,7 @@
     "@upstash/ratelimit": "^1.0.0",
     "@vercel/kv": "^1.0.1",
     "autoprefixer": "10.4.15",
+    "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
     "cookie": "^0.6.0",
     "cookies-next": "^4.1.0",

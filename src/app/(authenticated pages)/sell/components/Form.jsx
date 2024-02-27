@@ -2,12 +2,16 @@
 
 import React from 'react'
 import Select from './Select';
+import { Categories } from '@prisma/client';
 import { useForm } from 'react-hook-form';
 import AddingImage from './AddingImage';
 import { PrimaryButton } from '@/app/components/Buttons';
-import { fetchUserRoles, statesNigeria } from "../../../lib/enums";
+import {  statesNigeria } from "../../../lib/enums";
+// import {fetchUserRoles} from "../../../lib/category"
 
 import { useRouter } from 'next/navigation';
+
+const { LIVESTOCK, CROPS, FARM_SUPPLEMENT, OTHER_CATEGORIES } = Categories;
 
 
 const Form = () => {
@@ -16,7 +20,8 @@ const Form = () => {
 
     const route = useRouter()
 
-  const enumValues = fetchUserRoles();
+  const enumValues = [LIVESTOCK, CROPS, FARM_SUPPLEMENT, OTHER_CATEGORIES]
+  console.log(enumValues)
 
 
   const submit = (data) =>{

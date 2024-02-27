@@ -8,7 +8,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { useSearchParams } from "next/navigation";
-import { fetchUserRoles, statesNigeria } from "../../lib/enums";
+import {  statesNigeria } from "../../lib/enums";
+import { fetchUserRoles} from "../../lib/category";
 
 
 const {LIVESTOCK, CROPS, FARM_SUPPLEMENT, OTHER_CATEGORIES} = Categories

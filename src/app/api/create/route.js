@@ -5,8 +5,8 @@ import { createClient } from "@supabase/supabase-js";
 
 // Create Supabase client
 const supabase = createClient(
-  process.env.PROJECT_URL,
-  process.env.PROJECT_API_KEY
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_API_KEY
 );
 
 export async function POST(request) {

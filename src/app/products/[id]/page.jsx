@@ -2,6 +2,7 @@ import Header from "@/app/components/Header";
 import React from "react";
 import Images from "@/app/products/[id]/components/Images";
 import Details from "@/app/products/[id]/components/Details";
+import prisma from "../../lib/prisma"
 import notifyError from "@/app/utils/notifyError";
 import { fetchData } from "@/app/lib/fetch";
 
@@ -30,13 +31,17 @@ export const dynamic = 'force-dynamic'
 // }
 
 export async function generateStaticParams() {
-  const products = await fetch("http:/127.0.0.1:3000/api/product").then((res) =>
-    res.json()
-  );
+  const products = await prisma.product.findMany({
+    select: { Id: true }, 
+  });
 
-  return products.data?.map((product) => ({
+  return products.map((product) => ({
     id: product.Id.toString(),
   }));
+
+  // return products.data?.map((product) => ({
+  //   id: product.Id.toString(),
+  // }));
 }
 
 
@@ -44,19 +49,31 @@ const page = async ({params}) => {
 
   const param  = +params.id
 
-  const result = await fetch(
-    `http://127.0.0.1:3000/api/product-details/${param}`,
-    {
-      method: "GET",
-    }
-  ).then((res) => res.json());
+   const product = await prisma.product.findUnique({
+     where: {
+       Id: param, // Assuming 'param' corresponds to the product ID
+     },
+     include: {
+       image: { select: { Image: true } },
+       user: {
+         select: {
+           firstName: true,
+           lastName: true,
+           emailAddress: true,
+           phoneNumber: true,
+           createdAt: true,
+           updatedAt: true,
+           location: true,
+         },
+       },
+     },
+   });
 
-  console.log(result)
+   console.log(product)
 
-
-    const responseImage = await result.message.data?.image
-    const responseDetails = await result.message.data
-    const responseUser = await result.message.data?.user
+    const responseImage = await product?.image
+    const responseDetails = await product
+    const responseUser = await product?.user
   
   return (
     <main>

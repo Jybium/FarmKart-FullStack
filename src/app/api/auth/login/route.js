@@ -102,8 +102,11 @@ export async function POST(req, res) {
       });
 
      
+      const id = {
+        id: user.Id,
+      };
 
-      const refreshToken = await signRefreshJWT({ id: user.Id, expires: process.env.REFRESH_JWT_EXPIRES_IN});
+      const refreshToken = await signRefreshJWT(id,  process.env.REFRESH_JWT_EXPIRES_IN);
       // console.log(refreshToken)
 
        const refreshTokenSerialized = serialize("refreshToken", refreshToken, {

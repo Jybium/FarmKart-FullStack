@@ -1,6 +1,9 @@
-import React from "react";
+"use client"
+
+import React, {useState} from "react";
 import Image from "next/image";
 // import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { product } from "@/Constants/Offers";
 import "../product.css";
 import Link from "next/link"
@@ -67,6 +70,15 @@ const Product = ({ product }) => {
 };
 
 const Products = ({data}) => {
+  const searchParams = useSearchParams();
+  // const [product, setProduct] = useState([])
+
+  // setProduct(data)
+  const search = searchParams?.get("category" || "location" );
+   console.log(search);
+
+   
+   console.log(data)
 
   if (data.length <= 0)
     return (

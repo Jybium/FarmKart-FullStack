@@ -34,14 +34,14 @@ export const signAccessJWT = async (
 
 export const signRefreshJWT = async (
   payload
-
+,option
 ) => {
   try {
     const secret = new TextEncoder().encode(process.env.REFRESH_SECRET_KEY);
     const alg = "HS256";
-    return new SignJWT(payload.id)
+    return new SignJWT(payload)
       .setProtectedHeader({ alg })
-      .setExpirationTime(payload.expires)
+      .setExpirationTime(option)
       .setIssuedAt()
       .setSubject(payload)
       .sign(secret);

@@ -12,7 +12,7 @@ const prisma = new PrismaClient()
 export const metadata = {
   title: "Product Page | FarmKart",
   description:
-    "This page contains product listing (Farm produce) from the database as posted by the farmers and approved by the admin",
+    "This page contains product listing (Farm product) from the database as posted by the farmers and approved by the admin",
 };
 
 const page = async () => {

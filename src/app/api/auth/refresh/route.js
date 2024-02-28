@@ -45,7 +45,14 @@ export async function POST(
 
     const newAccessToken = await signAccessJWT(data, process.env.ACCESS_JWT_EXPIRES_IN);
 
-    const newRefreshToken = signRefreshJWT({ id: user.Id, expires: process.env.REFRESH_JWT_EXPIRES_IN });
+    const id = {
+      id: user.Id,
+    };
+
+    const newRefreshToken = await signRefreshJWT(
+      id,
+      process.env.REFRESH_JWT_EXPIRES_IN
+    );
 
     // Update the user's refresh token in the database
     await prisma.user.update({

@@ -28,10 +28,10 @@ export function middleware(request, res) {
    verified = verifyAccessJWT(cookie);
   } catch (error) {
     console.log(error)
-  }
+  
 
   let result
-  if (!cookie || cookie === " " || verified) {
+  if (!cookie || cookie === " " || !verified) {
     
 
     try{
@@ -51,11 +51,11 @@ export function middleware(request, res) {
       );
     }
   }
-
+  }
   // Setting cookies on the response using the `ResponseCookies` API
   const response = NextResponse.next();
 
-  const serialized = serialize("token", String(cookie.value), {
+  const serialized = serialize("token", String(cookie), {
     httpOnly: true,
     maxAge: 60 * 60,
     secure: process.env.NODE_ENV !== "development",
@@ -63,7 +63,7 @@ export function middleware(request, res) {
     path: "/",
   });
 
-  const refreshTokenSerialized = serialize("refreshToken", String(refreshCookie?.value), {
+  const refreshTokenSerialized = serialize("refreshToken", String(refreshCookie), {
     httpOnly: true,
     maxAge: 60 * 60 *24,
     secure: process.env.NODE_ENV !== "development",

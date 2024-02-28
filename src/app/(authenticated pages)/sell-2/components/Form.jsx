@@ -100,7 +100,7 @@ const Form = () => {
 
       console.log(images)
 
-      const response = await fetch("http://localhost:3000/api/create", {
+      const response = await fetch("http://127.0.0.1:3000/api/create", {
         method: "POST",
         body: formData,
         "content-type": "multipart/form-data",

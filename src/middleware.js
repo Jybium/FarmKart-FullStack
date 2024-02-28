@@ -38,7 +38,7 @@ export function middleware(request, res) {
 
       const refreshToken = verifyRefreshJWT(refreshCookie)
       if(refreshToken){
-       result =  fetch("http://localhost:3000/api/refresh", {
+       result =  fetch("http://127.0.0.1:3000/api/refresh", {
         method: "GET"
        }).then(res => res.json)
 

@@ -30,7 +30,7 @@ export const dynamic = 'force-dynamic'
 // }
 
 export async function generateStaticParams() {
-  const products = await fetch("http:/localhost:3000/api/product").then((res) =>
+  const products = await fetch("http:/127.0.0.1:3000/api/product").then((res) =>
     res.json()
   );
 
@@ -45,7 +45,7 @@ const page = async ({params}) => {
   const param  = +params.id
 
   const result = await fetch(
-    `http://localhost:3000/api/product-details/${param}`,
+    `http://127.0.0.1:3000/api/product-details/${param}`,
     {
       method: "GET",
     }

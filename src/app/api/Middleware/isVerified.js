@@ -1,4 +1,4 @@
 import {NextResponse, NextRequest} from next/server
-import {verifyToken} from "../../helpers/jwt"
+import {verifyAccessJWT} from "../../helpers/jwt"
 
 

@@ -1,1 +1,1 @@
-import
+import prisma from "../../lib/prisma"

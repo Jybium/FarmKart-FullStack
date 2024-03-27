@@ -1,5 +1,8 @@
+
 /** @type {import('next').NextConfig} */
 // const { PrismaPlugin } = require("@prisma/nextjs-monorepo-workaround-plugin");
+
+//@ts-ignore
 import { PrismaPlugin } from '@prisma/nextjs-monorepo-workaround-plugin';
 
 

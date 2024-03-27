@@ -10,11 +10,17 @@ import {CiShoppingCart} from "react-icons/ci"
 import { PrimaryButton, SecondaryButton } from "@/app/components/Buttons";
 import Navlink from "@/app/components/Navlink";
 import { ImageUrl } from "@/Constants/Offers";
+import { useFetchWithInterceptors } from "../lib/fetch";
 
 const Header = (props) => {
 
   const [show, setShow] = useState(false);
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+
+
+  const { data,  error } = useFetchWithInterceptors("/api/cart", {
+    method: "GET",
+  });
 
 
   const imageUrl = ImageUrl + user.image
@@ -42,8 +48,9 @@ const Header = (props) => {
       >
         <div className="sm:flex justify-between items-center ml-10 sm:w-full my-5 grid gap-20 sm:gap-0">
           <Navlink />
+          {loading ? " " : 
           <div>
-            {Object.entries(user).length !== 0 ? (
+           {Object.entries(user).length !== 0 ? (
               <div className="flex gap-5 items-center justify-between ">
                 <Link href="/profile">
 
@@ -61,8 +68,8 @@ const Header = (props) => {
                 <div className="flex justify-between items-center ml-auto gap-2">
                   <span className="relative">
                     <CiShoppingCart size={35} />
-                    <p className="absolute right-0 -top-1 bg-red-700 px-[6px] py-[1px] rounded-full text-white text-sm">
-                      0
+                    <p className="absolute right-0 -top-1 bg-red-700 px-[6px] py-[2px] rounded-full text-white text-sm">
+                   {data?.response?.data?.length}
                     </p>
                   </span>{" "}
                   <p className="">Cart</p>
@@ -79,7 +86,7 @@ const Header = (props) => {
                 </Link>
               </div>
             )}
-          </div>
+          </div>}
         </div>
       </div>
       <span className="sm:hidden z-10" onClick={showNav}>

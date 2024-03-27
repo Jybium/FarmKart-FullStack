@@ -1,60 +1,29 @@
-"use client"
+"use client";
 
-import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { PrimaryButton } from '@/app/components/Buttons';
-import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/navigation';
-import { Text } from '@/app/components/Input';
-import notifyError from '@/app/utils/notifyError';
-import notifySuccess from '@/app/utils/notifySuccess';
-import { useFetchWithInterceptors } from '@/app/lib/fetch';
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import { PrimaryButton } from "@/app/components/Buttons";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { Text } from "@/app/components/Input";
+import notifyError from "@/app/utils/notifyError";
+import notifySuccess from "@/app/utils/notifySuccess";
+import { useFetchWithInterceptors } from "@/app/lib/fetch";
 
 const Form = () => {
   const route = useRouter();
 
   const [images, setImages] = useState([]);
-  useLayoutEffect(()=>{
+  useLayoutEffect(() => {
     const imageURL = localStorage.getItem("images");
-     const URL = JSON.parse(imageURL)
-    setImages(URL)
-  }, [])
+    const URL = JSON.parse(imageURL);
+    setImages(URL);
+  }, []);
 
-
-  //  useEffect(() => {
-  //    const retrieveImagesFromLocalStorage = () => {
-  //      const images = [];
-
-  //      // Iterate over localStorage keys
-  //      for (let i = 0; i < localStorage.length; i++) {
-  //        const key = localStorage.key(i);
-
-  //        // Check if the key starts with "image_"
-  //        if (key.startsWith("image_")) {
-  //          // Extract the image URL from localStorage
-  //          const imageURL = localStorage.getItem(key);
-  //          const URL = JSON.parse(URL)
-
-  //          images.push(URL);
-  //        }
-  //      }
-
-  //      // Join images with commas
-  //      const commaSeparatedImages = images.join("-");
-  //      return commaSeparatedImages;
-  //    };
-
-  //    // Retrieve comma-separated images from localStorage
-  //    const retrievedImages = retrieveImagesFromLocalStorage();
-
-  //    // Set the retrieved images to state
-  //    setImages(retrievedImages);
-  //  }, []);
-
-   const deleteImagesFromLocalStorage = () => {
-         localStorage.removeItem("images");
-         localStorage.removeItem("location");
-         localStorage.removeItem("category");
-   };
+  const deleteImagesFromLocalStorage = () => {
+    localStorage.removeItem("images");
+    localStorage.removeItem("location");
+    localStorage.removeItem("category");
+  };
 
   const returned_location =
     typeof window !== "undefined" ? localStorage.getItem("location") : null;
@@ -72,11 +41,6 @@ const Form = () => {
     formState: { errors },
   } = useForm();
 
-  // const result = useFetchWithInterceptors("/api/create-product", {
-  //   method: "POST",
-  //   body: JSON.stringify(data),
-  // });
-
   const submit = async (data) => {
     try {
       const formData = new FormData();
@@ -93,25 +57,24 @@ const Form = () => {
       formData.append("category", category);
       formData.append("location", location);
       formData.append("slug", data.productName.replace(" ", "-"));
-     images.forEach((imageBlob) => {
-       formData.append("image", imageBlob);
-     });
-     
+      images.forEach((imageBlob) => {
+        formData.append("image", imageBlob);
+      });
 
-      console.log(images)
 
-      const response = await fetch("http://127.0.0.1:3000/api/create", {
+
+      const response = await fetch("/api/create-product", {
         method: "POST",
         body: formData,
         "content-type": "multipart/form-data",
       });
 
-
       if (response.ok) {
         const result = await response.json();
-        console.log(result);
+       
         notifySuccess(result.message);
         deleteImagesFromLocalStorage();
+
         if (
           result.message === "Bad request" ||
           "Unauthorized. Make sure you are signed in!"
@@ -121,8 +84,8 @@ const Form = () => {
         notifyError("An unexpected error occurred");
       }
     } catch (error) {
-      console.log(error);
-      notifyError("An unexpected error occurred");
+   
+      notifyError("An unexpected error occurred", error);
     }
   };
 
@@ -208,7 +171,7 @@ const Form = () => {
         <span className="flex items-center gap-2 font-black text-sm -mt-2">
           <input
             type="checkbox"
-            {...register("negotiable", { required: true })}
+            {...register("negotiable")}
             name="negotiable"
             id="negotiable"
             className="rounded"
@@ -244,6 +207,6 @@ const Form = () => {
       </div>
     </form>
   );
-}
+};
 
-export default Form
+export default Form;

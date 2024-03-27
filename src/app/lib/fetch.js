@@ -4,11 +4,13 @@ import {useState, useEffect} from "react"
 
 
 import {getCookie} from "cookies-next"
-import notifyError from "../utils/notifyError"
-import notifySuccess from "../utils/notifySuccess"
+import notifyError from "../utils/notifyError";
+
 
 
 export function fetchData(url, options) {
+
+
   let isFetching = false;
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -47,9 +49,16 @@ export function fetchData(url, options) {
 
 
 export const useFetchWithInterceptors = (url, options = {}) => {
+
+  // console.log(url, options)
+
+ 
+
   const [data, setData] = useState();
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
+
+  
 
   useEffect(() => {
     let isMounted = true;
@@ -70,30 +79,31 @@ export const useFetchWithInterceptors = (url, options = {}) => {
 
         const response = await fetch(url, modifiedOptions);
 
-        if (!response.ok) {
-          const errorData = await response.json();
-          setError(errorData)
-          console.error("Response error:", errorData);
+        // if (!response.ok) {
+        //   const errorData = await response.json();
+        //   setError(errorData)
+        //   console.error("Response error:", errorData);
 
-          if (response.status === 401) {
-            // Handle token expiry or unauthorized access
+        //   if (response.status === 401) {
+        //     // Handle token expiry or unauthorized access
             
-          }
+        //   }
 
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+        //   throw new Error(`HTTP error! Status: ${response.status}`);
+        // }
 
         const contentType = response.headers.get("content-type");
         const result =
           contentType && contentType.includes("application/json")
             ? await response.json()
-            : await response.text();
+            :  null;
 
         if (isMounted) {
           setData(result);
         }
       } catch (error) {
         console.error("Request error:", error);
+        notifyError("Request error:", error);
 
         if (isMounted) {
           setError(error);
@@ -117,22 +127,4 @@ export const useFetchWithInterceptors = (url, options = {}) => {
 };
 
 
-
-
-
-// Example usage:
-// const onsubmit = async (data) => {
-//   try {
-//     const result = await fetchWithInterceptors("/api/auth/register", {
-//       method: "POST",
-//       body: JSON.stringify(data),
-//     });
-
-//     console.log(result);
-//     notifySuccess(result.message);
-//   } catch (error) {
-//     notifyError("An unexpected error occurred");
-//   }
-
-// };
 

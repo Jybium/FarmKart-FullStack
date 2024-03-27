@@ -1,4 +1,4 @@
-"use client";
+
 
 import { Suspense, lazy } from "react";
 const Offer = lazy(()=>import("@/app/components/Offer"))
@@ -12,7 +12,7 @@ const CallToAction = lazy(()=>import("@/app/components/CallToAction"))
 
 export default function Home() {
   return (
-    <Suspense fallback>
+    <>
       <Header className="bg-[#E6EEE6]" />
       <main className="flex min-h-screen flex-col items-center justify-between relative overflow-scroll h-[calc(100%-80px)] md:top-[70px] top-[80px] pb-5 Hide">
         <CallToAction />
@@ -21,7 +21,7 @@ export default function Home() {
         <Reviews />
         <Sponsor />
       </main>
-      {/* <ToastContainer /> */}
-    </Suspense>
+    </>
+    
   );
 }

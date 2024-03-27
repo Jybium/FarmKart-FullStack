@@ -6,15 +6,13 @@ import cookie, { serialize } from "cookie";
 
 
 export const config = {
-  matcher: ["/sell-2", "/sell", "/profile", "/products" ,"/cart", "/checkout", "/profile/edit-profile", "/api/auth/me"],
+  matcher: ["/sell-2", "/sell", "/profile", "/products" ,"/cart", "/checkout", "/profile/edit-profile", "/api/auth/me", "/api/cart", "/api/profile", "/api/order", ],
 };
 
 export async function middleware(request, res) {
 
-  // console.log("a request came here")
   const currentUrl = request.url;
 
-  // const cookie = request.cookies.get("set-cookie");
   const cookie = request.cookies.get("token")?.value;
   const refreshCookie = request.cookies.get("refreshToken")?.value;
  
@@ -26,21 +24,20 @@ export async function middleware(request, res) {
 
   try {
    verified = await verifyAccessJWT(cookie);
-  //  verified = verifyAcces
+
   } catch (error) {
     console.log(error)
-    console.log("request got here")
+    console.log("access checker request got here")
 
   let result
   if (!verified) {
     try{
-
       const refreshToken = await verifyRefreshJWT(refreshCookie)
       if(refreshToken){
-       result =  fetch("http://127.0.0.1:3000/api/refresh", {
+       result = await fetch("/api/refresh-token", {
         method: "GET"
-       }).then(res => res.json)
-       console.log("request got here")
+       }).then(res => res.json())
+       console.log("refresh checker request got here")
        console.log(result)
       }
     } catch(error){
@@ -73,7 +70,7 @@ export async function middleware(request, res) {
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("set-cookie", [serialized, refreshTokenSerialized]);
 
-  // console.log(requestHeaders);
+
 
   return response;
 }
@@ -108,7 +105,7 @@ export async function middleware(request, res) {
 //         // Note: You need to implement logic to handle the new tokens
 //       }
 //     } catch (error) {
-//       console.log("Refresh token verification failed:", error);
+//       console.log("Refresh token verification failed");
 //       return NextResponse.json(
 //         { message: "Unauthorized request" },
 //         { status: 401 }

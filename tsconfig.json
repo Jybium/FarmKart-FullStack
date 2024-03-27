@@ -36,6 +36,6 @@
     "src/app/(Authentication)/login/page.jsx",
     "src/app/(Authentication)/forgot-password/page.jsx",
     "src/app/reset-password/page.jsx"
-, "src/app/api/auth/password-recovery-with-link/route.js", "src/app/products/page.jsx", "src/app/products/[product-id]/page.jsx", "src/app/products/components/Aside.jsx", "src/app/(authenticated pages)/sell/page.jsx"  ],
+, "src/app/api/auth/password-recovery-with-link/route.js", "src/app/products/page.jsx", "src/app/products/[product-id]/page.jsx", "src/app/products/components/Aside.jsx", "src/app/(authenticated pages)/sell/page.jsx", "src/app/(authenticated pages)/cart/page.jsx"  ],
   "exclude": ["node_modules"]
 }

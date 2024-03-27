@@ -38,7 +38,7 @@ const Footer = () => {
             <h1 className="font-bold uppercase">Resources</h1>
             <ul className="mt-2 text-sm gap-1 grid">
               <li>
-                <Link href="">Our Blog</Link>
+                <Link href="/coming-soon">Our Blog</Link>
               </li>
             </ul>
           </div>

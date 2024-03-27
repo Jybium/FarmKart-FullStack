@@ -21,13 +21,10 @@ const Form = () => {
     const route = useRouter()
 
   const enumValues = [LIVESTOCK, CROPS, FARM_SUPPLEMENT, OTHER_CATEGORIES]
-  console.log(enumValues)
 
 
   const submit = (data) =>{
 
-    // event.preventDefault()
-    console.log(data)
     localStorage.setItem("category", JSON.stringify(data.Category))
     localStorage.setItem("location", JSON.stringify(data.Location))
 

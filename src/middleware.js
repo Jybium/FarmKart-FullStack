@@ -6,7 +6,7 @@ import cookie, { serialize } from "cookie";
 
 
 export const config = {
-  matcher: ["/sell-2", "/sell", "/profile", "/products" ,"/cart", "/checkout", "/profile/edit-profile", "/api/auth/me", "/api/cart", "/api/profile", "/api/order"],
+  matcher: ["/sell-2", "/sell", "/profile", "/products" ,"/cart", "/checkout", "/profile/edit-profile", "/api/auth/me", "/api/cart", "/api/profile", "/api/order", ],
 };
 
 export async function middleware(request, res) {
@@ -34,7 +34,7 @@ export async function middleware(request, res) {
     try{
       const refreshToken = await verifyRefreshJWT(refreshCookie)
       if(refreshToken){
-       result = await fetch("http://127.0.0.1:3000/api/refresh", {
+       result = await fetch("/api/refresh-token", {
         method: "GET"
        }).then(res => res.json())
        console.log("refresh checker request got here")

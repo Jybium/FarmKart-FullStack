@@ -22,6 +22,7 @@ const product = await prisma.product.findMany({
     image: { select: { Image: true } },
     user: {
       select: {
+        Id:true,
         firstName: true,
         lastName: true,
         emailAddress: true,
@@ -45,7 +46,7 @@ const product = await prisma.product.findMany({
         <section className="sm:flex grid w-[90%] mx-auto gap-10">
           <Aside />
           
-          <Products data={product}/>
+          <Products datas={product}/>
          
         </section>
       </main>

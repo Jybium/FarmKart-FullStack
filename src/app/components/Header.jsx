@@ -10,13 +10,17 @@ import {CiShoppingCart} from "react-icons/ci"
 import { PrimaryButton, SecondaryButton } from "@/app/components/Buttons";
 import Navlink from "@/app/components/Navlink";
 import { ImageUrl } from "@/Constants/Offers";
+import { useFetchWithInterceptors } from "../lib/fetch";
 
 const Header = (props) => {
 
   const [show, setShow] = useState(false);
   const { user, loading } = useAuth();
 
-  console.log(Object.entries(user).length !== 0);
+
+  const { data,  error } = useFetchWithInterceptors("/api/cart", {
+    method: "GET",
+  });
 
 
   const imageUrl = ImageUrl + user.image
@@ -64,8 +68,8 @@ const Header = (props) => {
                 <div className="flex justify-between items-center ml-auto gap-2">
                   <span className="relative">
                     <CiShoppingCart size={35} />
-                    <p className="absolute right-0 -top-1 bg-red-700 px-[6px] py-[1px] rounded-full text-white text-sm">
-                      0
+                    <p className="absolute right-0 -top-1 bg-red-700 px-[6px] py-[2px] rounded-full text-white text-sm">
+                   {data?.response?.data?.length}
                     </p>
                   </span>{" "}
                   <p className="">Cart</p>

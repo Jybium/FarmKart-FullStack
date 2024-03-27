@@ -14,7 +14,9 @@ import { ImageUrl } from "@/Constants/Offers";
 const Header = (props) => {
 
   const [show, setShow] = useState(false);
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+
+  console.log(Object.entries(user).length !== 0);
 
 
   const imageUrl = ImageUrl + user.image
@@ -42,8 +44,9 @@ const Header = (props) => {
       >
         <div className="sm:flex justify-between items-center ml-10 sm:w-full my-5 grid gap-20 sm:gap-0">
           <Navlink />
+          {loading ? " " : 
           <div>
-            {Object.entries(user).length !== 0 ? (
+           {Object.entries(user).length !== 0 ? (
               <div className="flex gap-5 items-center justify-between ">
                 <Link href="/profile">
 
@@ -79,7 +82,7 @@ const Header = (props) => {
                 </Link>
               </div>
             )}
-          </div>
+          </div>}
         </div>
       </div>
       <span className="sm:hidden z-10" onClick={showNav}>

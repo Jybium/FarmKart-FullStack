@@ -9,11 +9,9 @@ const secretKey = process.env.JWT_SECRET_KEY
 
 export async function GET (request){
 
-    // const authorization  = getCookie({res, req})
+    
     const authorization = request.cookies.get("token");
-    //  console.log(authorization);
-    // console.log(req.headers)
-
+    
     if (!authorization || authorization.length <= 0) {
       return NextResponse.json({ message: "Unauthorised" }, { status: 401 });
     }
@@ -21,14 +19,14 @@ export async function GET (request){
     const token = authorization.value
     let decodedToken
     try {
-        decodedToken = verifyAccessJWT(token)
+        decodedToken = await verifyAccessJWT(token)
     } catch (error) {
         console.log(error)
         return NextResponse.json({message:"Invalid token"}, {status: 401})
     }
 
-    const {id, firstName, lastName, image, phoneNumber, emailAddress, location} = decodedToken
-    // console.log(decodedToken)
+    const {id, firstName, lastName, image, phoneNumber, emailAddress, location} =  decodedToken
+    
     
 
     return NextResponse.json({data : decodedToken}, {status:"200"})

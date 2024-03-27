@@ -78,7 +78,6 @@ const Products = ({data}) => {
    console.log(search);
 
    
-   console.log(data)
 
   if (data.length <= 0)
     return (

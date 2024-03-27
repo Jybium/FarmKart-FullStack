@@ -43,7 +43,7 @@ const Header = (props) => {
         <div className="sm:flex justify-between items-center ml-10 sm:w-full my-5 grid gap-20 sm:gap-0">
           <Navlink />
           <div>
-            {Object.entries(user) !== 0 ? (
+            {Object.entries(user).length !== 0 ? (
               <div className="flex gap-5 items-center justify-between ">
                 <Link href="/profile">
 

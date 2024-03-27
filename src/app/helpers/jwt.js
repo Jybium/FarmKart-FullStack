@@ -67,7 +67,8 @@ export const verifyAccessJWT = async (token) => {
       )
     ).payload
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    // return;
     throw new Error("Your token has expired.");
   }
 };
@@ -82,7 +83,7 @@ export const verifyRefreshJWT = async (token) => {
       )
     ).payload
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     throw new Error("Your token has expired.");
   }
 };

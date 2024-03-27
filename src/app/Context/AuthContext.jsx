@@ -26,6 +26,7 @@ const AuthProvider = ({ children }) => {
         router.push("/login")
         } else if (data) {
           setUser(data?.data);
+          console.log(data)
         }
       }
     };

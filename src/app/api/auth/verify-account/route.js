@@ -39,7 +39,7 @@ export async function POST(req, res) {
     NextResponse.json({ message: "Verification email sent successfully" }, {status : 200});
   } catch (error) {
     console.error(error);
-    NextResponse.json({ message: "Internal server error" }, {status : 500});
+    return NextResponse.json({ message: "Internal server error" }, {status : 500});
   }
 }
 

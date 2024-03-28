@@ -38,6 +38,13 @@ export async function POST(req, res) {
         where:{Id:+productId}
       });
 
+      
+    if (product)
+      return NextResponse.json(
+        { message: "Product already present in cart!" },
+        { status: 404 }
+      );
+
       if (!user || !product) {
               return NextResponse.json({ response: "No user or product found!" }, { status: 404 });
 
@@ -105,6 +112,9 @@ export async function GET(req, res) {
               image: {select: {Image:true}}, 
             },
           },
+          user:{
+            select:{location:true}
+          }
         },
       });
       const data = {

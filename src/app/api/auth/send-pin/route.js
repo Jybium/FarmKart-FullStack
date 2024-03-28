@@ -29,13 +29,13 @@ export async function POST(req, res) {
       // Send the PIN via email
       sendPinEmail(emailAddress, pin);
 
-      NextResponse.json({ message: "PIN sent successfully" }, {status : 200});
+      return NextResponse.json({ message: "PIN sent successfully" }, {status : 200});
     } catch (error) {
       console.error(error);
-    NextResponse.json({ message: "Internal server error" }, {status : 500});
+    return NextResponse.json({ message: "Internal server error" }, {status : 500});
     }
   } else {
-    NextResponse.json({ message: "Method not allowed" }, {status : 405});
+    return NextResponse.json({ message: "Method not allowed" }, {status : 405});
   }
 }
 

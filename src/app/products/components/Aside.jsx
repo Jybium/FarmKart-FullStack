@@ -8,71 +8,95 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { useSearchParams } from "next/navigation";
-import {  statesNigeria } from "../../lib/enums";
-import { fetchUserRoles} from "../../lib/category";
+import { statesNigeria } from "../../lib/enums";
+import { fetchUserRoles } from "../../lib/category";
 
-
-const {LIVESTOCK, CROPS, FARM_SUPPLEMENT, OTHER_CATEGORIES} = Categories
-
-
-
+const { LIVESTOCK, CROPS, FARM_SUPPLEMENT, OTHER_CATEGORIES } = Categories;
 
 const Aside = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-
-  const createQueryString = useCallback((name, value) =>{
-    const params = new URLSearchParams(searchParams)
-    params.set(name, value)
-  },[searchParams])
+  const createQueryString = useCallback(
+    (name, value) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+    },
+    [searchParams]
+  );
 
   return (
     <aside
       className="border-[1px] border-black rounded border-collapse text-sm h-max md:w-1/5 xl:w-1/4 lg:w-[30%] sm:w-1/4 w-fit mb-10
      block sm:grid"
     >
-      <div className="w-full">
+      <div className="">
         <div className="border-collaspe ">
           <p className="text-[#003800] font-bold py-2 px-4">categories</p>
           <ul className=" border-y border-black border-collapse px-4 py-3 grid gap-3">
-           <Link href={{pathname:"/products", query:{"category":`${LIVESTOCK.toLowerCase()}`}}}>
-            <li className="cursor-pointer flex items-center gap-3">
-              <span>
-                <AiOutlineUnorderedList size="24px" />
-              </span>{" "}
-              Livestock
-            </li>
-           </Link>
-<Link href={{pathname: "/products", query:{"category" : `${CROPS.toLowerCase()}`}}}>
-
-            <li className="cursor-pointer flex items-center gap-3">
-              <span>
-                <AiOutlineUnorderedList size="24px" />
-              </span>{" "}
-              Crops
-            </li>
-</Link>
-          
-          
-           <Link href={{pathname:"/products", query:{"category":`${FARM_SUPPLEMENT.replace("_", " ").toLowerCase()}`}}}>
-
-            <li className="cursor-pointer flex items-center gap-3">
-              <span>
-                <AiOutlineUnorderedList size="24px" />
-              </span>{" "}
-              Farm Supplements
-            </li>
+            <Link
+              href={{
+                pathname: "/products",
+                query: { category: `${LIVESTOCK.toLowerCase()}` },
+              }}
+            >
+              <li className="cursor-pointer flex items-center gap-3">
+                <span>
+                  <AiOutlineUnorderedList size="24px" />
+                </span>{" "}
+                Livestock
+              </li>
             </Link>
-           <Link href={{pathname:"/products", query:{"category":`${OTHER_CATEGORIES.replace("_", " ").toLowerCase()}`}}}>
+            <Link
+              href={{
+                pathname: "/products",
+                query: { category: `${CROPS.toLowerCase()}` },
+              }}
+            >
+              <li className="cursor-pointer flex items-center gap-3">
+                <span>
+                  <AiOutlineUnorderedList size="24px" />
+                </span>{" "}
+                Crops
+              </li>
+            </Link>
 
-            <li className="cursor-pointer flex items-center gap-3">
-              <span>
-                <AiOutlineUnorderedList size="24px" />
-              </span>{" "}
-              Other Categories
-            </li>
+            <Link
+              href={{
+                pathname: "/products",
+                query: {
+                  category: `${FARM_SUPPLEMENT.replace(
+                    "_",
+                    " "
+                  ).toLowerCase()}`,
+                },
+              }}
+            >
+              <li className="cursor-pointer flex items-center gap-3">
+                <span>
+                  <AiOutlineUnorderedList size="24px" />
+                </span>{" "}
+                Farm Supplements
+              </li>
+            </Link>
+            <Link
+              href={{
+                pathname: "/products",
+                query: {
+                  category: `${OTHER_CATEGORIES.replace(
+                    "_",
+                    " "
+                  ).toLowerCase()}`,
+                },
+              }}
+            >
+              <li className="cursor-pointer flex items-center gap-3">
+                <span>
+                  <AiOutlineUnorderedList size="24px" />
+                </span>{" "}
+                Other Categories
+              </li>
             </Link>
           </ul>
         </div>
@@ -86,9 +110,11 @@ const Aside = () => {
               id="location"
               className="rounded text-sm bg-[#E6EEE6]"
             >
-              {statesNigeria.map((state, i) =>
-              <option key={i} value={state}>{state}</option>
-              )}
+              {statesNigeria.map((state, i) => (
+                <option key={i} value={state}>
+                  {state}
+                </option>
+              ))}
             </select>
           </div>
           <div className="grid">

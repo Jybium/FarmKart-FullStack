@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { cache, useState } from "react";
 import Image from "next/image";
 import Logo from "../logo (2).png";
 import { useAuth } from "../Context/AuthContext";
@@ -20,6 +20,7 @@ const Header = (props) => {
 
   const { data,  error } = useFetchWithInterceptors("/api/cart", {
     method: "GET",
+  
   });
 
 
@@ -68,7 +69,7 @@ const Header = (props) => {
                 <div className="flex justify-between items-center ml-auto gap-2">
                   <span className="relative">
                     <CiShoppingCart size={35} />
-                    <p className="absolute right-0 -top-1 bg-red-700 px-[6px] py-[2px] rounded-full text-white text-sm">
+                    <p className="absolute right-0 -top-1 bg-red-700 px-[7px] py-[1px] rounded-full text-white text-sm md:text-[12px]">
                    {data?.response?.data?.length}
                     </p>
                   </span>{" "}

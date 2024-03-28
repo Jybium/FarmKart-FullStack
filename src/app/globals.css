@@ -11,28 +11,8 @@
   display: none;
 }
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
 
 body {
-  /* color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb)); */
   font-family: "Haoura";
 }
 
@@ -44,4 +24,25 @@ input:active{
 input:focus, input:focus-visible{
   outline: 1px solid black;
   border: 1px solid black
+}
+
+
+.category-carousel {
+  display: flex;
+  overflow-x: auto;
+  /* line-height: 200%; */
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; 
+}
+
+.category-item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  margin-right: 15px; 
+}
+
+.container {
+  width: fit-content;
+  max-width: 100%;
+  justify-content: center;
 }

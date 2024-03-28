@@ -16,6 +16,7 @@ import notifyError from "@/app/utils/notifyError";
 import { useAuth } from "@/app/Context/AuthContext";
 import { Spinner } from "flowbite-react";
 import notifySuccess from "@/app/utils/notifySuccess";
+import { reverseFormatNumber } from "@/app/utils/numberFormatter";
 
 const imageUrl =
   "https://neainqsqckknglhdwqdv.supabase.co/storage/v1/object/public/";
@@ -27,7 +28,7 @@ const Category = ({ category }) => {
         <Image
           src={category.image}
           alt="category image"
-          className="rounded-full w-[70px] h-[70px] block border-[1px] border-black"
+          className="rounded-full max-w-full object-cover h-[70px] block border-[1px] border-black"
         />
       </div>
 
@@ -74,7 +75,7 @@ const Product = ({ product }) => {
 
      const data = await response.json();
      notifySuccess(data?.response?.message)
-     console.log("Success:", data);
+     
    } catch (error) {
      console.error("Error:", error);
    }
@@ -85,21 +86,21 @@ const Product = ({ product }) => {
 
 
   return (
-    <div className="bg-[#E6EEE6] w-auto rounded shadow hover:shadow-lg hover:scale-110 hover:delay-100 m-1">
+    <div className="bg-[#E6EEE6] w-auto rounded shadow hover:shadow-lg hover:scale-100 hover:delay-100 m-1">
       <div className="w-auto text-center">
         <Link href={`/products/${product.Id}`}>
           <Image
             src={`${imageUrl}/${productImage}`}
             alt="product-image"
-            className="max-w-full h-auto block "
-            width={300}
+            className="w-[350px] h-auto block "
+            width={350}
             height={150}
           />
         </Link>
       </div>
       <div className="p-3 grid gap-1">
         <p className="font-bold text-sm">{product.productName}</p>
-        <p className="font-black text-[15px]"># {product.price}</p>
+        <p className="font-black text-[15px]"># {reverseFormatNumber(product.price)}</p>
         <p className="flex items-center gap-1 text-sm text-slate-400">
           <span className="font-bold">Sold By: </span>{" "}
           <span className="text-black">
@@ -141,21 +142,25 @@ const Products = ({ datas }) => {
 
   return (
     <main className="w-3/4 lg:w-3/5 xl:w-3/4 md:w-3/5 mb-10">
-      <section className="overflow-auto mb-5">
+      <section className="category-section overflow-hidden mb-5">
         <p className="text-[#003800] font-bold my-5">Categories</p>
-        <div className="grid grid-flow-col overflow-auto gap-5">
-          {Categories.map((category) => (
-            <Category category={category} key={category.name} />
+        <div className="category-carousel Hide">
+          {Categories.map((category, index) => (
+            <div className="category-item" key={index}>
+              <Category category={category} />
+            </div>
           ))}
         </div>
       </section>
-      <section>
-        <p className="text-[#003800] font-bold my-5">Most Popular</p>
-        <section className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-          {datas.map((product, i) => (
-            <Product product={product} key={i} />
-          ))}
-        </section>
+      <section className="popular-section">
+        <div className="container">
+          <p className="text-[#003800] font-bold my-5">Most Popular</p>
+          <section className="grid grid-cols-1 justify-center sm:grid-cols-2 lg:grid-cols-3 gap-2">
+            {datas.map((product, i) => (
+              <Product product={product} key={i} />
+            ))}
+          </section>
+        </div>
       </section>
     </main>
   );

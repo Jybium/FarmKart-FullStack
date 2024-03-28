@@ -43,7 +43,7 @@ const product = await prisma.product.findMany({
       <Header className="bg-white" />
       <main className="relative h-[calc(100%-80px)] top-[80px] overflow-scroll pb-20 Hide">
         <Search />
-        <section className="sm:flex grid w-[90%] mx-auto gap-10">
+        <section className="sm:flex grid w-[90%] mx-auto gap-x-10">
           <Aside />
           
           <Products datas={product}/>

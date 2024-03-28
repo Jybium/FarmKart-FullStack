@@ -1,48 +1,39 @@
-"use client"
-
+"use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { cache } from "react";
 import Header from "../../components/Header";
 import { PrimaryButton } from "../../components/Buttons";
 import CartImage from "@/Asset/FARMKART IMAGES/images/cart/Artwork.png";
 import Link from "next/link";
 import { GrSubtract } from "react-icons/gr";
 import { GrAdd } from "react-icons/gr";
-import Photo from "@/Asset/FARMKART IMAGES/images/profile-image.jpg";
+import { useRouter } from "next/navigation";
 import { useFetchWithInterceptors } from "@/app/lib/fetch";
 import { Spinner } from "flowbite-react";
 import notifyError from "@/app/utils/notifyError";
-import {removeCartItem} from "../../services/cart"
-
+import { reverseFormatNumber } from "../../utils/numberFormatter";
+import {
+  decreaseCartItem,
+  increaseCartItem,
+  removeCartItem,
+} from "../../services/cart";
+import {calculateTotalPrice} from "../../utils/cartPriceAggregator"
 
 const imageUrl =
   "https://neainqsqckknglhdwqdv.supabase.co/storage/v1/object/public/";
 
+export const dynamic = "force-dynamic";
+
 const Cart = () => {
+  const router = useRouter();
   const { data, loading, error } = useFetchWithInterceptors("/api/cart", {
     method: "GET",
+    cache: "no-store",
+    next: { revaidate: "300" },
   });
 
   const cartData = data?.response?.data;
-  console.log(data?.response?.data);
- 
- 
-
-  const reverseFormatNumber = (number) => {
-    return number
-      .toString()
-      .split("")
-      .reverse()
-      .join("")
-      .replace(/(\d{3})/g, "$1,")
-      .split("")
-      .reverse()
-      .join("")
-      .replace(/^,/, "");
-  };
-
- 
 
   if (error) {
     notifyError("An error has occured!");
@@ -53,6 +44,13 @@ const Cart = () => {
     );
   }
 
+
+const totalPrice = calculateTotalPrice(cartData);
+
+const delivery = 2500
+
+
+
   return (
     <main>
       <Header className="bg-white" />
@@ -61,10 +59,10 @@ const Cart = () => {
           <Spinner color="success" size="xl" />
         </div>
       ) : (
-        <div className="  text-center  overflow-scroll  Hide">
+        <div className=" overflow-scroll  Hide">
           {data?.response?.data?.length === 0 ? (
-            <main className="text-center w-full">
-              <main className="Hide sm:w-2/5 w-5/6 top-[80px] m-auto py-10 h-[calc(100%-80px)] relative ">
+            <main className="text-center w-ful Hide sm:w-2/5 w-5/6 top-[80px] m-auto py-10 h-[calc(100%-80px)] relative">
+              <main className=" ">
                 <div className="relative">
                   <Image
                     src={CartImage}
@@ -101,7 +99,6 @@ const Cart = () => {
                 {data?.response?.data.length > 1 ? "items" : "item"}
               </h1>
               <section className="sm:flex w-full gap-6 justify-between items-start mt-5 mb-10">
-                {cartData?.map((data) => (
                   <div className="bg-[#E6EEE6] rounded shadow w-full sm:w-9/12">
                     <div className="flex items-center justify-between py-2 px-4 uppercase font-black text-sm border-b border-black">
                       <p className="sm:w-[46%] w-[47%]">item details</p>
@@ -110,6 +107,7 @@ const Cart = () => {
                       </p>
                       <p className="w-[30%] text-right">Quantity</p>
                     </div>
+                {cartData?.map((data) => (
                     <section className="py-3 px-4">
                       <div className="flex justify-between  w-full">
                         <div className="sm:flex gap-5 sm:w-[46%] w-[42%]">
@@ -123,7 +121,9 @@ const Cart = () => {
                           />
                           <p className="flex flex-col items-start sm:gap-2 gap-1 pt-2">
                             <span>{data?.product?.productName}</span>
-                            {/* <span className="text-sm">Color: Brown</span> */}
+                            <span className="text-sm">
+                              {data?.user?.location}
+                            </span>
                           </p>
                         </div>
                         <p className="flex flex-col sm:w-[20%] text-center sm:gap-2 gap-1 w-[23%]">
@@ -135,23 +135,42 @@ const Cart = () => {
                         </p>
                         <div className="text-right w-[20%]">
                           <p className="flex items-center justify-end sm:gap-3 gap-1">
-                            <span className="p-2 border-black sm:border">
+                            <span
+                              className="p-2 border-black sm:border"
+                              onClick={() => {
+                                decreaseCartItem(data?.Id);
+                                router.replace("/cart");
+                              }}
+                            >
                               <GrSubtract />
                             </span>{" "}
                             {data?.Quantity}{" "}
-                            <span className="p-2 border-black sm:border">
+                            <span
+                              className="p-2 border-black sm:border"
+                              onClick={() => {
+                                increaseCartItem(data?.Id);
+                                router.replace("/cart");
+                              }}
+                            >
                               <GrAdd />
                             </span>
                           </p>
                         </div>
                       </div>
                       <p className="font-bold text-sm flex justify-end mt-2 text-right gap-9 text-[#003800]">
-                        <span onClick={()=>removeCartItem(data?.Id)}>Remove</span>
+                        <span
+                          onClick={() => {
+                            removeCartItem(data?.Id);
+                            router.replace("/cart");
+                          }}
+                        >
+                          Remove
+                        </span>
                         {/* <span>Save for later</span> */}
                       </p>
                     </section>
+                    ))}
                   </div>
-                ))}
 
                 {/* CHECKOUT PAGE */}
 
@@ -165,13 +184,13 @@ const Cart = () => {
                       <span>Delivery Fee</span>
                     </p>
                     <p className="grid font-black gap-3">
-                      <span>#30, 000</span>
-                      <span>#2, 000</span>
+                      <span># {reverseFormatNumber(totalPrice)}</span>
+                      <span># {delivery}</span>
                     </p>
                   </div>
                   <p className="flex justify-between py-3 px-4">
                     <span>Total</span>
-                    <span className="font-black">#32, 000</span>
+                    <span className="font-black"># {reverseFormatNumber(totalPrice, delivery)}</span>
                   </p>
                   <div className="text-center mx-auto w-auto mt-5">
                     <PrimaryButton

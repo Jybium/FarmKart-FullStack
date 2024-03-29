@@ -1,4 +1,5 @@
 import axios from "axios";
+import Openrouteservice from "openrouteservice-js";
 import prisma from "../../lib/prisma";
 import { NextResponse } from "next/server";
 import { verifyAccessJWT } from "../../helpers/jwt";
@@ -59,29 +60,49 @@ export async function GET(req) {
     for (const cart of carts) {
       // Calculate the destination location
       const destinationLocation = await cart?.user?.location;
+      console.log(destinationLocation);
 
       // Calculate the distance between user's location and destination
-      const url = `https://api.openrouteservice.org/v2/matrix/driving-car?api_key=${OPENROUTESERVICE_API_KEY}&locations=${user.location}&destinations=${destinationLocation}`;
-      const response = await axios.post(url);
+      // Add your api_key here
+      const Matrix = new Openrouteservice.Matrix({ api_key: "XYZ" });
 
-      // Check if the API response is successful
-      if (response.status === 200) {
-        const distance = response.data.durations[0][0]; // Distance in seconds, assuming user.location is the origin
+      try {
+        let response = await Matrix.calculate({
+          locations: [
+            [8.690958, 49.404662],
+            [8.687868, 49.390139],
+            [8.687868, 49.390133],
+          ],
+          profile: "driving-car",
+          sources: ["all"],
+          destinations: ["all"],
+        });
+        // Add your own result handling here
 
-        // Convert distance to kilometers (or any appropriate unit) and calculate fee
-        const distanceInKm = distance / 1000;
-        const fee = calculateFee(distanceInKm);
+        if (response.status === 200) {
+          const distance = await response.data.durations[0][0]; // Distance in seconds, assuming user.location is the origin
+          console.log(distance);
 
-        // Update total distance and fee
-        totalDistance += distanceInKm;
-        totalFee += fee;
-      } else {
-        // Handle API request failure or invalid response
-        console.error(
-          "Failed to calculate distance for destination:",
-          destinationLocation
-        );
+          // Convert distance to kilometers (or any appropriate unit) and calculate fee
+          const distanceInKm = distance / 1000;
+          const fee = calculateFee(distanceInKm);
+
+          // Update total distance and fee
+          totalDistance += distanceInKm;
+          totalFee += fee;
+        } else {
+          // Handle API request failure or invalid response
+          console.error(
+            "Failed to calculate distance for destination:",
+            destinationLocation
+          );
+        }
+        console.log("response: ", response);
+      } catch (err) {
+        console.log("An error occurred: " + err.status);
+        console.error(await err.response.json());
       }
+      
     }
 
     // Return response with total distance and fee

@@ -86,7 +86,7 @@ const delivery = 2500
                   <PrimaryButton
                     title="Back To Homepage"
                     type="button"
-                    className="sm:w-full w-4/6 mx-auto my-5 text-sm tracking-wider"
+                    className="sm:w-full w-5/6 mx-auto my-5 text-sm tracking-wider"
                   />
                 </Link>
               </main>

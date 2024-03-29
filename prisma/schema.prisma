@@ -80,7 +80,7 @@ model Order {
 
 model Cart {
   Id        String  @id @default(uuid())
-  userId    String  
+  userId    String   
   productId Int     @unique
   Quantity  Int
   user      User    @relation(fields: [userId], references: [Id])

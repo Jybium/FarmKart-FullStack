@@ -70,7 +70,11 @@ const Product = ({ product }) => {
      });
 
      if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Error:", errorData);
+      notifyError(errorData.message);
        throw new Error("Network response was not ok");
+       
      }
 
      const data = await response.json();
@@ -92,9 +96,9 @@ const Product = ({ product }) => {
           <Image
             src={`${imageUrl}/${productImage}`}
             alt="product-image"
-            className="w-[350px] h-auto block "
-            width={350}
-            height={150}
+            className="max-w-full h-[210px] block object-cover"
+            width={330}
+            height={200}
           />
         </Link>
       </div>

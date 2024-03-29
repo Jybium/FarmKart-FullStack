@@ -8,11 +8,9 @@ import{revalidatePath} from "next/cache"
 
 export async function POST(req, res) {
   if (req.method === "POST") {
-
-    const {Quantity,  productId} = await req.json()
+    const { Quantity, productId } = await req.json();
     const authorization = req.cookies.get("token");
 
-    
     if (!authorization || authorization.length <= 0) {
       return NextResponse.json({ message: "Unauthorised" }, { status: 401 });
     }
@@ -29,47 +27,63 @@ export async function POST(req, res) {
     const { id } = decodedToken;
 
     try {
-      
       const user = await prisma.user.findUnique({
         where: { Id: id },
       });
 
       const product = await prisma.product.findUnique({
-        where:{Id:+productId}
+        where: { Id: +productId },
       });
 
-      
-    if (product)
-      return NextResponse.json(
-        { message: "Product already present in cart!" },
-        { status: 404 }
-      );
-
       if (!user || !product) {
-              return NextResponse.json({ response: "No user or product found!" }, { status: 404 });
+        return NextResponse.json(
+          { error: "No user or product found!" },
+          { status: 404 }
+        );
+      }
 
+      // Check if the product already exists in the user's cart
+      const existingCartItem = await prisma.cart.findFirst({
+        where: {
+          userId: id,
+          productId: +productId,
+        },
+      });
+
+      if (existingCartItem) {
+        return NextResponse.json(
+          { message: "Product already present in cart!" },
+          { status: 409 }
+        ); // 409 for conflict
       }
 
       // Create cart entry
       const cart = await prisma.cart.create({
         data: {
-          userId : id,
-          productId,
+          userId: id,
+          productId: +productId,
           Quantity,
         
         },
       });
 
+      if (!cart) {
+        return NextResponse.json(
+          { error: "Unable to add product to cart!" },
+          { status: 500 }
+        );
+      }
+
       const data = {
         data: cart,
         message: "Product added to cart successfully!",
       };
-     revalidatePath("/")
+      revalidatePath("/");
       return NextResponse.json({ response: data }, { status: 200 });
     } catch (error) {
       console.error(error);
       return NextResponse.json(
-        { error: "Unable to add product to cart!" },
+        { error: "Unfortunately, an error has occurred" },
         { status: 500 }
       );
     }
@@ -77,6 +91,7 @@ export async function POST(req, res) {
     return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
   }
 }
+
 
 
 

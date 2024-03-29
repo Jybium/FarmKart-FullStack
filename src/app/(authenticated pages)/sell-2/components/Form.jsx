@@ -78,8 +78,10 @@ const Form = () => {
         if (
           result.message === "Bad request" ||
           "Unauthorized. Make sure you are signed in!"
-        )
+        ){
+
           route.push("/login");
+        }
       } else {
         notifyError("An unexpected error occurred");
       }

@@ -23,7 +23,7 @@ const page = () => {
           className="text-center m-auto"
         />
       </header>
-      <main className="mb-10 w-[40%] mx-auto text-center">
+      <main className="mb-10 sm:w-[40%] w-3/4 mx-auto text-center">
         <div className="grid gap-3 mt-9">
           <h1 className="capitalize text-lg font-black">Verify your email</h1>
           <p className="text-sm">

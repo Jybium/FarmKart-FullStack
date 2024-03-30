@@ -15,19 +15,20 @@ import notifyError from "@/app/utils/notifyError";
 import { reverseFormatNumber } from "../../utils/numberFormatter";
 import {
   decreaseCartItem,
+  fetchDeliveryFee,
   increaseCartItem,
   removeCartItem,
 } from "../../services/cart";
-import {calculateTotalPrice} from "../../utils/cartPriceAggregator"
+import { calculateTotalPrice } from "../../utils/cartPriceAggregator";
 
 const imageUrl =
   "https://neainqsqckknglhdwqdv.supabase.co/storage/v1/object/public/";
 
 export const dynamic = "force-dynamic";
 
-const Cart = () => {
+const Cart = async () => {
   const router = useRouter();
-  const { data, loading, error } = useFetchWithInterceptors("/api/cart", {
+  const { data, loading, error } = await useFetchWithInterceptors("/api/cart", {
     method: "GET",
     cache: "no-store",
     next: { revaidate: "300" },
@@ -44,17 +45,14 @@ const Cart = () => {
     );
   }
 
+  const totalPrice = await calculateTotalPrice(cartData);
 
-const totalPrice = calculateTotalPrice(cartData);
-
-const delivery = 2500
-
-
+  const delivery = loading ? " " : await fetchDeliveryFee();
 
   return (
     <main>
       <Header className="bg-white" />
-      {loading ? (
+      {data?.length === 0 ? (
         <div className="justify-center text-center mb-24 Hide top-[80px] m-auto py-10 h-[calc(100%-80px)] relative ">
           <Spinner color="success" size="xl" />
         </div>
@@ -99,24 +97,24 @@ const delivery = 2500
                 {data?.response?.data.length > 1 ? "items" : "item"}
               </h1>
               <section className="sm:flex w-full gap-6 justify-between items-start mt-5 mb-10">
-                  <div className="bg-[#E6EEE6] rounded shadow w-full sm:w-9/12">
-                    <div className="flex items-center justify-between py-2 px-4 uppercase font-black text-sm border-b border-black">
-                      <p className="sm:w-[46%] w-[47%]">item details</p>
-                      <p className="sm:w-[20%] w-[21%] text-right sm:text-right">
-                        item price
-                      </p>
-                      <p className="w-[30%] text-right">Quantity</p>
-                    </div>
-                {cartData?.map((data) => (
-                    <section className="py-3 px-4">
+                <div className="bg-[#E6EEE6] rounded shadow w-full sm:w-9/12">
+                  <div className="flex items-center justify-between py-2 px-4 uppercase font-black text-sm border-b border-black">
+                    <p className="sm:w-[46%] w-[47%]">item details</p>
+                    <p className="sm:w-[20%] w-[21%] text-right sm:text-right">
+                      item price
+                    </p>
+                    <p className="w-[30%] text-right">Quantity</p>
+                  </div>
+                  {cartData?.map((data) => (
+                    <section className="py-3 px-4  backdrop-blur">
                       <div className="flex justify-between  w-full">
                         <div className="sm:flex gap-5 sm:w-[46%] w-[42%]">
                           <Image
                             src={`${imageUrl}/${data?.product?.image[0].Image[0]}`}
                             alt="product image"
-                            className="w-[150px] h-max"
-                            height={200}
-                            width={200}
+                            className="max-w-full h-[150px] block object-cover"
+                            width={150}
+                            height={150}
                             priority
                           />
                           <p className="flex flex-col items-start sm:gap-2 gap-1 pt-2">
@@ -169,8 +167,8 @@ const delivery = 2500
                         {/* <span>Save for later</span> */}
                       </p>
                     </section>
-                    ))}
-                  </div>
+                  ))}
+                </div>
 
                 {/* CHECKOUT PAGE */}
 
@@ -184,20 +182,37 @@ const delivery = 2500
                       <span>Delivery Fee</span>
                     </p>
                     <p className="grid font-black gap-3">
-                      <span># {reverseFormatNumber(totalPrice)}</span>
-                      <span># {delivery}</span>
+                      <span>
+                        {data?.length !== 0 ? "#" : ""}
+                        {data?.length !== 0
+                          ? reverseFormatNumber(totalPrice)
+                          : ""}
+                      </span>
+                      <span>
+                        {data?.length !== 0 ? "#" : ""}
+                        {data?.length !== 0
+                          ? reverseFormatNumber(delivery)
+                          : ""}
+                      </span>
                     </p>
                   </div>
                   <p className="flex justify-between py-3 px-4">
                     <span>Total</span>
-                    <span className="font-black"># {reverseFormatNumber(totalPrice, delivery)}</span>
+                    <span className="font-black">
+                      {data?.length !== 0 ? "#" : " "}
+                      {data?.length !== 0
+                        ? reverseFormatNumber(totalPrice, delivery)
+                        : " "}
+                    </span>
                   </p>
                   <div className="text-center mx-auto w-auto mt-5">
-                    <PrimaryButton
-                      title="CHECKOUT"
-                      type="submit"
-                      className="w-10/12 mx-auto text-center"
-                    />
+                    <Link href="/checkout">
+                      <PrimaryButton
+                        title="CHECKOUT"
+                        type="submit"
+                        className="w-10/12 mx-auto text-center"
+                      />
+                    </Link>
                   </div>
                 </div>
               </section>

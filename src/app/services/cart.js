@@ -79,5 +79,29 @@ export const decreaseCartItem = async (id) => {
 
 
 
+export const fetchDeliveryFee = async () => {
+  try {
+    const response = await fetch("/api/delivery-fee", {
+      method: "GET",
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Error:", errorData);
+      notifyError(errorData.error);
+      return;
+    }
+    const result = await response.json();
+    console.log(result);
+    // notifySuccess(result?.response?.message);
+    return result.totalFee
+  } catch (error) {
+    console.log(error);
+    notifyError(error);
+  }
+};
+
+
+
 
   

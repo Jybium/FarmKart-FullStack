@@ -8,36 +8,37 @@ const imageUrl =
 const Images = ({ image }) => {
   const images = image[0].Image;
   const fullImageUrl = imageUrl + images[0];
-  console.log(images)
-  console.log(image)
+
 
   return (
     <>
-      <section className="sm:w-[40%] w-full py-2">
-        <img
+    <div className="flex flex-col sm:w-5/12 w-full">
+
+      <section>
+        <Image
           src={fullImageUrl}
           alt="product-image"
-          className="max-w-full h-[400px] block "
-          // width={50}
-          // height={50}
+          className="max-w-full h-[360px] object-cover block"
+          width={360}
+          height={360}
         />
       </section>
-      <div className="bg-red-500 h-60">
+      <div className="h-36 mt-3">
         {images.map((image, i) => {
           const imagery = imageUrl + image;
-          {
-            console.log(imagery);
-          }
-
-          <img
-            src={fullImageUrl}
-            alt="product-image"
-            className="max-w-full h-[200px] block "
-            // width={50}
-            // height={50}
-          />;
-        })}
+          return (
+            <Image
+              src={imagery}
+              alt="product-image"
+              className="max-w-full h-[150px] block "
+              width={150}
+              height={150}
+              key={i}
+            />
+            );
+          })}
       </div>
+          </div>
     </>
   );
 };

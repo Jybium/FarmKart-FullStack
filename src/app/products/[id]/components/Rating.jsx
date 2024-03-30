@@ -5,11 +5,12 @@ const Rating = () => {
   return (
     <div className="flex gap-5 my-2">
       <div className="flex">
-        <GrStar />
-        <GrStar />
-        <GrStar />
-        <GrStar />
-        <GrStar />
+        <GrStar color="gold"/>
+        <GrStar color="gold"/>
+        <GrStar color="gold"/>
+        <GrStar color="gold"/>
+        <GrStar color="gold"/>
+       
       </div>
       <div className="flex gap-3 text-xs">
         <p>1200 Reviews</p>

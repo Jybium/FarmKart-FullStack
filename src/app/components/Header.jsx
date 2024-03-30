@@ -11,6 +11,12 @@ import { PrimaryButton, SecondaryButton } from "@/app/components/Buttons";
 import Navlink from "@/app/components/Navlink";
 import { ImageUrl } from "@/Constants/Offers";
 import { useFetchWithInterceptors } from "../lib/fetch";
+import profile from "../../../public/profile.png";
+
+
+
+
+
 
 const Header = (props) => {
 
@@ -24,7 +30,7 @@ const Header = (props) => {
   });
 
 
-  const imageUrl = ImageUrl + user.image
+  const imageUrl = `${ImageUrl}/${user.image}`
 
 
 
@@ -55,10 +61,12 @@ const Header = (props) => {
               <div className="flex gap-5 items-center justify-between ">
                 <Link href="/profile">
 
-                <img
-                  src={imageUrl}
+                <Image
+                  src={user.image ? imageUrl : profile}
                   alt="User's profile image"
-                  className=" block w-16 h-16 rounded-full border border-black"
+                  className=" block w-16 h-16 rounded-full border  border-black object-cover"
+                  width={16}
+                  height={16}
                   />
                   </Link>
                 <Link href="/sell">

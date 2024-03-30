@@ -51,10 +51,10 @@
     "ws": "^8.16.0"
   },
   "devDependencies": {
-    "@prisma/client": "^5.8.1",
+    "@prisma/client": "^5.11.0",
     "@prisma/nextjs-monorepo-workaround-plugin": "^5.7.1",
     "@types/nodemailer": "^6.4.14",
-    "prisma": "^5.8.1"
+    "prisma": "^5.11.0"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.8",

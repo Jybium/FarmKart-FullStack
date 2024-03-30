@@ -39,7 +39,7 @@ const page = () => {
           className="text-center m-auto"
         />
       </header>
-      <main className="text-center w-1/2 mx-auto mb-12">
+      <main className="text-center sm:w-1/2 w-3/4 mx-auto mb-12">
         <div className="grid gap-3 my-5">
           <h1 className="capitalize font-black text-lg">new password</h1>
           <p>Enter a new password to complete the process</p>

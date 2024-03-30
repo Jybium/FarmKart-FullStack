@@ -13,6 +13,7 @@ const Form = () => {
   const route = useRouter();
 
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
   useLayoutEffect(() => {
     const imageURL = localStorage.getItem("images");
     const URL = JSON.parse(imageURL);
@@ -61,33 +62,36 @@ const Form = () => {
         formData.append("image", imageBlob);
       });
 
-
-
       const response = await fetch("/api/create-product", {
         method: "POST",
         body: formData,
         "content-type": "multipart/form-data",
       });
-
+      setLoading(true)
       if (response.ok) {
         const result = await response.json();
-       
+
         notifySuccess(result.message);
         deleteImagesFromLocalStorage();
+      setLoading(false);
+
 
         if (
           result.message === "Bad request" ||
           "Unauthorized. Make sure you are signed in!"
-        ){
-
+        ) {
           route.push("/login");
         }
       } else {
         notifyError("An unexpected error occurred");
+      setLoading(false);
+
       }
     } catch (error) {
-   
       notifyError("An unexpected error occurred", error);
+    }finally{
+      setLoading(false);
+     
     }
   };
 

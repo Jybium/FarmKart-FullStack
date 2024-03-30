@@ -6,60 +6,41 @@ import { GrLocation, GrPhone } from "react-icons/gr";
 import Quantity from "@/app/products/[id]/components/Quantity";
 import { GrStar } from "react-icons/gr";
 import { GrView } from "react-icons/gr";
+import {reverseFormatNumber} from "../../../utils/numberFormatter"
+import formatTimeElapsed from "../../../helpers/formatTimeElapsed"
 import { PrimaryButton } from "@/app/components/Buttons";
+import { ImageUrl } from "@/Constants/Offers";
+import profile from "../../../../../public/profile.png";
+
+
+
+
 
 const style = { color: "Green" };
 
-function formatTimeElapsed(createdAt) {
-  const createdAtDate = new Date(createdAt); // Convert createdAt to a Date object
-  const currentTime = new Date(); // Current time
-
-  // Calculate the difference in milliseconds
-  const timeDifference = currentTime - createdAtDate;
-
-  // Convert milliseconds to seconds
-  const secondsElapsed = Math.floor(timeDifference / 1000);
-
-  // Convert seconds to minutes
-  const minutesElapsed = Math.floor(secondsElapsed / 60);
-
-  // Convert minutes to hours
-  const hoursElapsed = Math.floor(minutesElapsed / 60);
-
-  // Convert hours to days
-  const daysElapsed = Math.floor(hoursElapsed / 24);
-
-  // Construct the elapsed time string based on the difference
-  if (daysElapsed > 0) {
-    return `${daysElapsed} day${daysElapsed === 1 ? "" : "s"}`;
-  } else if (hoursElapsed > 0) {
-    return `${hoursElapsed} hour${hoursElapsed === 1 ? "" : "s"}`;
-  } else if (minutesElapsed > 0) {
-    return `${minutesElapsed} minute${minutesElapsed === 1 ? "" : "s"}`;
-  } else {
-    return `${secondsElapsed} second${secondsElapsed === 1 ? "" : "s"}`;
-  }
-}
-
-
-
-
 const Details = ({user, details}) => {
 
-  // console.log(user, details)
+  const imageUrl = `${ImageUrl}/${user.image}`;
+
   return (
     <section className="sm:w-5/12 w-full">
       <section className="border-[1px] border-black rounded px-3 py-2 my-2 ">
         {/* FOR THE DETAILS SUCH AS IMAGE, NAME AND LOCATION */}
 
         <div className="flex items-center gap-5 text-sm font-black">
-          <Image src={user?.image ? user.image : Seller} alt="seller-image" />
-          <div>
+          <Image
+            src={user.image ? imageUrl : profile}
+            alt="User's profile image"
+            className=" block w-16 h-16 rounded-full border  border-black object-cover"
+            width={16}
+            height={16}
+          />
+          <div className="grid sm:flex items-center justify-between sm:gap-3">
             <p className="text-[#003800] flex gap-2">
               {user.firstName} <span>{user.lastName}</span>
             </p>
             <p className="text-[#003800] flex items-center gap-2">
-             <GrPhone /> {user.phoneNumber} 
+              <GrPhone /> {user.phoneNumber}
             </p>
             <p className="flex items-center gap-2">
               <span className="text-green-400">
@@ -79,7 +60,7 @@ const Details = ({user, details}) => {
               <GrView /> {details.views} views
             </span>
           </p>
-          <p># {details.price}/ Quantity</p>
+          <p># {reverseFormatNumber(details.price)}/ Quantity</p>
         </div>
         <div className="flex justify-between mt-3 text-sm w-5/6">
           <div className="text-left grid gap-1">

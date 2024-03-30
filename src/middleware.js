@@ -6,7 +6,7 @@ import cookie, { serialize } from "cookie";
 
 
 export const config = {
-  matcher: ["/sell-2", "/sell", "/profile", "/products" ,"/cart", "/checkout", "/profile/edit-profile", "/api/auth/me", "/api/cart", "/api/profile", "/api/order", ],
+  matcher: ["/sell-2", "/sell", "/profile","/cart", "/checkout", "/profile/edit-profile", "/api/auth/me", "/api/cart", "/api/profile", "/api/order", ],
 };
 
 export async function middleware(request, res) {
@@ -27,7 +27,7 @@ export async function middleware(request, res) {
 
   } catch (error) {
     console.log(error)
-    console.log("access checker request got here")
+    
 
   let result
   if (!verified) {
@@ -37,8 +37,7 @@ export async function middleware(request, res) {
        result = await fetch("/api/refresh-token", {
         method: "GET"
        }).then(res => res.json())
-       console.log("refresh checker request got here")
-       console.log(result)
+       
       }
     } catch(error){
       return (
@@ -76,72 +75,6 @@ export async function middleware(request, res) {
 }
 
 
-
-
-
-// export async function middleware(request, res) {
-//   const currentUrl = request.url;
-//   const cookie = request.cookies.get("token")?.value;
-//   const refreshCookie = request.cookies.get("refreshToken")?.value;
-//   const url = request.nextUrl.clone();
-//   url.pathname = `/login?redirect=${encodeURI(currentUrl)}`;
-
-//   // Verify the access JWT token
-//   try {
-//     verifyAccessJWT(cookie);
-//   } catch (error) {
-//     console.log(error);
-//     console.log("response")
-
-//     // Verify the refresh JWT token and refresh if valid
-//     try {
-//       const refreshToken = verifyRefreshJWT(refreshCookie);
-//       if (refreshToken) {
-//         const result = await fetch("http://127.0.0.1:3000/api/refresh", {
-//           method: "GET",
-//         }).then((res) => res.json());
-//         console.log("Token refreshed:", result);
-//         // Set the new access and refresh tokens in cookies
-//         // Note: You need to implement logic to handle the new tokens
-//       }
-//     } catch (error) {
-//       console.log("Refresh token verification failed");
-//       return NextResponse.json(
-//         { message: "Unauthorized request" },
-//         { status: 401 }
-//       );
-//     }
-//   }
-
-//   // Setting cookies on the response using the `ResponseCookies` API
-//   const response = NextResponse.next();
-
-//   // Serialize and set cookies
-//   const serialized = serialize("token", String(cookie), {
-//     httpOnly: true,
-//     maxAge: 60 * 60,
-//     secure: process.env.NODE_ENV !== "development",
-//     sameSite: "strict",
-//     path: "/",
-//   });
-
-//   const refreshTokenSerialized = serialize(
-//     "refreshToken",
-//     String(refreshCookie),
-//     {
-//       httpOnly: true,
-//       maxAge: 60 * 60 * 24,
-//       secure: process.env.NODE_ENV !== "development",
-//       sameSite: "strict",
-//       path: "/",
-//     }
-//   );
-
-//   const requestHeaders = new Headers(request.headers);
-//   requestHeaders.set("set-cookie", [serialized, refreshTokenSerialized]);
-
-//   return response;
-// }
 
 
 

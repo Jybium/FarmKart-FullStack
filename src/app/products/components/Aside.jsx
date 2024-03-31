@@ -109,9 +109,14 @@ const Aside = () => {
               name="location"
               id="location"
               className="rounded text-sm bg-[#E6EEE6]"
+              onChange={(e) => {
+                const selectedLocation = e.target.value;
+                 router.push(`/products?location=${selectedLocation}`);
+              }}
             >
+              <option value="">Select Location</option>
               {statesNigeria.map((state, i) => (
-                <option key={i} value={state}>
+                <option value={state} key={i}>
                   {state}
                 </option>
               ))}
@@ -125,8 +130,27 @@ const Aside = () => {
               name="sort"
               id="sort"
               className="rounded text-sm bg-[#E6EEE6]"
+              onChange={(e) => {
+                const selectedSortOption = e.target.value;
+                if (selectedSortOption === "Most Popular") {
+                  router.push(
+                    `/products?popularity= most popular`
+                   
+                  )
+                } else if (selectedSortOption === "Least Popular") {
+                   router.push(`/products?popularity=least popular`);
+                } else if (selectedSortOption === "Price - asc") {
+                  router.push(`/products?price=ascending`);
+                } else if (selectedSortOption === "Price - desc") {
+                  router.push(`/products?price=descending`);
+                }
+              }}
             >
+              <option value="">Sort By</option>
               <option value="Most Popular">Most Popular</option>
+              <option value="Least Popular">Least Popular</option>
+              <option value="Price - asc">Most Pricey</option>
+              <option value="Price - desc">Least Pricey</option>
             </select>
           </div>
 

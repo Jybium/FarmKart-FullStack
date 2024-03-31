@@ -14,66 +14,6 @@ const AddingImage = () => {
     return image;
   };
 
-  // const PackFiles = (event) => {
-  //   // console.log(event);
-  //   const selectedFiles = [];
-  //   const targetFiles = event.target.files;
-  //   // console.log(targetFiles);
-
-  //   const targetFilesObject = [...targetFiles];
-  //   // console.log(targetFilesObject);
-  //   targetFilesObject.map((file) => {
-  //     selectedFiles.push(URL.createObjectURL(file));
-  //     console.log(file)
-  //     localStorage.setItem(`image_${file.name}`, JSON.stringify(file));
-  //   });
-  //   setImages(selectedFiles);
-  //   console.log(images)
-  //   localStorage.setItem(`image`, JSON.stringify(selectedFiles));
-  // };
-
-  // const PackFiles = (event) => {
-  //   const selectedFiles = [];
-  //   const targetFiles = event.target.files;
-
-  //   const targetFilesObject = [...targetFiles];
-  //   targetFilesObject.map((file) => {
-  //     const fileUrl = URL.createObjectURL(file);
-  //     selectedFiles.push(fileUrl);
-  //     // Store the file URL in localStorage
-  //     localStorage.setItem(`image_${file.name}`, fileUrl);
-  //   });
-
-  //   // Store the array of file URLs in localStorage
-  //   localStorage.setItem(`images`, JSON.stringify(targetFiles));
-  // };
-
-
-
-// const PackFiles = (event) => {
-//   const selectedFiles = [];
-//   const imageFiles = [];
-//   const targetFiles = Array.from(event.target.files);
-
-//   targetFiles.forEach((file) => {
-//     imageFiles.push(URL.createObjectURL(file));
-//     const reader = new FileReader();
-//     reader.onload = (e) => {
-//       const dataURL = e.target.result;
-//       selectedFiles.push(dataURL);
-//     };
-//     reader.readAsDataURL(file);
-//   });
-
-//   // Log the selectedFiles array to check its content
-//   console.log("Selected Files:", selectedFiles);
-
-//   // Convert selectedFiles array to JSON string before storing in localStorage
-//   localStorage.setItem("images", JSON.stringify(selectedFiles));
-
-//   setImages(imageFiles);
-// };
-
 
 
 const PackFiles = async (event) => {
@@ -134,8 +74,8 @@ const fileToBase64 = (file) => {
           className="bg-sell-page bg-black bg-center absolute w-44 h-44"
           style={{ backgroundSize: "60%", backgroundRepeat: "no-repeat" }}
         ></div>
-        {images.map((image) => (
-          <div className={`w-44 h-44 rounded`}>
+        {images.map((image, i) => (
+          <div className={`w-44 h-44 rounded`}key={i} >
             {/* <Image
               src={image}
                

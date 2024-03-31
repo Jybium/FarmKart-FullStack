@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { cache } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import { PrimaryButton } from "../../components/Buttons";
 import CartImage from "@/Asset/FARMKART IMAGES/images/cart/Artwork.png";
@@ -26,39 +26,80 @@ const imageUrl =
 
 export const dynamic = "force-dynamic";
 
-const Cart = async () => {
-  const router = useRouter();
-  const { data, loading, error } = await useFetchWithInterceptors("/api/cart", {
-    method: "GET",
-    cache: "no-store",
-    next: { revaidate: "300" },
-  });
 
-  const cartData = data?.response?.data;
+
+
+const Cart = () => {
+  const router = useRouter();
+  const [deliveryFee, setDeliveryFee] = useState(null);
+  const [cartData, setCartData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  
+  
+
+useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data, loading, error } = await useFetchWithInterceptors(
+          "/api/cart",
+          {
+            method: "GET",
+            cache: "no-store",
+            next: { revaidate: "300" },
+          }
+        );
+        setCartData(data?.response?.data || []);
+        setLoading(loading);
+        setError(error);
+      } catch (error) {
+        setError(error);
+        notifyError("An error has occurred!");
+      }
+    };
+
+    fetchData();
+
+    const fetchFee = async () => {
+      try {
+        const fee = await fetchDeliveryFee();
+        setDeliveryFee(fee);
+      } catch (error) {
+        console.error("Error fetching delivery fee:", error);
+      }
+    };
+    fetchFee();
+  }, []);
+
+  
+  const delivery = loading ? " " : deliveryFee;
+  const totalPrice =  calculateTotalPrice(cartData);
+
+
 
   if (error) {
     notifyError("An error has occured!");
     return (
-      <div className="text-[#E6EEE6] text-center">
+      <div className="text-[#E6EEE6] text-center my-2">
         <p>An error has occured! </p>
       </div>
     );
   }
 
-  const totalPrice = await calculateTotalPrice(cartData);
 
-  const delivery = loading ? " " : await fetchDeliveryFee();
+
 
   return (
     <main>
       <Header className="bg-white" />
-      {data?.length === 0 ? (
+      {cartData?.length === 0 ? (
         <div className="justify-center text-center mb-24 Hide top-[80px] m-auto py-10 h-[calc(100%-80px)] relative ">
           <Spinner color="success" size="xl" />
         </div>
       ) : (
         <div className=" overflow-scroll  Hide">
-          {data?.response?.data?.length === 0 ? (
+          {cartData?.length === 0 ? (
             <main className="text-center w-ful Hide sm:w-2/5 w-5/6 top-[80px] m-auto py-10 h-[calc(100%-80px)] relative">
               <main className=" ">
                 <div className="relative">
@@ -93,8 +134,8 @@ const Cart = async () => {
             // IF THE CART IS NOT EMPTY
             <main className="w-[90%] mx-auto mt-8 mb-20 relative top-[80px] overflow-scroll h-[calc(100%-80px)] pb-20 Hide">
               <h1 className="capitalize font-black">
-                shopping cart: {data?.response.data.length}{" "}
-                {data?.response?.data.length > 1 ? "items" : "item"}
+                shopping cart: {cartData?.length}{" "}
+                {cartData?.length > 1 ? "items" : "item"}
               </h1>
               <section className="sm:flex w-full gap-6 justify-between items-start mt-5 mb-10">
                 <div className="bg-[#E6EEE6] rounded shadow w-full sm:w-9/12">
@@ -183,14 +224,14 @@ const Cart = async () => {
                     </p>
                     <p className="grid font-black gap-3">
                       <span>
-                        {data?.length !== 0 ? "#" : ""}
-                        {data?.length !== 0
+                        {cartData?.length !== 0 ? "#" : ""}
+                        {cartData?.length !== 0
                           ? reverseFormatNumber(totalPrice)
                           : ""}
                       </span>
                       <span>
-                        {data?.length !== 0 ? "#" : ""}
-                        {data?.length !== 0
+                        {cartData?.length !== 0 ? "#" : ""}
+                        {cartData?.length !== 0
                           ? reverseFormatNumber(delivery)
                           : ""}
                       </span>
@@ -199,8 +240,8 @@ const Cart = async () => {
                   <p className="flex justify-between py-3 px-4">
                     <span>Total</span>
                     <span className="font-black">
-                      {data?.length !== 0 ? "#" : " "}
-                      {data?.length !== 0
+                      {cartData?.length !== 0 ? "#" : " "}
+                      {cartData?.length !== 0
                         ? reverseFormatNumber(totalPrice, delivery)
                         : " "}
                     </span>

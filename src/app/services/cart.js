@@ -1,4 +1,5 @@
 
+
 import notifyError from "../utils/notifyError";
 import notifySuccess from "../utils/notifySuccess";
 
@@ -88,16 +89,17 @@ export const fetchDeliveryFee = async () => {
     if (!response.ok) {
       const errorData = await response.json();
       console.error("Error:", errorData);
-      notifyError(errorData.error);
-      return;
+      notifyError(errorData.error); 
+      return null; 
     }
+
     const result = await response.json();
     console.log(result);
-    // notifySuccess(result?.response?.message);
-    return result.totalFee
+    return result.totalFee; 
   } catch (error) {
-    console.log(error);
-    notifyError(error);
+    console.error(error);
+    notifyError("An error occurred while fetching delivery fee."); 
+    return null; 
   }
 };
 

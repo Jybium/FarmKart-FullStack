@@ -8,14 +8,16 @@ import { verifyAccessJWT } from "../../helpers/jwt";
 
 // Main function to handle GET requests
 export async function GET(req) {
+
+  const authorization = req.cookies.get("token");
+  if (!authorization || authorization.length <= 0) {
+    return handleError("Unauthorized", 401);
+  }
+  const token = authorization?.value;
+  const decodedToken = await verifyAccessJWT(token);
+  
   try {
     // Verify access token
-    const authorization = req.cookies.get("token");
-    if (!authorization || authorization.length <= 0) {
-      return handleError("Unauthorized", 401);
-    }
-    const token = authorization?.value;
-    const decodedToken = await verifyAccessJWT(token);
 
     // Check user ID
     const { id } = decodedToken;

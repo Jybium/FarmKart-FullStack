@@ -1,6 +1,3 @@
-
-
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -37,9 +34,9 @@ model User {
 }
 
 model Product {
-  Id          Int        @id @default(autoincrement())
+  Id          Int         @id @default(autoincrement())
   userId      String
-  user        User       @relation(fields: [userId], references: [Id])
+  user        User        @relation(fields: [userId], references: [Id])
   productName String
   Quantity    Int
   weight      Int
@@ -49,13 +46,14 @@ model Product {
   bulkPrice   Int
   views       Int
   description String
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  negotiable  Boolean    @default(false)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  negotiable  Boolean     @default(false)
   category    Categories
   image       Image[]
   cart        Cart[]
   Review      Review[]
+  OrderItem   OrderItem[]
 }
 
 model Image {
@@ -68,19 +66,34 @@ model Image {
 }
 
 model Order {
-  Id            String   @id @default(uuid())
-  userId        String   @unique
-  user          User     @relation(fields: [userId], references: [Id])
+  Id            String      @id @default(uuid())
+  userId        String      @unique
+  user          User        @relation(fields: [userId], references: [Id])
   status        Status
-  transactionId String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  transactionId String?
+  paymentMethod String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
   totalAmount   Int
+  order         OrderItem[]
+}
+
+// schema.prisma
+
+model OrderItem {
+  id        String   @id @default(uuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [Id])
+  productId Int
+  product   Product  @relation(fields: [productId], references: [Id])
+  quantity  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Cart {
   Id        String  @id @default(uuid())
-  userId    String   
+  userId    String
   productId Int     @unique
   Quantity  Int
   user      User    @relation(fields: [userId], references: [Id])
@@ -98,6 +111,8 @@ model Review {
   user      User     @relation(fields: [userId], references: [Id])
   product   Product  @relation(fields: [productId], references: [Id])
 }
+
+// ENUMS
 
 enum Categories {
   LIVESTOCK

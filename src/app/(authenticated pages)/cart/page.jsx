@@ -32,35 +32,21 @@ export const dynamic = "force-dynamic";
 const Cart = () => {
   const router = useRouter();
   const [deliveryFee, setDeliveryFee] = useState(null);
-  const [cartData, setCartData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
+
+  const { data, loading, error } =  useFetchWithInterceptors(
+    "/api/cart",
+    {
+      method: "GET",
+      cache: "no-store",
+      next: { revaidate: "300" },
+    }
+  );
+ 
   
-  
+  const cartData = data?.response?.data
 
 useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data, loading, error } = await useFetchWithInterceptors(
-          "/api/cart",
-          {
-            method: "GET",
-            cache: "no-store",
-            next: { revaidate: "300" },
-          }
-        );
-        setCartData(data?.response?.data || []);
-        setLoading(loading);
-        setError(error);
-      } catch (error) {
-        setError(error);
-        notifyError("An error has occurred!");
-      }
-    };
-
-    fetchData();
-
     const fetchFee = async () => {
       try {
         const fee = await fetchDeliveryFee();

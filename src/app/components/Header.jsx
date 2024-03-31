@@ -78,7 +78,7 @@ const Header = (props) => {
                   <span className="relative">
                     <CiShoppingCart size={35} />
                     <p className="absolute right-0 -top-1 bg-red-700 px-[7px] py-[1px] rounded-full text-white text-sm md:text-[12px]">
-                   {data?.response?.data?.length}
+                   {data?.response?.data?.length ||  "0"}
                     </p>
                   </span>{" "}
                   <p className="">Cart</p>

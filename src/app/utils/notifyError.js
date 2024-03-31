@@ -1,17 +1,14 @@
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 const notifyError = (message) => {
   toast.error(message, {
+    duration: 4000,
     position: "top-right",
-
-    autoClose: 2000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    // transition: "bounce",
-    theme: "dark",
+    style: {
+      border: "1px solid #ff4d4f",
+      padding: "10px",
+      color: "#ff4d4f",
+    },
   });
 };
 

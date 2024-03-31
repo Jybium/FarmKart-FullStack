@@ -1,16 +1,14 @@
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 const notifySuccess = (message) => {
   toast.success(message, {
+    duration: 4000,
     position: "top-right",
-    autoClose: 2000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    // transition: "bounce",
-    theme: "dark",
+    style: {
+      border: "1px solid #52c41a",
+      padding: "10px",
+      color: "#52c41a",
+    },
   });
 };
 

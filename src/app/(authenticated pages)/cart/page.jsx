@@ -32,35 +32,21 @@ export const dynamic = "force-dynamic";
 const Cart = () => {
   const router = useRouter();
   const [deliveryFee, setDeliveryFee] = useState(null);
-  const [cartData, setCartData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
+
+  const { data, loading, error } =  useFetchWithInterceptors(
+    "/api/cart",
+    {
+      method: "GET",
+      cache: "no-store",
+      next: { revaidate: "300" },
+    }
+  );
+ 
   
-  
+  const cartData = data?.response?.data
 
 useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data, loading, error } = await useFetchWithInterceptors(
-          "/api/cart",
-          {
-            method: "GET",
-            cache: "no-store",
-            next: { revaidate: "300" },
-          }
-        );
-        setCartData(data?.response?.data || []);
-        setLoading(loading);
-        setError(error);
-      } catch (error) {
-        setError(error);
-        notifyError("An error has occurred!");
-      }
-    };
-
-    fetchData();
-
     const fetchFee = async () => {
       try {
         const fee = await fetchDeliveryFee();
@@ -81,7 +67,7 @@ useEffect(() => {
   return (
     <main>
       <Header className="bg-white" />
-      {cartData?.length === 0 ? (
+      {loading ? (
         <div className="justify-center text-center mb-24 Hide top-[80px] m-auto py-10 h-[calc(100%-80px)] relative ">
           <Spinner color="success" size="xl" />
         </div>

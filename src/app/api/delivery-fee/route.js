@@ -38,6 +38,10 @@ export async function GET(req) {
       },
     });
 
+    if(carts.length == 0){
+      return handleError("Cart is empty")
+    }
+
     // Calculate total distance and fee
     return calculateTotalDistance(carts, user);
   } catch (error) {

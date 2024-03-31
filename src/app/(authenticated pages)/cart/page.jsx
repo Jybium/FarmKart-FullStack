@@ -81,7 +81,7 @@ useEffect(() => {
   return (
     <main>
       <Header className="bg-white" />
-      {cartData?.length === 0 ? (
+      {loading ? (
         <div className="justify-center text-center mb-24 Hide top-[80px] m-auto py-10 h-[calc(100%-80px)] relative ">
           <Spinner color="success" size="xl" />
         </div>

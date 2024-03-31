@@ -35,7 +35,7 @@ const product = await prisma.product.findMany({
   },
 });
 
-// console.log(product)
+
 
   return (
 

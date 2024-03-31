@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { cache } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import { PrimaryButton } from "../../components/Buttons";
 import CartImage from "@/Asset/FARMKART IMAGES/images/cart/Artwork.png";
@@ -28,6 +28,8 @@ export const dynamic = "force-dynamic";
 
 const Cart = async () => {
   const router = useRouter();
+  const [deliveryFee, setDeliveryFee] = useState(null);
+
   const { data, loading, error } = await useFetchWithInterceptors("/api/cart", {
     method: "GET",
     cache: "no-store",
@@ -47,7 +49,24 @@ const Cart = async () => {
 
   const totalPrice = await calculateTotalPrice(cartData);
 
-  const delivery = loading ? " " : await fetchDeliveryFee();
+  const delivery = loading ? " " : deliveryFee;
+
+  // Use useEffect to fetch the delivery fee on the client side
+  useEffect(() => {
+    const fetchFee = async () => {
+      try {
+        const fee = await fetchDeliveryFee();
+        setDeliveryFee(fee);
+      } catch (error) {
+        console.error("Error fetching delivery fee:", error);
+       
+      }
+    };
+
+    fetchFee(); 
+
+   
+  }, []);
 
   return (
     <main>

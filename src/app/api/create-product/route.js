@@ -30,7 +30,15 @@ export async function POST(request) {
     } = Object.fromEntries(formData.entries());
 
     // Parse the image data into an array
-    const images = [image];
+    const images = image.split("|").filter(Boolean);
+
+    // Validate if images array is not empty
+    if (images.length === 0) {
+      return NextResponse.json(
+        { message: "At least one image is required!" },
+        { status: 400 }
+      );
+    }
 
     // Validate required fields
     if (!productName || !Quantity || !description || !category || !price) {
@@ -89,63 +97,86 @@ export async function POST(request) {
       );
     }
 
-    let imageUrls = [];
-    console.log(images)
-    const Upload = async (images) => {
-      
-      // Map each image upload operation to a promise
-      const uploadPromises = images.map(async (image, i) => {
-        // Create a buffer from the base64 encoded data
-        const base64Data = image.replace(/^data:image\/\w+;base64,/, "");
-        const buffer = Buffer.from(base64Data, "base64");
-        
-        const filename = `image_${i}.jpg`;
-        const filePath = `Product-image/${product.Id}/${filename}`;
-        
-        // Split the base64 string to get the data prefix
-        const prefix = image.split(",")[0];
+    // Delete existing images associated with the product
+    await prisma.image.deleteMany({
+      where: { productid: product.Id },
+    });
 
-        // Extract the image format from the prefix
-        const imageFormat = prefix.split(";")[0].split("/")[1];
+    const Upload = async (images, product) => {
+      try {
+        let imageUrls = []; // Declare or initialize imageUrls array
 
-        const { data, error } = await supabase.storage
-          .from("Product-image")
-          .upload(filePath, buffer, { contentType: `image/${imageFormat}` });
-        if (error) {
-          console.error("Error uploading image to Supabase:", error);
-          // Rollback product creation
-          await prisma.product.delete({ where: { Id: product.Id } });
-          throw new Error(error.message);
+        // Loop through each image data URI
+        for (let i = 0; i < images.length; i++) {
+          const image = images[i];
+          // Create a buffer from the base64 encoded data
+          const base64Data = image.replace(/^data:image\/\w+;base64,/, "");
+          const buffer = Buffer.from(base64Data, "base64");
+
+          // Generate a unique filename for each image
+          const filename = `photo_${i}.jpg`;
+
+          const filePath = `Product-image/${product.Id}/${filename}`;
+
+          // Split the base64 string to get the data prefix
+          const prefix = image.split(",")[0];
+
+          // Extract the image format from the prefix
+          const imageFormat = prefix.split(";")[0].split("/")[1];
+
+          // Upload the image to Supabase storage
+          const { data, error } = await supabase.storage
+            .from("Product-image")
+            .upload(filePath, buffer, { contentType: `image/${imageFormat}` });
+
+          if (error) {
+            console.error("Error uploading image to Supabase:", error);
+            // Rollback product creation
+            await prisma.product.delete({ where: { Id: product.Id } });
+            throw new Error(error.message);
+          }
+
+          // Add the URL of the uploaded image to the imageUrls array
+          imageUrls.push(data.fullPath);
+         
         }
-        return data.fullPath; // Return the URL of the uploaded image
-      });
 
-      // Wait for all upload promises to resolve
-      const uploadedImageUrls = await Promise.all(uploadPromises);
-      
-      // Concatenate all uploaded image URLs
-      imageUrls = imageUrls.concat(uploadedImageUrls);
+        return imageUrls; // Return the URLs of all uploaded images
+      } catch (error) {
+        console.error("Error uploading images:", error);
+        // Handle error (e.g., notify user)
+        throw error; // Rethrow the error for further handling
+      }
     };
 
+    const imageUrls = await Upload(images, product);
 
-    await Upload(images);
-    console.log(imageUrls)
 
     const createImageResult = await prisma.image.createMany({
       data: {
-        Image: imageUrls.map((urls) => urls),
-        productid: product.Id,
+        Image: imageUrls,
+        productid: product.Id
       },
     });
 
-    if (createImageResult.count !== images.length) {
-      // Rollback product creation
-      await prisma.product.delete({ where: { Id: product.Id } });
-      return NextResponse.json(
-        { success: false, error: "Failed to create product images" },
-        { status: 500 }
-      );
-    }
+
+
+
+   if (!createImageResult.count) {
+     // Delete all images associated with the product
+     await prisma.image.deleteMany({
+       where: { productid: product.Id },
+     });
+
+     // Rollback product creation
+     await prisma.product.delete({ where: { Id: product.Id } });
+
+     return NextResponse.json(
+       { success: false, error: "Failed to create product images" },
+       { status: 500 }
+     );
+   }
+
 
     return NextResponse.json(
       { message: "Product created successfully!", product: product },

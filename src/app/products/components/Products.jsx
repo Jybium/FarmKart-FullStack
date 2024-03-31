@@ -1,60 +1,65 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
-// import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import "../product.css";
-import Product from "../components/Product"
+import Product from "../components/Product";
 import { Categories } from "@/Constants/Offers";
+import Category from "./Category";
 import { useAuth } from "@/app/Context/AuthContext";
 import { Spinner } from "flowbite-react";
-
 
 const imageUrl =
   "https://neainqsqckknglhdwqdv.supabase.co/storage/v1/object/public/";
 
-const Category = ({ category }) => {
-  return (
-    <div className="grid w-full mx-auto text-center gap-1">
-      <div className="w-[70px] h-[70px]">
-        <Image
-          src={category.image}
-          alt="category image"
-          className="rounded-full max-w-full object-cover h-[70px] block border-[1px] border-black"
-        />
-      </div>
-
-      <p className="text-sm font-bold">{category.name}</p>
-    </div>
-  );
-};
-
-
 
 const Products = ({ datas }) => {
+  const [product, setProduct] = useState(datas);
   const { loading } = useAuth();
-
-  if (loading) {
-    return (
-      <div className="grid justify-center text-center my-5 text-xl">
-        <Spinner color="success" size="xl" />
-      </div>
-    );
-  }
   const searchParams = useSearchParams();
-  // const [product, setProduct] = useState([])
+  const category = searchParams?.get("category")?.replace("+", " ");
+  const location = searchParams?.get("location")?.replace("+", " ");
+  const productName = searchParams?.get("product")?.replace("+", " ");
+  const price = searchParams?.get("price")?.replace("+", " ");
+  const popular = searchParams?.get("popularity")?.replace("+", " ");
+ 
 
-  // setProduct(data)
-  const search = searchParams?.get("category" || "location");
-  // console.log(search);
+ useEffect(() => {
+   let filteredData = datas.slice(); 
 
-  if (datas.length <= 0)
-    return (
-      <div className="text-center text-xl justify-center mt-3 mb-5 mx-auto">
-        sorry 😥😣! <br /> There are no product available!
-      </div>
-    );
+   if (category) {
+     filteredData = filteredData.filter(
+       (item) => item.category.replace("_", " ").toLowerCase() === category
+     );
+   }
+
+   if (location) {
+     filteredData = filteredData.filter((item) => item.location === location);
+   }
+
+   if (productName) {
+     filteredData = filteredData.filter((item) =>
+       item.productName.includes(productName)
+     );
+   }
+
+   if (price === "ascending") {
+     filteredData.sort((a, b) => a.price - b.price);
+   } else if (price === "descending") {
+     filteredData.sort((a, b) => b.price - a.price);
+   }
+
+   if (popular === "most popular") {
+     filteredData.sort((a, b) => a.views - b.views);
+   } else if (popular === "least popular") {
+     filteredData.sort((a, b) => b.views - a.views);
+   }
+
+   setProduct(filteredData);
+ }, [category, location, productName, popular, price]);
+
+
+
 
   return (
     <main className="w-3/4 lg:w-3/5 xl:w-3/4 md:w-3/5 mb-10">
@@ -69,14 +74,32 @@ const Products = ({ datas }) => {
         </div>
       </section>
       <section className="popular-section">
-        <div className="container">
-          <p className="text-[#003800] font-bold my-5">Most Popular</p>
-          <section className="grid grid-cols-1 justify-center sm:grid-cols-2 lg:grid-cols-3 gap-2">
-            {datas.map((product, i) => (
-              <Product product={product} key={i} />
-            ))}
-          </section>
-        </div>
+        {loading ? (
+          <div className="mx-auto justify-center text-center my-3 text-xl">
+            <Spinner
+              color="success"
+              size="xl"
+              className="text-center justify-center"
+            />
+          </div>
+        ) : (
+          <>
+            {product.length <= 0 ? (
+              <div className="text-center text-lg justify-center mt-5 mb-5 mx-auto">
+                sorry 😥😣! <br /> There are no product available!
+              </div>
+            ) : (
+              <div className="container">
+                <p className="text-[#003800] font-bold my-5">Most Popular</p>
+                <section className="grid grid-cols-1 justify-center sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                  {product.map((product, i) => (
+                    <Product product={product} key={i} />
+                  ))}
+                </section>
+              </div>
+            )}
+          </>
+        )}
       </section>
     </main>
   );

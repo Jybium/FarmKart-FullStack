@@ -25,7 +25,7 @@ const Mission = () => {
         <h1 className="text-[#005400] font-bold my-3 text-center  pt-10 text-lg">
           Our Mission
         </h1>
-        <div className="text-center mt-5 mb-10 grid gap-3">
+        <div className="text-justify mt-5 mb-10 grid gap-3">
           <p>
             Farmer's Vetures, an agricultural organisation that aims to better
             the lives of farmers by giving them a unique way of selling their
@@ -53,7 +53,7 @@ const Mission = () => {
         </div>
       </section>
       <section className="pt-10 w-11/12 mx-auto">
-        <h1 className="text-[#005400] font-bold my-3 text-center text-lg">
+        <h1 className="text-[#005400] font-bold my-3 text-justify text-lg">
           Meet Our Team
         </h1>
         <p className="text-center pb-14">

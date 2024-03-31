@@ -1,7 +1,7 @@
 // for verifying email address and account
 
 import {NextResponse} from "next/server"
-const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer"
 import prisma from "../../../lib/prisma"
 
 
@@ -33,7 +33,7 @@ export async function POST(req, res) {
       },
     });
 
-    const verificationLink = `http://your-app.com/verify-account/${token}`;
+    const verificationLink = `https://your-app.com/verify-account/${token}`;
     sendVerificationEmail(emailAddress, verificationLink);
 
     NextResponse.json({ message: "Verification email sent successfully" }, {status : 200});

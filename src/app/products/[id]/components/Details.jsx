@@ -76,6 +76,10 @@ const Details = ({user, details}) => {
             <p>{details.color}</p>
           </div>
         </div>
+          <p className="py-2 text-justify text-sm">
+            <p className="font-bold text-base">Description: </p>
+            {details.description}
+          </p>
       </section>
       <Quantity />
       <div className="border-b-[1px] border-black pb-2 mb-5">

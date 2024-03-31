@@ -25,7 +25,6 @@ const products = await prisma.product.findMany({
   },
 });
 
-//   const product = products?.map((data) => data.category === category);
 
   return (
     <section className="sm:flex grid sm:gap-3 gap-2 py-3">

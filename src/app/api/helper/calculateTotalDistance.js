@@ -1,7 +1,6 @@
 //@ts-ignore
 
 import Openrouteservice from "openrouteservice-js";
-import axios from "axios";
 import { NextResponse } from "next/server";
 import getLocationCoordinates from "../../services/calculateCordinates";
 import calculateFee from "./calculateFee";
@@ -33,8 +32,8 @@ const calculateTotalDistance = async (carts, user) => {
       // Calculate coordinates and prepare locations array
       const destinationEncoded = await getLocationCoordinates(destination);
       const userLocationEncoded = await getLocationCoordinates(user.location);
-      const locations = destinationEncoded
-        .concat(userLocationEncoded)
+      const locations = userLocationEncoded
+        .concat(destinationEncoded)
         .map(([lat, lng]) => [lng, lat]);
 
       // Perform Matrix calculation

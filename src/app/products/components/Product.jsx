@@ -18,8 +18,8 @@ const imageUrl =
 const Product = ({ product }) => {
   const MemoizedProduct = React.memo(Product);
 
-  const productImage = product?.image[0]?.Image;
-  //   const fullImageUrl = imageUrl + productImage;
+  const productImage = product?.image[0]?.Image[0];
+
 
   const [productId, setProductId] = useState("");
 
@@ -65,15 +65,15 @@ const Product = ({ product }) => {
           <Image
             src={`${imageUrl}/${productImage}`}
             alt="product-image"
-            className="max-w-full h-[210px] block object-cover"
-            width={330}
+            className="max-w-full h-[200px] block object-cover rounded-t"
+            width={340}
             height={200}
           />
         </Link>
       </div>
       <div className="p-3 grid gap-1">
         <p className="font-bold text-sm">{product.productName}</p>
-        <p className="font-black text-[15px]">
+        <p className="font-black text-[15px] text-sm">
           # {reverseFormatNumber(product.price)}
         </p>
         <p className="flex items-center gap-1 text-sm text-slate-400">

@@ -58,34 +58,33 @@ const Form = () => {
       formData.append("category", category);
       formData.append("location", location);
       formData.append("slug", data.productName.replace(" ", "-"));
-      images.forEach((imageBlob) => {
-        formData.append("image", imageBlob);
+
+      let concatenatedValues = "";
+
+      images.forEach((imageBlob, index) => {
+     
+        concatenatedValues += `${imageBlob}|`;
       });
+
+      formData.append("image", concatenatedValues);
+
+      setLoading(true);
 
       const response = await fetch("/api/create-product", {
         method: "POST",
         body: formData,
         "content-type": "multipart/form-data",
       });
-      setLoading(true)
       if (response.ok) {
         const result = await response.json();
 
         notifySuccess(result.message);
         deleteImagesFromLocalStorage();
-      setLoading(false);
-
-
-        if (
-          result.message === "Bad request" ||
-          "Unauthorized. Make sure you are signed in!"
-        ) {
-          route.push("/login");
-        }
+        setLoading(false);
+        route.push("/products")
       } else {
         notifyError("An unexpected error occurred");
-      setLoading(false);
-
+        setLoading(false);
       }
     } catch (error) {
       notifyError("An unexpected error occurred", error);
@@ -206,6 +205,7 @@ const Form = () => {
 
       <div className="text-center sm:mt-20 mt-10">
         <PrimaryButton
+        loading={loading}
           title="Submit Product"
           type="submit"
           className=" sm:w-1/3 w-3/4 mx-auto text-[15px]"

@@ -78,18 +78,6 @@ useEffect(() => {
 
 
 
-  if (error) {
-    notifyError("An error has occured!");
-    return (
-      <div className="text-[#E6EEE6] text-center my-2">
-        <p>An error has occured! </p>
-      </div>
-    );
-  }
-
-
-
-
   return (
     <main>
       <Header className="bg-white" />

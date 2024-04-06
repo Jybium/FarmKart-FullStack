@@ -20,7 +20,7 @@ export async function POST(req, res) {
     try {
       decodedToken = await verifyAccessJWT(token);
     } catch (error) {
-      console.log(error);
+       (error);
       return NextResponse.json({ message: "Invalid token" }, { status: 401 });
     }
 
@@ -110,7 +110,7 @@ export async function GET(req, res) {
    try {
      decodedToken = await verifyAccessJWT(token);
    } catch (error) {
-     console.log(error);
+      (error);
      return NextResponse.json({ message: "Invalid token" }, { status: 401 });
    }
 

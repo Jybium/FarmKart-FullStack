@@ -1,14 +1,11 @@
-
-
 import { Suspense, lazy } from "react";
-const Offer = lazy(()=>import("@/app/components/Offer"))
-const ChooseUs = lazy(()=>import("@/app/components/ChooseUs"))
-const Sponsor = lazy(()=>import("@/app/components/Sponsor"))
-const Reviews = lazy(()=>import("@/app/components/Reviews"))
-const Header = lazy(()=>import("@/app/components/Header"))
-const CallToAction = lazy(()=>import("@/app/components/CallToAction"))
-// import { ToastContainer } from "react-toastify";
-// import "react-toastify/ReactToastify.min.css";
+const Offer = lazy(() => import("@/app/components/Offer"));
+const ChooseUs = lazy(() => import("@/app/components/ChooseUs"));
+const Sponsor = lazy(() => import("@/app/components/Sponsor"));
+const Reviews = lazy(() => import("@/app/components/Reviews"));
+const Header = lazy(() => import("@/app/components/Header"));
+const CallToAction = lazy(() => import("@/app/components/CallToAction"));
+
 
 export default function Home() {
   return (
@@ -22,6 +19,5 @@ export default function Home() {
         <Sponsor />
       </main>
     </>
-    
   );
 }

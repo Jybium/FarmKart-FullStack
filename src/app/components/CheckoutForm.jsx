@@ -20,7 +20,7 @@ const CheckoutForm = () => {
       console.error(error);
     } else {
       // Send token to your server for further processing
-      console.log(token);
+       (token);
     }
   };
 

@@ -58,7 +58,7 @@ export async function POST(req, res) {
       { status: 201 }
     );
   } catch (error) {
-    console.log(error)
+     (error)
 
     if(error.code === "P2002") return NextResponse.json({message:"User Already Exist"}, {status: 401})
     if(error.name === "PrismaClientInitializationError") return NextResponse.json({message:"Network Error. trying resetting your connection"}, {status: 404})

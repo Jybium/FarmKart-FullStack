@@ -17,7 +17,7 @@ export function fetchData(url, options) {
   const [loading, setLoading] = useState(false);
 
   if (isFetching) {
-    console.log("Request in progress, please wait.");
+     ("Request in progress, please wait.");
     return { data, loading, error };
   }
 
@@ -50,7 +50,7 @@ export function fetchData(url, options) {
 
 export const useFetchWithInterceptors = (url, options = {}) => {
 
-  // console.log(url, options)
+  //  (url, options)
 
  
 

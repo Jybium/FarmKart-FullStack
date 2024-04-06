@@ -28,7 +28,7 @@ export async function GET(request, { params }) {
       });
 
       if (response) {
-        // console.log("Product updated:", response);
+        //  ("Product updated:", response);
         return NextResponse.json(
           { message: { data: response, response: "success" } },
 

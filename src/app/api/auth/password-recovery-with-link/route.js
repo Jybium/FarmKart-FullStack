@@ -70,7 +70,7 @@ async function sendPasswordResetEmail(email, resetLink) {
     if (error) {
       console.error("Error sending email:", error);
     } else {
-      console.log("Email sent:", info.response);
+       ("Email sent:", info.response);
     }
   });
 }

@@ -28,16 +28,16 @@ const SignUpForm = ({ showModal }) => {
   //      axios
   //        .post("/api/auth/register", {...data})
   //        .then((res) => res.data)
-  //        .then((result) => {console.log(result)
+  //        .then((result) => { (result)
   //       notifySuccess(result.message)});
   //    } catch (error) {
-  //     console.log(error)
+  //      (error)
   //     notifyError(error)
   //      if (error.response) {
   //        // The request was made and the server responded with a status code
   //        // that falls out of the range of 2xx
   //        const errors = error.response.data;
-  //        console.log(errors);
+  //         (errors);
   //        notifySuccess(errors.message);
 
   //        if (error.response.status === 401) {
@@ -45,11 +45,11 @@ const SignUpForm = ({ showModal }) => {
   //        }
   //      } else if (error.request) {
   //        // The request was made but no response was received
-  //        console.log(error.request);
+  //         (error.request);
   //        notifyError("No response received from the server");
   //      } else {
   //        // Something happened in setting up the request that triggered an Error
-  //        console.log("Error", error.message);
+  //         ("Error", error.message);
   //        notifyError("Error in setting up the request");
   //      }
   //    }
@@ -68,7 +68,7 @@ const SignUpForm = ({ showModal }) => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.log(errorData);
+         (errorData);
         notifyError(errorData.message);
 
         // if (response.status === 401) {
@@ -80,7 +80,7 @@ const SignUpForm = ({ showModal }) => {
 
       const result = await response.json();
       setLoading(false)
-      console.log(result);
+       (result);
       notifySuccess(result.message);
       router.push('/login')
     } catch (error) {

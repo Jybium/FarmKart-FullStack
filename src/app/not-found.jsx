@@ -14,7 +14,7 @@ const Custom404 = () => {
       <PrimaryButton
         title="Back To HomePage"
         type="button"
-        className="w-2/3 mx-auto my-5"
+        className="w-auto mx-auto my-5"
       />
     </main>
   );

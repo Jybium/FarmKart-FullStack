@@ -26,7 +26,7 @@ export async function middleware(request, res) {
    verified = await verifyAccessJWT(cookie);
 
   } catch (error) {
-    console.log(error)
+     (error)
     
 
   let result

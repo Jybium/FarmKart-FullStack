@@ -21,7 +21,7 @@ export async function GET (request){
     try {
         decodedToken = await verifyAccessJWT(token)
     } catch (error) {
-        console.log(error)
+         (error)
         return NextResponse.json({message:"Invalid token"}, {status: 401})
     }
 

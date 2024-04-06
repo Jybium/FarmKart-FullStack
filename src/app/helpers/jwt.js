@@ -67,7 +67,7 @@ export const verifyAccessJWT = async (token) => {
       )
     ).payload
   } catch (error) {
-    // console.log(error);
+    //  (error);
     // return;
     throw new Error("Your token has expired.");
   }
@@ -83,7 +83,7 @@ export const verifyRefreshJWT = async (token) => {
       )
     ).payload
   } catch (error) {
-    // console.log(error);
+    //  (error);
     throw new Error("Your token has expired.");
   }
 };
@@ -116,7 +116,7 @@ export const verifyRefreshJWT = async (token) => {
 //         return decoded
         
 //     } catch (error) {
-//         console.log(error)
+//          (error)
 //         throw new Error("Token Expired")
 //         // return error
 //     }
@@ -131,7 +131,7 @@ export const verifyRefreshJWT = async (token) => {
 //         return decoded
 
 //     } catch (error) {
-//         console.log(error)
+//          (error)
 //         throw new Error("Token Expired")
 //     }
 
@@ -147,7 +147,7 @@ export const verifyRefreshJWT = async (token) => {
 //         return decoded, decoded.payload
 
 //     } catch (error) {
-//         console.log(error)
+//          (error)
 //         return null
 //     }
 

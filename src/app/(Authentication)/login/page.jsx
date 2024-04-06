@@ -45,7 +45,7 @@ const page = () => {
 
        if (!response.ok) {
          const errorData = await response.json();
-         console.log(errorData);
+          (errorData);
          if(errorData.message === "User not found" ) {
           router.push("/signup")
          }
@@ -60,7 +60,7 @@ const page = () => {
 
        const result = await response.json();
        setLoading(false);
-      //  console.log(result);
+      //   (result);
        notifySuccess(result.message);
        setUser(result.data.user)
        router.replace(redirect || "/products");

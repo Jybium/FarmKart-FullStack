@@ -98,7 +98,7 @@ async function sendVerificationEmail(email, verificationLink) {
     if (error) {
       console.error("Error sending email:", error);
     } else {
-      console.log("Email sent:", info.response);
+       ("Email sent:", info.response);
     }
   });
 }

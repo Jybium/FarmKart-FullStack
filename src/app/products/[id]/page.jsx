@@ -3,7 +3,9 @@ import Header from "../../components/Header";
 import Images from "./components/Images";
 import Details from "./components/Details";
 
-import prisma from "../../lib/prisma";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient()
 
 export const dynamic = "force-dynamic";
 
@@ -22,7 +24,7 @@ const page = async ({ params }) => {
 
   const product = await prisma.product.update({
     where: {
-      Id: param, // Assuming 'param' corresponds to the product ID
+      Id: param, 
     },
     data: { views: { increment: 1 } },
     include: {

@@ -23,7 +23,7 @@ const page = () => {
     if(data.password !== data.confirmPassword){
       notifyError("New password and confirm password must be the same!")
     }
-    console.log(data);
+     (data);
     reset();
   };
 

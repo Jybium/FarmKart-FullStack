@@ -89,9 +89,9 @@ const Products = ({ datas }) => {
                 sorry 😥😣! <br /> There are no product available!
               </div>
             ) : (
-              <div className="container">
+              <div className="container w-fit">
                 <p className="text-[#003800] font-bold my-5">Most Popular</p>
-                <section className="grid grid-cols-1 justify-center sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                <section className="grid grid-cols-1 justify-center sm:grid-cols-2 lg:grid-cols-3 gap-2 w-fit">
                   {product.map((product, i) => (
                     <Product product={product} key={i} />
                   ))}

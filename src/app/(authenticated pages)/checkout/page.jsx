@@ -1,8 +1,11 @@
-import React from "react";
-import Header from "../../components/Header";
+
+import Header from "../../components/Header"
+import OrderSummary from "./components/OrderSummary"
+import Checkout from "./components/Checkout"
+
+
 import { GrShieldSecurity } from "react-icons/gr";
-import Checkout from "./components/Checkout";
-import OrderSummary from "./components/OrderSummary";
+
 
 const page = () => {
   return (

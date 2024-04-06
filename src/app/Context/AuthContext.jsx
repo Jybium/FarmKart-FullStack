@@ -15,7 +15,7 @@ const AuthProvider = ({ children }) => {
     method: "GET",
   });
 
-  // console.log(data?.data)
+  //  (data?.data)
 
   useEffect(() => {
     const fetchUser = async () => {

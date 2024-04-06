@@ -1,13 +1,11 @@
-
-import Link from "next/link"
-import Header from "../components/Header";
 import Search from "./components/Search";
 import Aside from "./components/Aside";
-import "./product.css";
-import { PrismaClient } from "@prisma/client";
+import Header from "../components/Header";
 import Products from "./components/Products";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 
-const prisma = new PrismaClient()
+import "./product.css";
 
 export const metadata = {
   title: "Product Page | FarmKart",
@@ -16,42 +14,36 @@ export const metadata = {
 };
 
 const page = async () => {
-
-const product = await prisma.product.findMany({
-  include: {
-    image: { select: { Image: true } },
-    user: {
-      select: {
-        Id:true,
-        firstName: true,
-        lastName: true,
-        emailAddress: true,
-        phoneNumber: true,
-        createdAt: true,
-        updatedAt: true,
-        location: true,
+  const product = await prisma.product.findMany({
+    include: {
+      image: { select: { Image: true } },
+      user: {
+        select: {
+          Id: true,
+          firstName: true,
+          lastName: true,
+          emailAddress: true,
+          phoneNumber: true,
+          createdAt: true,
+          updatedAt: true,
+          location: true,
+        },
       },
     },
-  },
-});
-
-
+  });
 
   return (
-
     <main>
       <Header className="bg-white" />
       <main className="relative h-[calc(100%-80px)] top-[80px] overflow-scroll pb-20 Hide">
         <Search />
         <section className="sm:flex grid w-[90%] mx-auto gap-x-10">
           <Aside />
-          
-          <Products datas={product}/>
-         
+
+          <Products datas={product} />
         </section>
       </main>
     </main>
-   
   );
 };
 

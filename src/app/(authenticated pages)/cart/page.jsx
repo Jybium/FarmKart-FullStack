@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
-import Header from "../../components/Header";
+import Header from "../../components/Header"
 import { PrimaryButton } from "../../components/Buttons";
 import CartImage from "@/Asset/FARMKART IMAGES/images/cart/Artwork.png";
 import Link from "next/link";
@@ -11,7 +11,6 @@ import { GrAdd } from "react-icons/gr";
 import { useRouter } from "next/navigation";
 import { useFetchWithInterceptors } from "@/app/lib/fetch";
 import { Spinner } from "flowbite-react";
-import notifyError from "@/app/utils/notifyError";
 import { reverseFormatNumber } from "../../utils/numberFormatter";
 import {
   decreaseCartItem,

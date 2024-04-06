@@ -1,10 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import Seller from "@/Asset/FARMKART IMAGES/images/product-details/seller.png";
 import Rating from "@/app/products/[id]/components/Rating";
 import { GrLocation, GrPhone } from "react-icons/gr";
 import Quantity from "@/app/products/[id]/components/Quantity";
-import { GrStar } from "react-icons/gr";
 import { GrView } from "react-icons/gr";
 import {reverseFormatNumber} from "../../../utils/numberFormatter"
 import formatTimeElapsed from "../../../helpers/formatTimeElapsed"

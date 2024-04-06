@@ -17,11 +17,11 @@ export const removeCartItem = async (id) => {
       return;
     }
     const result = await response.json();
-    console.log(result.response);
+     (result.response);
     notifySuccess(result?.response?.message);
    
   } catch (error) {
-    console.log(error);
+     (error);
     notifyError(error);
   }
 };
@@ -42,12 +42,12 @@ export const increaseCartItem = async (id) => {
       return;
     }
     const result = await response.json();
-    console.log(result.response);
+     (result.response);
     
     notifySuccess(result?.response?.message);
    
   } catch (error) {
-    console.log(error);
+     (error);
     notifyError(error);
   }
 };
@@ -68,12 +68,12 @@ export const decreaseCartItem = async (id) => {
       return;
     }
     const result = await response.json();
-    console.log(result.response);
+     (result.response);
     
     notifySuccess(result?.response?.message);
   
   } catch (error) {
-    console.log(error);
+     (error);
     notifyError(error);
   }
 };
@@ -94,7 +94,7 @@ export const fetchDeliveryFee = async () => {
     }
 
     const result = await response.json();
-    console.log(result);
+     (result);
     return result.totalFee; 
   } catch (error) {
     console.error(error);

@@ -107,7 +107,7 @@ export async function POST(req, res) {
       };
 
       const refreshToken = await signRefreshJWT(id,  process.env.REFRESH_JWT_EXPIRES_IN);
-      // console.log(refreshToken)
+      //  (refreshToken)
 
        const refreshTokenSerialized = serialize("refreshToken", refreshToken, {
          httpOnly: true,
@@ -180,7 +180,7 @@ export async function POST(req, res) {
     }
   } catch (error) {
 
-    console.log(error);
+     (error);
        if(error.code === "P2002") return NextResponse.json({message:"User Already Exist"}, {status: 401})
 
     if(error.name === "PrismaClientInitializationError") return NextResponse.json({message:"Network Error. trying resetting your connection"}, {status: 404})

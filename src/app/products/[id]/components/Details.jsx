@@ -11,6 +11,7 @@ import formatTimeElapsed from "../../../helpers/formatTimeElapsed"
 import { PrimaryButton } from "@/app/components/Buttons";
 import { ImageUrl } from "@/Constants/Offers";
 import profile from "../../../../../public/profile.png";
+import Link from "next/link";
 
 
 
@@ -84,7 +85,10 @@ const Details = ({user, details}) => {
           Estimated time: 2 - 5 days
         </p>
       </div>
+      <Link href="/payment-successful">
+
       <PrimaryButton title="Buy Now" type="button" className="w-full" />
+      </Link>
     </section>
   );
 };

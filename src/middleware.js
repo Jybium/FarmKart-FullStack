@@ -6,7 +6,7 @@ import cookie, { serialize } from "cookie";
 
 
 export const config = {
-  matcher: ["/sell-2", "/sell", "/profile","/cart", "/checkout", "/profile/edit-profile", "/api/auth/me", "/api/cart", "/api/profile", "/api/order", ],
+  matcher: ["/sell-2", "/sell", "/profile","/cart", "/checkout", "/profile/edit-profile", "/api/auth/me", "/api/cart", "/api/profile", "/api/order","/payment-successful", "/api/order","/api/payment" ],
 };
 
 export async function middleware(request, res) {

@@ -1,0 +1,250 @@
+{
+    "status": 200,
+    "message": "success",
+    "data": {
+        "auth_url": null,
+        "access_token": null,
+        "merchant_info": {
+            "merchant_response": null,
+            "merchant_name": null,
+            "merchant_logo": null,
+            "merchant_id": "SBN1EBZEQ8"
+        },
+        "currency": "NGN",
+        "recurring": {
+            "frequency": null,
+            "duration": null,
+            "type": 0,
+            "plan_code": null,
+            "customer_name": null
+        },
+        "is_recurring": false,
+        "plan_code": null,
+        "callback_url": "http://squadco.com",
+        "transaction_ref": "4678388588350909090AH",
+        "transaction_memo": null,
+        "transaction_amount": 43000,
+        "authorized_channels": [
+            "card",
+            "ussd",
+            "bank"
+        ],
+        "checkout_url": "https://sandbox-pay.squadco.com/4678388588350909090AH"
+    }
+}
+
+
+
+
+
+
+
+
+
+
+{
+    "status": 200,
+    "success": true,
+    "message": "Success",
+    "data": {
+        "transaction_amount": 5000,
+        "transaction_ref": "SQCHIZ3634573076082",
+        "email": "ayo@gmail.com",
+        "transaction_status": "Success",
+        "transaction_currency_id": "NGN",
+        "created_at": "0001-01-01T00:00:00",
+        "transaction_type": "VirtualAccount",
+        "merchant_name": "CHIZOBA ANTHONY",
+        "merchant_business_name": null,
+        "gateway_transaction_ref": "SQCHIZ3634573076082",
+        "recurring": null,
+        "merchant_email": "okoyeanthonychizoba@gmail.com",
+        "plan_code": null
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+import { verifyAccessJWT
+} from "@/app/helpers/jwt";
+import { PrismaClient
+} from "@prisma/client";
+import { NextResponse
+} from "next/server";
+import stripe from "stripe";
+
+const prisma = new PrismaClient();
+
+export async function POST(request) {
+  if (request.method === "POST") {
+    const { productId, quantity, multiple
+        } = await request.json();
+    const product_Id = +productId;
+    //   console.log(productId, product_Id);
+
+
+    const authorization = request.cookies.get("token");
+
+    if (!authorization || authorization.length <= 0) {
+      return NextResponse.json({ message: "Unauthorised"
+            },
+            { status: 401
+            });
+        }
+
+    const token = authorization.value;
+    let decodedToken;
+    try {
+      decodedToken = await verifyAccessJWT(token);
+        } catch (error) {
+      console.log(error);
+      return NextResponse.json({ message: "Invalid token"
+            },
+            { status: 401
+            });
+        }
+
+    const { id
+        } = decodedToken;
+
+    try {
+      let totalAmount;
+      let orderItems;
+
+      if (multiple) {
+                // Fetch cart items from user's cart
+        const cartItems = await prisma.cart.findMany({
+          where: { userId: id
+                    },
+          include: {
+            product: true,
+                    },
+                });
+
+        
+        if (!cartItems.length) {
+            return NextResponse.json({ error: "Cart is empty"
+                    },
+                    { status: 400
+                    });
+                }
+                // If cartItems are present, handle the case where the user adds products to the cart
+        if (cartItems) {
+                    // Calculate total amount from cart items
+            totalAmount =  calculateTotal(cartItems);
+            // console.log(cartItems);
+                    // Create order
+          const order = await prisma.order.create({
+            data: {
+              userId: id,
+              totalAmount,
+              status: "PENDING",
+                        },
+                    });
+
+          // Create order items
+          orderItems = await Promise.all(
+            cartItems.map(async (item) => {
+              const orderItem = await prisma.orderItem.create({
+                data: {
+                  orderId: order.Id,
+                  productId: item.productId,
+                  quantity: item.Quantity,
+                  unitPrice: item.product.price,
+                  subTotal: item.product.price * item.Quantity,
+                            },
+                        });
+              return orderItem;
+                    })
+          );
+
+          // Clear cart
+          await prisma.cart.deleteMany({
+            where: { userId: id
+                        },
+                    });
+                }
+            } else {
+                // Fetch product details
+        const product = await prisma.product.findUnique({
+            where: {Id: product_Id
+                    }
+                })
+
+        if (!product) {
+          return NextResponse.json(
+            { error: "Product not found"
+                    },
+                    { status: 404
+                    }
+          );
+                }
+                // Calculate total amount for single product purchase
+        totalAmount = product.price * quantity;
+
+        // Create order
+        const order = await prisma.order.create({
+          data: {
+            userId: id,
+            totalAmount,
+            status: "PENDING", // or any default status
+                        // Add other necessary fields
+                    },
+                });
+
+        // Create order item for single product
+        const orderItem = await prisma.orderItem.create({
+          data: {
+            orderId: order.Id,
+            productId,
+            quantity,
+            unitPrice: product.price,
+            subTotal: product.price * quantity,
+                    },
+                });
+
+        orderItems = [orderItem
+                ];
+            }
+
+     return  NextResponse.json(
+        { message: "Order created successfully", orderItems
+            },
+            { status: 201
+            }
+      );
+        } catch (error) {
+      console.error(error);
+      return NextResponse.json(
+        { error: "Failed to create order"
+            },
+            { status: 500
+            }
+      );
+        }
+    } else {
+    return NextResponse.json(
+      { message: "Unfortunately, An error has occured"
+        },
+        { status: 405
+        }
+    );
+    }
+}
+
+function calculateTotal(cartItems) {
+  let total = 0;
+  cartItems.forEach((item) => {
+    total += item.Quantity * item.product.price;
+    });
+  return total;
+}

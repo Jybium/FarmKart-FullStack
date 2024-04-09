@@ -67,7 +67,7 @@ model Image {
 
 model Order {
   Id            String      @id @default(uuid())
-  userId        String      @unique
+  userId        String      
   user          User        @relation(fields: [userId], references: [Id])
   status        Status
   transactionId String?
@@ -78,8 +78,6 @@ model Order {
   order         OrderItem[]
 }
 
-// schema.prisma
-
 model OrderItem {
   id        String   @id @default(uuid())
   orderId   String
@@ -87,6 +85,8 @@ model OrderItem {
   productId Int
   product   Product  @relation(fields: [productId], references: [Id])
   quantity  Int
+  unitPrice Int
+  subTotal  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -130,6 +130,8 @@ enum Role {
 enum Status {
   COMPLETED
   PENDING
+  ABANDONED
   IN_PROGRESS
   CANCELLED
+  FAILED
 }

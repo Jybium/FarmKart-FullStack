@@ -18,8 +18,8 @@ const imageUrl =
 const Product = ({ product }) => {
   const MemoizedProduct = React.memo(Product);
 
-  const productImage = product?.image[0]?.Image;
-  //   const fullImageUrl = imageUrl + productImage;
+  const productImage = product?.image[0]?.Image[0];
+    console.log(productImage)
 
   const [productId, setProductId] = useState("");
 

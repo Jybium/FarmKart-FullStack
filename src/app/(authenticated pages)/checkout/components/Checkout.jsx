@@ -2,7 +2,10 @@ import React from "react";
 import { GrCheckmark } from "react-icons/gr";
 import { GrWaypoint } from "react-icons/gr";
 
-const Checkout = () => {
+const Checkout = ({data}) => {
+
+    const cart = data?.response?.data;
+
   return (
     <main className="sm:w-[50%] w-full">
       <p className="font-black text-sm my-5">CHECKOUT</p>
@@ -16,12 +19,12 @@ const Checkout = () => {
               </span>{" "}
               <span>1. ADDRESS DETAILS</span>
             </p>
-            <p className="text-[#003800] font-black">EDIT</p>
+           
           </div>
           <div className="ml-10 text-xs my-2 grid gap-2">
-            <p className="text-sm">James Abel</p>
-            <p>ROAD 20F, Parakin, Ile-Ife, Osun State, Nigeria.</p>
-            <p>+2348052340099</p>
+            <p className="text-sm">{data?.user?.firstName} {data?.user?.lastName}</p>
+            <p>{data?.user?.location}, Nigeria.</p>
+            <p>{data?.user?.phoneNumber}</p>
           </div>
         </div>
 
@@ -83,8 +86,11 @@ const Checkout = () => {
                 SHIPMENT DETAILS
               </p>
               <div className="pl-5 text-xs py-2 grid gap-2 border-[1px] border-black border-collapse">
-                <p className="text-sm">Shipment 1 of 1</p>
-                <p>20 x Mature West African Dwarf Breed Goats</p>
+                <p className="text-sm">Shipment {cart?.length} of {cart?.length}</p>
+                {Cart.map((data) => 
+                
+                <p>{data?.product?.Quantity} x{ data?.product?.productName}</p>
+                )}
                 <p>Delivered between 2 - 3 days</p>
               </div>
             </div>

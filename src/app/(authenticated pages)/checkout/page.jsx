@@ -1,10 +1,18 @@
+"use client"
+
 import React from "react";
 import Header from "../../components/Header";
 import { GrShieldSecurity } from "react-icons/gr";
 import Checkout from "./components/Checkout";
 import OrderSummary from "./components/OrderSummary";
+import prisma from "@/app/lib/prisma";
+import { useAuth } from "@/app/Context/AuthContext";
+import { useFetchWithInterceptors } from "@/app/lib/fetch";
 
 const page = () => {
+
+  const {data, errror, loading} = useFetchWithInterceptors("/api/cart")
+
   return (
     <main>
       <Header className="bg-white" />
@@ -16,8 +24,8 @@ const page = () => {
           className="sm:flex grid justify-between
         my-10 gap-5"
         >
-          <Checkout />
-          <OrderSummary />
+          <Checkout data={data}/>
+          <OrderSummary data={data}/>
         </section>
       </main>
     </main>

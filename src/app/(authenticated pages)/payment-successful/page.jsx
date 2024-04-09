@@ -1,3 +1,4 @@
+
 import React from "react";
 import Image from "next/image";
 import Header from "../../components/Header";
@@ -13,12 +14,7 @@ const page = () => {
       "
       />
       <main className="w-5/6 mx-auto py-5 relative overflow-scroll top-[80px] h-[calc(100%-80px)] Hide pb-20">
-        <Image
-          src={Payment}
-           
-           
-          className="sm:w-1/4 w-3/4 m-auto text-center"
-        />
+        <Image src={Payment} className="sm:w-1/4 w-3/4 m-auto text-center" />
         <section className="text-center my-6">
           <h1 className="font-black text-lg grid gap-9 capitalize">
             payment successfull!
@@ -28,7 +24,7 @@ const page = () => {
             <span className="font-bold text-blue-500">
               jamesabel@outlook.com
             </span>{" "}
-            containing your order details and how to track ypur order.
+            containing your order details and how to track your order.
           </p>
         </section>
         <section className="mb-20">
